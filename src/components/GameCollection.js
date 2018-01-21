@@ -1,13 +1,14 @@
 import React from 'react'
 
 const GameCollection = ({ gameCollection }) => {
-      console.log(gameCollection, "gameCollection");
+  console.log(gameCollection.all, "gameCollection.all from GameCollection component");
+
   return (
     <div>
       <p>something!</p>
-      {/* { gameCollection.map((el, i) => {
-        return <p>{el.name}</p>
-      })} */}
+      { gameCollection.all.map((el, i) => {
+        return <p key={i}>{el.name}</p>
+      })}
     </div>
   )
 }

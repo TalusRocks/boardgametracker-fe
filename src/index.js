@@ -8,6 +8,7 @@ import store from './store'
 import { Provider } from 'react-redux'
 import { fetchGameCollection } from './actions'
 
+// (1)
 store.dispatch(fetchGameCollection())
 
 ReactDOM.render(

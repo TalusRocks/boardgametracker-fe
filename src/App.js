@@ -1,10 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-
 import GameCollection from './components/GameCollection'
-
 import './App.css';
-
 import { connect } from 'react-redux'
 
 const App = ( { gameCollection }) => (
@@ -19,6 +16,7 @@ const App = ( { gameCollection }) => (
 
 )
 
+//keys should be the name of reducer functions
 const mapStateToProps = state => ({
   gameCollection: state.gameCollection
 })

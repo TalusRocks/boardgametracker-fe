@@ -1,5 +1,6 @@
 export const GAMES_LOADED = 'GAMES_LOADED'
 
+// (2)
 export function fetchGameCollection(){
   return async (dispatch) => {
     const response = await fetch('http://localhost:3000/games')
@@ -7,7 +8,7 @@ export function fetchGameCollection(){
     console.log(json, "json from actions/index.js");
     dispatch({
       type: GAMES_LOADED,
-      gameCollection: json.games
+      payload: json.games
     })
   }
 }
