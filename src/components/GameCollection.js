@@ -5,7 +5,6 @@ const GameCollection = ({ gameCollection }) => {
 
   return (
     <div>
-      <p>something!</p>
       { gameCollection.all.map((el, i) => {
         return <p key={i}>{el.name}</p>
       })}
