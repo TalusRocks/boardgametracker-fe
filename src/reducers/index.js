@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
 import { GAMES_LOADED } from '../actions'
 
-function getGameCollection(state = { all: { games: [] }}, action) {
+function getGameCollection(state = { all: [] }, action) {
+
   switch (action.type) {
     case GAMES_LOADED:
       return {
@@ -13,6 +14,8 @@ function getGameCollection(state = { all: { games: [] }}, action) {
   }
 
 }
+
+
 
 export default combineReducers({
   getGameCollection
