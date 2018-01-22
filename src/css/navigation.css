@@ -22,7 +22,7 @@ nav {
   width: 100%;
   position: absolute;
   bottom: 0px;
-  background-color: gray;
+  background-color: #E1E1E1;
 }
 
 .bottom-nav-item {
@@ -31,8 +31,19 @@ nav {
   justify-content: center;
   height: 100%;
   width: 50%;
+  text-transform: uppercase;
 }
 
 .bottom-nav-selected {
-  background-color: pink;
+  background-color: #717171;
+  font-weight: 700;
+  color: #fff;
+}
+
+.bottom-mobile-nav-selected-bar {
+  height: 6px;
+  width: 50%;
+  position: absolute;
+  bottom: 0px;
+  background-color: #4A4A4A;
 }
