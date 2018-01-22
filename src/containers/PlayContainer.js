@@ -7,7 +7,6 @@ const PlayContainer = () => {
       <div className="m-1">
         <p>Plays</p>
       </div>
-      
       <AddPlayButton />
     </div>
   )

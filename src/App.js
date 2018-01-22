@@ -13,11 +13,18 @@ const App = ( { gameCollection }) => (
   // ( gameCollection ) ? (
     <Router>
       <div>
-        <Route exact path='/' component={ props =>
+
+        <Route exact path='/plays' component={ props =>
           <div>
             <TopNavigationBar/>
             <PlayContainer />
             <BottomMobileNav/>
+          </div>
+        }/>
+
+        <Route path='/plays/addplay' component={ props =>
+          <div>
+            add play 
           </div>
         }/>
 
