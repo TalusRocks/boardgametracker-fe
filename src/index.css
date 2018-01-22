@@ -12,6 +12,10 @@ body {
   margin: 1em;
 }
 
+.mr-025 {
+  margin-right: 0.25em;
+}
+
 a, p, h1, h2, h3, h4, div {
   font-family: 'Raleway', sans-serif;
 }

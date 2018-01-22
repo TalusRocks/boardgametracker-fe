@@ -21,3 +21,10 @@ function gameCollection(state = { all: [] }, action) {
 export default combineReducers({
   gameCollection
 })
+
+// in expanded form, object key can be whatever-
+// but that's what you'll call after state in App.js
+// e.g. gameCollection: state.banana (in mapStateToProps)
+// export default combineReducers({
+//   banana: gameCollection
+// })

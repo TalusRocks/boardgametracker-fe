@@ -1,10 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import registerServiceWorker from './registerServiceWorker'
 
-import './index.css';
-import './css/navigation.css';
+import './index.css'
+import './css/navigation.css'
+import './css/plays.css'
 
 import store from './store'
 import { Provider } from 'react-redux'
@@ -20,6 +21,6 @@ ReactDOM.render(
     <App />
   </Provider>,
   document.getElementById('root')
-);
+)
 
-registerServiceWorker();
+registerServiceWorker()
