@@ -5,7 +5,7 @@ const BottomMobileNav = () => {
     <div className="bottom-mobile-nav">
       <div className="bottom-nav-item bottom-nav-unselected">Plays</div>
       <div className="bottom-nav-item bottom-nav-selected">Games
-        <div className="bottom-mobile-nav-selected-bar"></div>
+        <div className="bottom-mobile-nav-selected-bar right"></div>
       </div>
     </div>
   )
