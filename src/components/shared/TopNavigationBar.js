@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Navigation = () => {
+const TopNavigationBar = () => {
   return (
     <nav>
       <p className="brand">brand</p>
@@ -9,4 +9,4 @@ const Navigation = () => {
   )
 }
 
-export default Navigation;
+export default TopNavigationBar;

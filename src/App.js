@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import GameCollection from './components/GameCollection'
-import Navigation from './components/shared/Navigation'
+import GameCollection from './components/games/GameCollection'
+import TopNavigationBar from './components/shared/TopNavigationBar'
+import BottomMobileNavigation from './components/shared/BottomMobileNavigation'
 import './App.css';
 import { connect } from 'react-redux'
 
@@ -12,9 +13,10 @@ const App = ( { gameCollection }) => (
 
         <Route exact path='/' component={ (props) =>
           <div>
-          <Navigation/>
+          <TopNavigationBar/>
           <GameCollection {...props}
         gameCollection={ gameCollection }/>
+          <BottomMobileNavigation/>
           </div>
         }/>
 

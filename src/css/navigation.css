@@ -1,12 +1,38 @@
+/*=====TOP NAV=====*/
 nav {
-  background-color: #212121;
-  color: #fff;
-  height: 3em;
   display: flex;
   align-content: center;
   justify-content: space-between;
+  height: 3em;
+  background-color: #212121;
+  color: #fff;
 }
 
 .brand, .menu-burger {
   margin: auto 0.5em;
+}
+
+/*=====BOTTOM MOBILE NAV=====*/
+
+.bottom-mobile-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 3em;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  background-color: gray;
+}
+
+.bottom-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 50%;
+}
+
+.bottom-nav-selected {
+  background-color: pink;
 }
