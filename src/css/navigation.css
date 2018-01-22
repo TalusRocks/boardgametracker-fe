@@ -4,6 +4,9 @@ nav {
   align-content: center;
   justify-content: space-between;
   height: 3em;
+  width: 100%;
+  position: fixed;
+  top: 0px;
   background-color: #212121;
   color: #fff;
 }
@@ -20,7 +23,7 @@ nav {
   justify-content: space-around;
   height: 3em;
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   background-color: #E1E1E1;
 }
