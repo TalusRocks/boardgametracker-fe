@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import GameCollection from './containers/GameCollection'
 import AllPlaysContainer from './containers/AllPlaysContainer'
 import AddPlayForm from './containers/AddPlayForm'
+import FilterGamesForm from './containers/FilterGamesForm'
 import TopNavigationBar from './components/shared/TopNavigationBar'
 import BottomMobileNav from './components/shared/BottomMobileNav'
 import './App.css';
@@ -28,13 +29,17 @@ const App = ( { gameCollection, allPlays }) => (
           <AddPlayForm/>
         }/>
 
-        <Route path='/games' component={ props =>
+        <Route exact path='/games' component={ props =>
           <div>
           <TopNavigationBar/>
           <GameCollection {...props}
         gameCollection={ gameCollection }/>
           <BottomMobileNav/>
           </div>
+        }/>
+
+        <Route path='/games/filtergames' component={ props =>
+          <FilterGamesForm/>
         }/>
 
       </div>

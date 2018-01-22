@@ -8,18 +8,37 @@ body {
   font-family: sans-serif;
 }
 
+a, p, h1, h2, h3, h4, div {
+  font-family: 'Raleway', sans-serif;
+  margin: 0em;
+}
+
 .m-1 {
   margin: 1em;
+}
+
+.mtb-1 {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.mtb-2 {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.mb-025 {
+  margin-bottom: 0.25em;
 }
 
 .mr-025 {
   margin-right: 0.25em;
 }
 
-a, p, h1, h2, h3, h4, div {
-  font-family: 'Raleway', sans-serif;
-}
-
 a {
   text-decoration: none;
+}
+
+h2 {
+  font-size: 1.2em;
 }
