@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import GameCollection from './containers/GameCollection'
 import PlayContainer from './containers/PlayContainer'
+import AddPlayForm from './containers/AddPlayForm'
 import TopNavigationBar from './components/shared/TopNavigationBar'
 import BottomMobileNav from './components/shared/BottomMobileNav'
 import './App.css';
@@ -23,9 +24,7 @@ const App = ( { gameCollection }) => (
         }/>
 
         <Route path='/plays/addplay' component={ props =>
-          <div>
-            add play 
-          </div>
+          <AddPlayForm/>
         }/>
 
         <Route path='/games' component={ props =>
