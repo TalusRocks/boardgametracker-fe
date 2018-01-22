@@ -5,7 +5,7 @@ const AddPlayButton = () => {
   return (
     <Link to='/plays/addplay'>
       <div className="button add-play-button">
-        <i class="material-icons mr-025">add_circle</i> Add Play
+        <i className="material-icons mr-025">add_circle</i> Add Play
       </div>
     </Link>
   )
