@@ -13,3 +13,12 @@
   width: 100%;
   bottom: 3em;
 }
+
+.green {
+  background-color: #4CAF50;
+}
+
+.green-link {
+  color: #4CAF50;
+  font-weight: 700;
+}

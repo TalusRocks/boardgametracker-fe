@@ -13,6 +13,10 @@ a, p, h1, h2, h3, h4, div {
   margin: 0em;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .m-1 {
   margin: 1em;
 }
@@ -25,6 +29,14 @@ a, p, h1, h2, h3, h4, div {
 .mtb-2 {
   margin-top: 2em;
   margin-bottom: 2em;
+}
+
+.mb-2 {
+  margin-bottom: 2em;
+}
+
+.mt-05 {
+  margin-top: 0.5em;
 }
 
 .mb-025 {
@@ -41,4 +53,10 @@ a {
 
 h2 {
   font-size: 1.2em;
+}
+
+.caps-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  /*font-size: 0.9em;*/
 }

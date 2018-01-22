@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
+import Welcome from './components/Welcome'
 import GameCollection from './containers/GameCollection'
 import AllPlaysContainer from './containers/AllPlaysContainer'
 import AddPlayForm from './containers/AddPlayForm'
@@ -15,6 +16,8 @@ const App = ( { gameCollection, allPlays }) => (
   // ( gameCollection ) ? (
     <Router>
       <div>
+
+        <Route exact path='/' component={ props => <Welcome/>}/>
 
         <Route exact path='/plays' component={ props =>
           <div>
