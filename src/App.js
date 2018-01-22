@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import GameCollection from './containers/GameCollection'
-import PlayContainer from './containers/PlayContainer'
+import AllPlaysContainer from './containers/AllPlaysContainer'
 import AddPlayForm from './containers/AddPlayForm'
 import TopNavigationBar from './components/shared/TopNavigationBar'
 import BottomMobileNav from './components/shared/BottomMobileNav'
@@ -10,7 +10,7 @@ import './App.css';
 
 import { connect } from 'react-redux'
 
-const App = ( { gameCollection }) => (
+const App = ( { gameCollection, allPlays }) => (
   // ( gameCollection ) ? (
     <Router>
       <div>
@@ -18,7 +18,8 @@ const App = ( { gameCollection }) => (
         <Route exact path='/plays' component={ props =>
           <div>
             <TopNavigationBar/>
-            <PlayContainer />
+            <AllPlaysContainer {...props}
+            allPlays={ allPlays }/>
             <BottomMobileNav/>
           </div>
         }/>
@@ -46,7 +47,8 @@ const App = ( { gameCollection }) => (
 //if Reducer is foo then VALUE here is state.foo
 //to access data 'bar' (nested in state), use this.props.foo.bar
 const mapStateToProps = state => ({
-  gameCollection: state.gameCollection
+  gameCollection: state.gameCollection,
+  allPlays: state.allPlays
 })
 
 const mapDispatchToProps = state => ({})

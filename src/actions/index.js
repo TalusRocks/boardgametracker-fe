@@ -1,4 +1,5 @@
 export const GAMES_LOADED = 'GAMES_LOADED'
+export const PLAYS_LOADED = 'PLAYS_LOADED'
 
 //https://github.com/Leonidas-from-XIV/node-xml2js
 var parseString = require('xml2js').parseString;
@@ -16,7 +17,7 @@ export function fetchGameCollection(){
     .then(response => response.text())
     .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
 
-    parseString(`<GamesOwned>${data.documentElement.innerHTML}</GamesOwned>`, {trim: true }, function (err, result){
+    parseString(`<GamesOwned>${data.documentElement.innerHTML}</GamesOwned>`, {trim: true}, function (err, result){
       //one game name:
       //console.log(result.GamesOwned.item[0].name[0]._);
       dispatch({
@@ -25,21 +26,22 @@ export function fetchGameCollection(){
       })
       // console.log(result, "result");
     })
-
   }
 }
 
+export function fetchPlays(){
+  return async (dispatch) => {
+    const playData = await fetch('https://www.boardgamegeek.com/xmlapi2/plays?username=PlayBosco')
+    .then(response => response.text())
+    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
 
-// (2) populate from SEEDS
-// export function fetchGameCollection(){
-//   return async (dispatch) => {
-//     const response = await fetch('http://localhost:3000/games')
-//
-//     const json = await response.json()
-//     // console.log(json, "json from actions/index.js");
-//     dispatch({
-//       type: GAMES_LOADED,
-//       payload: json.games
-//     })
-//   }
-// }
+    parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, function (err, result){
+
+      dispatch({
+        type: PLAYS_LOADED,
+        payload: result.AllPlays.play
+      })
+      
+    })
+  }
+}

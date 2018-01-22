@@ -10,12 +10,13 @@ import './css/forms.css'
 
 import store from './store'
 import { Provider } from 'react-redux'
-import { fetchGameCollection } from './actions'
+import { fetchGameCollection, fetchPlays } from './actions'
 
 
 
 // (1)
 store.dispatch(fetchGameCollection())
+store.dispatch(fetchPlays())
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { GAMES_LOADED } from '../actions'
+import { GAMES_LOADED, PLAYS_LOADED } from '../actions'
 
 // (3)
 function gameCollection(state = { all: [] }, action) {
@@ -16,10 +16,24 @@ function gameCollection(state = { all: [] }, action) {
 
 }
 
+function allPlays(state = { all: [] }, action) {
+
+  switch (action.type) {
+    case PLAYS_LOADED:
+      return {
+        ...state,
+        all: action.payload
+      }
+    default:
+      return state
+  }
+
+}
+
 
 
 export default combineReducers({
-  gameCollection
+  gameCollection, allPlays
 })
 
 // in expanded form, object key can be whatever-
