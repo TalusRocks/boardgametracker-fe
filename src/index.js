@@ -12,11 +12,12 @@ import './css/buttons.css'
 
 import store from './store'
 import { Provider } from 'react-redux'
-import { fetchGameCollection, fetchPlays } from './actions'
+// import { fetchGameCollection, fetchPlays } from './actions'
 
 // (1)
-store.dispatch(fetchGameCollection())
-store.dispatch(fetchPlays())
+// if logged in...
+// store.dispatch(fetchGameCollection())
+// store.dispatch(fetchPlays())
 
 ReactDOM.render(
   <Provider store={store}>

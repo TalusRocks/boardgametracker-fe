@@ -23,12 +23,10 @@ export function sendBGGUsername(bggusername){
 
 export function fetchGameCollection(){
   return async (dispatch, getState) => {
-    // console.log(getState().currentUser, "HAYYYYY");
-    // let bggusername = getState().currentUser.username
-    // console.log(bggusername, "should be PlayBosco");
-    //IS THIS LOADING ON RE-RENDER? NEED TO LOAD WITH DYNAMIC USERNAME
-    // if(bggusername){
-        const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/collection?username=PlayBosco&own=1`)
+    let bggusername = getState().currentUser.username
+    //****To do - add gameCollection length to 'if'
+    if(bggusername){
+        const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/collection?username=${bggusername}&own=1`)
         .then(response => response.text())
         .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
 
@@ -39,7 +37,7 @@ export function fetchGameCollection(){
           })
         })
       }
-    // }
+    }
 }
 
 export function fetchPlays(){

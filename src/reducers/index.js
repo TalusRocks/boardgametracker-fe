@@ -3,7 +3,6 @@ import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME } from '../actions'
 
 // (3)
 function gameCollection(state = { all: [] }, action) {
-
   switch (action.type) {
     case GAMES_LOADED:
       return {
@@ -13,11 +12,9 @@ function gameCollection(state = { all: [] }, action) {
     default:
       return state
   }
-
 }
 
 function allPlays(state = { all: [] }, action) {
-
   switch (action.type) {
     case PLAYS_LOADED:
       return {
@@ -27,12 +24,10 @@ function allPlays(state = { all: [] }, action) {
     default:
       return state
   }
-
 }
 
 
 function currentUser(state = { username: '' }, action){
-
   switch (action.type) {
     case SET_BGG_USERNAME:
       return {
@@ -42,7 +37,6 @@ function currentUser(state = { username: '' }, action){
     default:
       return state
   }
-
 }
 
 

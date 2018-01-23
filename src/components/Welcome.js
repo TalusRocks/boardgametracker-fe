@@ -1,14 +1,15 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { sendBGGUsername } from '../actions'
+import { sendBGGUsername, fetchGameCollection } from '../actions'
 import { Link, Redirect } from 'react-router-dom'
 
-const Welcome = ({ username, sendBGGUsername }) => {
+const Welcome = ({ username, sendBGGUsername, fetchGameCollection }) => {
 
   const submitBGGUsername = (e) => {
     e.preventDefault()
     sendBGGUsername(e.target.bggusername.value)
+    fetchGameCollection()
   }
 
   return username ? <Redirect to="/games"/> : <div className="m-1 text-center">
@@ -39,7 +40,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ sendBGGUsername }, dispatch)
+  return bindActionCreators({ sendBGGUsername, fetchGameCollection }, dispatch)
 }
 
 export default connect(
