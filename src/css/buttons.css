@@ -18,7 +18,16 @@
   background-color: #4CAF50;
 }
 
+.submit {
+  width: 100%;
+  border: none;
+  font-size: 1em;
+  font-family: 'Raleway';
+  cursor: pointer;
+}
+
 .green-link {
   color: #4CAF50;
   font-weight: 700;
+  cursor: pointer;
 }

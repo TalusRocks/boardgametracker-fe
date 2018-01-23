@@ -1,5 +1,6 @@
 export const GAMES_LOADED = 'GAMES_LOADED'
 export const PLAYS_LOADED = 'PLAYS_LOADED'
+export const SET_BGG_USERNAME = 'SET_BGG_USERNAME'
 
 //https://github.com/Leonidas-from-XIV/node-xml2js
 var parseString = require('xml2js').parseString;
@@ -11,22 +12,33 @@ var parseString = require('xml2js').parseString;
 //     console.log(JSON.stringify(result), "STRINGified");
 // });
 
-export function fetchGameCollection(){
-  return async (dispatch) => {
-    const data = await fetch('https://www.boardgamegeek.com/xmlapi2/collection?username=PlayBosco&own=1')
-    .then(response => response.text())
-    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
 
-    parseString(`<GamesOwned>${data.documentElement.innerHTML}</GamesOwned>`, {trim: true}, function (err, result){
-      //one game name:
-      //console.log(result.GamesOwned.item[0].name[0]._);
-      dispatch({
-        type: GAMES_LOADED,
-        payload: result.GamesOwned.item
-      })
-      // console.log(result, "result");
-    })
+export function sendBGGUsername(bggusername){
+  //********TO-DO: ping API to check username
+  return {
+    type: SET_BGG_USERNAME,
+    payload: bggusername
   }
+}
+
+export function fetchGameCollection(){
+  return async (dispatch, getState) => {
+    // console.log(getState().currentUser, "HAYYYYY");
+    // let bggusername = getState().currentUser.username
+    // console.log(bggusername, "should be PlayBosco");
+    // if(bggusername){
+        const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/collection?username=PlayBosco&own=1`)
+        .then(response => response.text())
+        .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+
+        parseString(`<GamesOwned>${data.documentElement.innerHTML}</GamesOwned>`, {trim: true}, function (err, result){
+          dispatch({
+            type: GAMES_LOADED,
+            payload: result.GamesOwned.item
+          })
+        })
+      }
+    // }
 }
 
 export function fetchPlays(){
@@ -41,7 +53,7 @@ export function fetchPlays(){
         type: PLAYS_LOADED,
         payload: result.AllPlays.play
       })
-      
+
     })
   }
 }

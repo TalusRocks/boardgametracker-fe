@@ -35,8 +35,7 @@ const App = ( { gameCollection, allPlays }) => (
         <Route exact path='/games' component={ props =>
           <div>
           <TopNavigationBar/>
-          <GameCollection {...props}
-        gameCollection={ gameCollection }/>
+          <GameCollection {...props} gameCollection={ gameCollection }/>
           <BottomMobileNav/>
           </div>
         }/>

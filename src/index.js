@@ -14,8 +14,6 @@ import store from './store'
 import { Provider } from 'react-redux'
 import { fetchGameCollection, fetchPlays } from './actions'
 
-
-
 // (1)
 store.dispatch(fetchGameCollection())
 store.dispatch(fetchPlays())

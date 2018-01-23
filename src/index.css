@@ -17,6 +17,18 @@ a, p, h1, h2, h3, h4, div {
   text-align: center;
 }
 
+.mb-025 {
+  margin-bottom: 0.25em;
+}
+
+.mr-025 {
+  margin-right: 0.25em;
+}
+
+.mt-05 {
+  margin-top: 0.5em;
+}
+
 .m-1 {
   margin: 1em;
 }
@@ -26,6 +38,10 @@ a, p, h1, h2, h3, h4, div {
   margin-bottom: 1em;
 }
 
+.mt-1 {
+  margin-top: 1em;
+}
+
 .mtb-2 {
   margin-top: 2em;
   margin-bottom: 2em;
@@ -33,18 +49,6 @@ a, p, h1, h2, h3, h4, div {
 
 .mb-2 {
   margin-bottom: 2em;
-}
-
-.mt-05 {
-  margin-top: 0.5em;
-}
-
-.mb-025 {
-  margin-bottom: 0.25em;
-}
-
-.mr-025 {
-  margin-right: 0.25em;
 }
 
 a {
