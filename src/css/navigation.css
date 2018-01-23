@@ -37,20 +37,8 @@ nav {
   text-transform: uppercase;
 }
 
-/*.bottom-nav-selected {
+.active {
   background-color: #717171;
   font-weight: 700;
   color: #fff;
-}*/
-
-/*.bottom-mobile-nav-selected-bar {
-  height: 6px;
-  width: 50%;
-  position: absolute;
-  bottom: 0px;
-  background-color: #4A4A4A;
 }
-
-.right {
-  right: 0px;
-}*/

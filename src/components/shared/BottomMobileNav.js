@@ -1,17 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const BottomMobileNav = () => {
   return (
     <div className="bottom-mobile-nav">
-      <Link to='/plays'>
-        <div className="bottom-nav-item bottom-nav-unselected">Plays</div>
-      </Link>
-      <Link to='/games'>
-        <div className="bottom-nav-item bottom-nav-selected">Games
-          <div className="bottom-mobile-nav-selected-bar right"></div>
-        </div>
-      </Link>
+        <NavLink className="bottom-nav-item" to='/plays'>Plays</NavLink>
+        <NavLink className="bottom-nav-item" to='/games'>Games</NavLink>
     </div>
   )
 }
