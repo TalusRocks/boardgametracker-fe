@@ -4,9 +4,13 @@
   align-items: center;
 }
 
-.text-input {
+.text-input, textarea {
   width: 100%;
   height: 3em;
   font-size: 1em;
-  padding-left: 0.5em;
+  padding: 0.25em;
+}
+
+textarea {
+  height: 8em;
 }

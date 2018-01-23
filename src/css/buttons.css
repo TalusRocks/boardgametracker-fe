@@ -6,6 +6,11 @@
   text-transform: uppercase;
   background-color: #4A90E2;
   color: #fff;
+  cursor: pointer;
+}
+
+.short-btn {
+  height: 2.2em;
 }
 
 .add-play-button, .filter-games-button {
@@ -28,6 +33,12 @@
 
 .green-link {
   color: #4CAF50;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.blue-link {
+  color: #4990E2;
   font-weight: 700;
   cursor: pointer;
 }

@@ -26,6 +26,7 @@ export function fetchGameCollection(){
     // console.log(getState().currentUser, "HAYYYYY");
     // let bggusername = getState().currentUser.username
     // console.log(bggusername, "should be PlayBosco");
+    //IS THIS LOADING ON RE-RENDER? NEED TO LOAD WITH DYNAMIC USERNAME
     // if(bggusername){
         const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/collection?username=PlayBosco&own=1`)
         .then(response => response.text())
