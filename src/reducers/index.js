@@ -14,12 +14,24 @@ function gameCollection(state = { all: [] }, action) {
   }
 }
 
-function allPlays(state = { all: [] }, action) {
+function allPlays(state = { all: [], byDate: [] }, action) {
   switch (action.type) {
     case PLAYS_LOADED:
+
+      const byDate = action.payload.reduce(function(acc, el){
+        const date = el.$.date
+        acc[date] = acc[date] || []
+        acc[date].push({ name: el.item[0].$.name,
+        comments: el.comments ? el.comments[0] : '' })
+        return acc
+      }, {})
+
+      console.log(byDate, "byDate!!!!!!");
+
       return {
         ...state,
-        all: action.payload
+        all: action.payload,
+        // byDate
       }
     default:
       return state
