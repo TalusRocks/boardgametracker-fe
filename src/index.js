@@ -12,12 +12,16 @@ import './css/buttons.css'
 
 import store from './store'
 import { Provider } from 'react-redux'
-// import { fetchGameCollection, fetchPlays } from './actions'
+import { fetchGameCollection, fetchPlays } from './actions'
 
 // (1)
-// if logged in...
-// store.dispatch(fetchGameCollection())
-// store.dispatch(fetchPlays())
+//using local storage for development purposes
+let bggusername = localStorage.getItem('bggusername')
+if(bggusername){
+  store.dispatch(fetchGameCollection())
+  store.dispatch(fetchPlays())
+}
+
 
 ReactDOM.render(
   <Provider store={store}>

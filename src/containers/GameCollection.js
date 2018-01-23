@@ -1,8 +1,9 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { fetchGameCollection } from '../actions'
 import FilterGamesButton from '../components/games/FilterGamesButton'
-import { connect } from 'react-redux'
+
 
 const GameCollection = ({ username, gameCollection, fetchGameCollection }) => {
   return (

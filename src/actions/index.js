@@ -15,6 +15,7 @@ var parseString = require('xml2js').parseString;
 
 export function sendBGGUsername(bggusername){
   //********TO-DO: ping API to check username
+  localStorage.setItem('bggusername', bggusername)
   return {
     type: SET_BGG_USERNAME,
     payload: bggusername
@@ -23,7 +24,9 @@ export function sendBGGUsername(bggusername){
 
 export function fetchGameCollection(){
   return async (dispatch, getState) => {
-    let bggusername = getState().currentUser.username
+    // let bggusername = getState().currentUser.username
+
+    let bggusername = localStorage.getItem('bggusername')
     //****To do - add gameCollection length to 'if'
     if(bggusername){
         const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/collection?username=${bggusername}&own=1`)

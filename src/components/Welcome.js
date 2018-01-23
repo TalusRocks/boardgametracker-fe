@@ -1,15 +1,16 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { sendBGGUsername, fetchGameCollection } from '../actions'
+import { sendBGGUsername, fetchGameCollection, fetchPlays } from '../actions'
 import { Link, Redirect } from 'react-router-dom'
 
-const Welcome = ({ username, sendBGGUsername, fetchGameCollection }) => {
+const Welcome = ({ username, sendBGGUsername, fetchGameCollection, fetchPlays }) => {
 
   const submitBGGUsername = (e) => {
     e.preventDefault()
     sendBGGUsername(e.target.bggusername.value)
     fetchGameCollection()
+    fetchPlays()
   }
 
   return username ? <Redirect to="/games"/> : <div className="m-1 text-center">
@@ -24,7 +25,7 @@ const Welcome = ({ username, sendBGGUsername, fetchGameCollection }) => {
       <label>
         <span className="caps-title">BoardGameGeek UserName</span>
         <br></br>
-        <input className="mt-05 text-input" type="text" name="bggusername" placeholder="BGG username"></input>
+        <input className="mt-05 text-input" type="text" name="bggusername"  defaultValue="PlayBosco"></input>
       </label>
 
       <input className="button submit green mt-1" type="submit" value="Get BGG Data" />
@@ -40,7 +41,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ sendBGGUsername, fetchGameCollection }, dispatch)
+  return bindActionCreators({ sendBGGUsername, fetchGameCollection, fetchPlays }, dispatch)
 }
 
 export default connect(
