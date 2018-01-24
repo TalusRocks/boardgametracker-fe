@@ -6,15 +6,10 @@ import AddPlayButton from '../components/plays/AddPlayButton'
 
 const AllPlaysContainer = ({ allPlays, fetchPlays }) => {
 
-  // const justPlays = []
-  // allPlays.byDate.map((el, i) => {
-  //   justPlays.push(el.plays)
-  // })
-
   return (
     <div>
       <div className="plays-container">
-
+        
         { allPlays.byDate.map((el, i) => {
           return (
             <div key={`${el.date}-00-${i}`}>

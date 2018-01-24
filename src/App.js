@@ -4,16 +4,18 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Welcome from './components/Welcome'
 import GameCollection from './containers/GameCollection'
 import AllPlaysContainer from './containers/AllPlaysContainer'
+import PlayStatsContainer from './containers/PlayStatsContainer'
 import AddPlayForm from './containers/AddPlayForm'
 import FilterGamesForm from './containers/FilterGamesForm'
 import TopNavigationBar from './components/shared/TopNavigationBar'
 import BottomMobileNav from './components/shared/BottomMobileNav'
+import TopMobilePlayNav from './components/shared/TopMobilePlayNav'
 import './App.css';
 
 import { connect } from 'react-redux'
 
 const App = ( { gameCollection, allPlays }) => (
-  // ( gameCollection ) ? (
+
     <Router>
       <div>
 
@@ -22,13 +24,24 @@ const App = ( { gameCollection, allPlays }) => (
         <Route exact path='/plays' component={ props =>
           <div>
             <TopNavigationBar/>
+            <TopMobilePlayNav/>
             <AllPlaysContainer {...props}
             allPlays={ allPlays }/>
             <BottomMobileNav/>
           </div>
         }/>
 
-        <Route path='/plays/addplay' component={ props =>
+        <Route exact path='/plays/stats' component={ props =>
+          <div>
+            <TopNavigationBar/>
+            <TopMobilePlayNav/>
+            <PlayStatsContainer/>
+            <BottomMobileNav/>
+          </div>
+
+        }/>
+
+        <Route exact path='/plays/addplay' component={ props =>
           <AddPlayForm/>
         }/>
 
@@ -40,13 +53,12 @@ const App = ( { gameCollection, allPlays }) => (
           </div>
         }/>
 
-        <Route path='/games/filtergames' component={ props =>
+        <Route exact path='/games/filtergames' component={ props =>
           <FilterGamesForm/>
         }/>
 
       </div>
     </Router>
-  // ) : (<div>Loading...</div>)
 
 )
 
