@@ -11,6 +11,8 @@ const AllPlaysContainer = ({ allPlays, fetchPlays }) => {
     justPlays.push(el.plays)
   })
 
+  console.log(allPlays.byDate, "all plays by date");
+
   return (
     <div>
       <div className="plays-container">

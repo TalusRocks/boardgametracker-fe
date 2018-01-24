@@ -28,8 +28,13 @@ function allPlays(state = { all: [], byDate: [] }, action) {
 
       // 1) group dates
       const playsByDate = []
-      for (let i = 1; i < action.payload.length; i++) {
-        let prevdate = action.payload[i-1].$.date
+      for (let i = 0; i < action.payload.length; i++) {
+        let prevdate
+        if(i >= 1){
+          prevdate = action.payload[i-1].$.date
+        } else if(i < 1) {
+          prevdate = ''
+        }
         let date = action.payload[i].$.date
 
         let dateGroup = { date: '', plays: []}
