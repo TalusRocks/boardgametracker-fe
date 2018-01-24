@@ -1,4 +1,9 @@
 .plays-container {
-  margin-top: 4em;
+  margin-top: 3em;
   margin-bottom: 15em;
+}
+
+.date-divider {
+  background-color: #EFEFEF;
+  padding: 0.25em
 }
