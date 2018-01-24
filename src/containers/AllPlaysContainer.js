@@ -22,7 +22,7 @@ const AllPlaysContainer = ({ allPlays, fetchPlays }) => {
 
               {el.plays.map((el, j) => {
                 return (
-                  <div key={`${el.gamename}-${el.playid}`}>className="m-1">
+                  <div key={`${el.gamename}-${el.playid}`} className="m-1">
                     <h2 key={el.playid} className="mb-025">{el.gamename}</h2>
                     <p key={`${el.playid}-comments`}>{el.comments ? el.comments : ''}</p>
                   </div>
