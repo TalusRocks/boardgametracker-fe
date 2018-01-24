@@ -3,8 +3,22 @@ import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME } from '../actions'
 
 // (3)
 function gameCollection(state = { all: [] }, action) {
+  // is this really different from the allPlays payload?
+  // console.log(action.payload, "GAAAAAME payload");
   switch (action.type) {
     case GAMES_LOADED:
+
+      // 1) get game and total plays
+      const playsByGame = []
+      for (let i = 0; i < action.payload.length; i++){
+        // let gamename
+
+        let gamePlays = { gamename: '', totalplays: 0 }
+      }
+
+      // 2) nest plays, listing dates played
+
+
       return {
         ...state,
         all: action.payload
@@ -17,7 +31,7 @@ function gameCollection(state = { all: [] }, action) {
 function allPlays(state = { all: [], byDate: [] }, action) {
   switch (action.type) {
     case PLAYS_LOADED:
-
+    console.log("PAYLOAD BEFORE PROCESSESING==========", action.payload);
       // const byDate = action.payload.reduce(function(acc, el){
       //   const date = el.$.date
       //   acc[date] = acc[date] || []
@@ -26,6 +40,7 @@ function allPlays(state = { all: [], byDate: [] }, action) {
       //   return acc
       // }, {})
 
+      //***** BY DATE *****
       // 1) group dates
       const playsByDate = []
       for (let i = 0; i < action.payload.length; i++) {
@@ -64,14 +79,12 @@ function allPlays(state = { all: [], byDate: [] }, action) {
         }
 
       }
-      // console.log(action.payload, "PAYLOAD");
-      // console.log(playsByDate, "by date");
-
+      console.log(action.payload, "PLAYYYY payload");
 
       return {
         ...state,
         all: action.payload,
-        byDate: playsByDate
+        byDate: [...state.byDate, ...playsByDate]
       }
     default:
       return state

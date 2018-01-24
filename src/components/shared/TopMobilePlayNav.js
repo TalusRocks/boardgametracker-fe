@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom'
 const TopMobilePlayNav = () => {
   return (
     <div className="mobile-nav top-mobile-nav">
-      <NavLink exact to='/plays' className="mobile-nav-item" activeClassName="active-blue">Recent</NavLink>
-      <NavLink exact to='/plays/stats' className="mobile-nav-item" activeClassName="active-blue">Stats</NavLink>
+      <NavLink exact to='/plays' className="black mobile-nav-item" activeClassName="active-blue">Recent</NavLink>
+      <NavLink exact to='/plays/stats' className="black mobile-nav-item" activeClassName="active-blue">Stats</NavLink>
     </div>
   )
 }

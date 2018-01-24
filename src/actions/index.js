@@ -24,7 +24,6 @@ export function sendBGGUsername(bggusername){
 
 export function fetchGameCollection(){
   return async (dispatch, getState) => {
-    // let bggusername = getState().currentUser.username
 
     let bggusername = localStorage.getItem('bggusername')
     //****To do - add gameCollection length to 'if'
@@ -45,17 +44,35 @@ export function fetchGameCollection(){
 
 export function fetchPlays(){
   return async (dispatch) => {
-    const playData = await fetch('https://www.boardgamegeek.com/xmlapi2/plays?username=PlayBosco')
-    .then(response => response.text())
-    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+    //dispatch PLAYS_LOADING to make a spinner here
+    //change PLAYS_LOADED to ADD_PLAYS
+    // then PLAYS_LOADED (can have >1 dispatch)
+    let page = 1
 
-    parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, function (err, result){
+    let going = true
 
-      dispatch({
-        type: PLAYS_LOADED,
-        payload: result.AllPlays.play
+    while (going) {
+
+      const playData = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=PlayBosco&page=${page}`)
+      .then(response => response.text())
+      .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+
+      parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, function (err, result){
+
+        if(result.AllPlays.play.length < 100) going = false
+
+        dispatch({
+          type: PLAYS_LOADED,
+          payload: result.AllPlays.play
+        })
+
       })
 
-    })
+      console.log(page, "page");
+      page += 1
+      await fetchPlays()
+
+    }
+
   }
 }

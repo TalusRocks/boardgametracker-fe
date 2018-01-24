@@ -9,7 +9,7 @@ const AllPlaysContainer = ({ allPlays, fetchPlays }) => {
   return (
     <div>
       <div className="plays-container">
-        
+
         { allPlays.byDate.map((el, i) => {
           return (
             <div key={`${el.date}-00-${i}`}>
@@ -32,7 +32,7 @@ const AllPlaysContainer = ({ allPlays, fetchPlays }) => {
       <AddPlayButton />
     </div>
   )
-}
+} 
 
 const mapStateToProps = state => ({
   allPlays: state.allPlays
