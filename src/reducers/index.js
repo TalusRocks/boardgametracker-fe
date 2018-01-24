@@ -54,16 +54,18 @@ function allPlays(state = { all: [], byDate: [] }, action) {
         } else {
           comments = ''
         }
+        let playid = action.payload[j].$.id
 
         for (let k = 0; k < playsByDate.length; k++){
 
           if(date === playsByDate[k].date){
-            playsByDate[k].plays.push({gamename, comments})
+            playsByDate[k].plays.push({playid, gamename, comments})
           }
         }
 
       }
-      // console.log(playsByDate, "playsByDate");
+      // console.log(action.payload, "PAYLOAD");
+      console.log(playsByDate, "by date");
 
 
       return {

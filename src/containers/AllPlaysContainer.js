@@ -6,12 +6,10 @@ import AddPlayButton from '../components/plays/AddPlayButton'
 
 const AllPlaysContainer = ({ allPlays, fetchPlays }) => {
 
-  const justPlays = []
-  allPlays.byDate.map((el, i) => {
-    justPlays.push(el.plays)
-  })
-
-  console.log(allPlays.byDate, "all plays by date");
+  // const justPlays = []
+  // allPlays.byDate.map((el, i) => {
+  //   justPlays.push(el.plays)
+  // })
 
   return (
     <div>
@@ -19,14 +17,14 @@ const AllPlaysContainer = ({ allPlays, fetchPlays }) => {
 
         { allPlays.byDate.map((el, i) => {
           return (
-            <div key={el.date}>
-              <div key={i} className="date-divider">{el.date}</div>
+            <div key={`${el.date}-00-${i}`}>
+              <div key={el.date} className="date-divider">{el.date}</div>
 
               {el.plays.map((el, j) => {
                 return (
-                  <div className="m-1">
-                    <h2 key={j} className="mb-025">{el.gamename}</h2>
-                    <p>{el.comments ? el.comments : ''}</p>
+                  <div key={`${el.gamename}-${el.playid}`}>className="m-1">
+                    <h2 key={el.playid} className="mb-025">{el.gamename}</h2>
+                    <p key={`${el.playid}-comments`}>{el.comments ? el.comments : ''}</p>
                   </div>
                 )
               })}
