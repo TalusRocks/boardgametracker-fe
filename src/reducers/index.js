@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME } from '../actions'
 
 // (3)
-function gameCollection(state = { all: [] }, action) {
+function gameCollection(state = { all: [], byPlays: [] }, action) {
   // is this really different from the allPlays payload?
   // console.log(action.payload, "GAAAAAME payload");
   switch (action.type) {
@@ -11,27 +11,31 @@ function gameCollection(state = { all: [] }, action) {
       // 1) get game and total plays
       const playsByGame = []
       for (let i = 0; i < action.payload.length; i++){
-        // let gamename
 
-        let gamePlays = { gamename: '', totalplays: 0 }
+        let gamename = action.payload[i].name[0]._
+        let gameid = action.payload[i].$.objectid
+        let totalplays = action.payload[i].numplays[0]
+
+        let gamePlays = { gamename, gameid, totalplays }
+        playsByGame.push(gamePlays)
       }
-
-      // 2) nest plays, listing dates played
-
-
+      console.log(playsByGame, "PLAYS BY GAME");
       return {
         ...state,
-        all: action.payload
+        all: action.payload,
+        byPlays: [...state.byPlays, ...playsByGame]
       }
     default:
       return state
   }
 }
 
+
+
 function allPlays(state = { all: [], byDate: [] }, action) {
   switch (action.type) {
     case PLAYS_LOADED:
-    console.log("PAYLOAD BEFORE PROCESSESING==========", action.payload);
+    // console.log("PAYLOAD BEFORE PROCESSESING==========", action.payload);
       // const byDate = action.payload.reduce(function(acc, el){
       //   const date = el.$.date
       //   acc[date] = acc[date] || []
@@ -79,7 +83,7 @@ function allPlays(state = { all: [], byDate: [] }, action) {
         }
 
       }
-      console.log(action.payload, "PLAYYYY payload");
+      // console.log(action.payload, "PLAYYYY payload");
 
       return {
         ...state,
