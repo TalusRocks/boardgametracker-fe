@@ -1,20 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { postPlay } from '../actions'
-
-//onSubmit... do this:
-//a function that fetches a POST
-//un, pw, cookie
-//send FORM data
 
 const AddPlayForm = ({ postPlay }) => {
-
-  const submitNewPlay = (e) => {
-    e.preventDefault()
-    postPlay()
-  }
 
   return (
     <div>
@@ -25,7 +12,7 @@ const AddPlayForm = ({ postPlay }) => {
         </Link>
       </div>
       <div className="m-1">
-        <form onSubmit={submitNewPlay}>
+        <form>
           <div className="mtb-2">
             <label>
               <span className="caps-title">
@@ -65,17 +52,4 @@ const AddPlayForm = ({ postPlay }) => {
   )
 }
 
-
-const mapStateToProps = state => ({
-  allPlays: state.allPlays,
-  username: state.currentUser.username
-})
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ postPlay }, dispatch)
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddPlayForm)
+export default AddPlayForm
