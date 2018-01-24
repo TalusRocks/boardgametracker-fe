@@ -1,6 +1,7 @@
 export const GAMES_LOADED = 'GAMES_LOADED'
 export const PLAYS_LOADED = 'PLAYS_LOADED'
 export const SET_BGG_USERNAME = 'SET_BGG_USERNAME'
+export const POST_PLAY = 'POST_PLAY'
 
 //https://github.com/Leonidas-from-XIV/node-xml2js
 var parseString = require('xml2js').parseString;
@@ -12,6 +13,41 @@ var parseString = require('xml2js').parseString;
 //     console.log(JSON.stringify(result), "STRINGified");
 // });
 
+export function postPlay(){
+  let formData = new FormData()
+  formData.append('ajax', '1')
+  formData.append('action', 'save')
+  formData.append('objecttype', 'thing')
+  formData.append('objectid', '18602')
+  formData.append('playdate', '2018-01-24')
+  formData.append('quantity', '1')
+  console.log(formData, "formData from actions");
+
+  let headers = new Headers({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Cookie': 'bggusername=PlayBosco; bggpassword=ns3vd94jjmg8fzs4jwhvlabq9yxrax2d;'
+  })
+
+
+  return async (dispatch, formData, headers) => {
+    const data = await fetch('https://boardgamegeek.com/geekplay.php', {
+      headers: headers,
+      method: 'POST',
+      body: formData
+    })
+    .then(result => {
+      return console.log(result, "result...?")
+    })
+    // .then(response => response.json())
+    // .catch(error => console.error('Error:', error))
+    // .then(response => console.log('Success:', response));
+  }
+
+  // return {
+  //   type: POST_PLAY,
+  //   payload: formData
+  // }
+}
 
 export function sendBGGUsername(bggusername){
   //********TO-DO: ping API to check username
