@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { fetchGameCollection } from '../actions'
 
 const PlayStatsContainer = ({ gameCollection }) => {
-  console.log(gameCollection.byPlays, "from Play Stats Containers");
+  // console.log(gameCollection.byPlays, "from Play Stats Containers");
   return (
     <div className="play-stats-container">
       {gameCollection.byPlays.map((el, i) => {

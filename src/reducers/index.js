@@ -20,6 +20,17 @@ function gameCollection(state = { all: [], byPlays: [] }, action) {
         playsByGame.push(gamePlays)
       }
       // console.log(playsByGame, "PLAYS BY GAME");
+
+      for (let j = 0; j < playsByGame.length; j++){
+
+      }
+
+      //2) SORT into most play order
+      playsByGame.sort(function(a, b) {
+        return b.totalplays - a.totalplays
+      })
+      // console.log("SORTED?=========================", playsByGame);
+
       return {
         ...state,
         all: action.payload,
