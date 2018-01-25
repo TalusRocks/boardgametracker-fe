@@ -25,10 +25,13 @@ export function sendBGGUsername(bggusername){
 export function fetchGameCollection(){
   return async (dispatch, getState) => {
 
-    let bggusername = localStorage.getItem('bggusername')
+    // let bggusername = localStorage.getItem('bggusername')
+    //temporary holder for development:
+    let bggusername = 'PlayBosco'
+
     //****To do - add gameCollection length to 'if'
     if(bggusername){
-        const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/collection?username=${bggusername}&own=1`)
+        const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/collection?username=${bggusername}&own=1&stats=1`)
         .then(response => response.text())
         .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
 

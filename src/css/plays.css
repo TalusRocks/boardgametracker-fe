@@ -17,3 +17,9 @@
   display: flex;
   align-items: center;
 }
+
+.h-index {
+  background-color: #E1E1E1;
+  padding: 0.2em 0em 0.2em 0.5em;
+  text-align: center;
+}
