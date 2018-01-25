@@ -2,8 +2,9 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { fetchGameCollection } from '../actions'
-import Game from '../components/games/Game'
+import GameStatsHeader from '../components/games/GameStatsHeader'
 import FilterGamesButton from '../components/games/FilterGamesButton'
+import Game from '../components/games/Game'
 
 
 const GameCollection = ({ username, gameCollection, fetchGameCollection }) => {
@@ -11,6 +12,7 @@ const GameCollection = ({ username, gameCollection, fetchGameCollection }) => {
   return (
       <div>
         <div className="games-container">
+          <GameStatsHeader/>
           <Game />
         </div>
         <FilterGamesButton/>

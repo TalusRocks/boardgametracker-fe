@@ -1,5 +1,5 @@
 .games-container {
-  margin-top: 4em;
+  margin-top: 3em;
   margin-bottom: 15em;
 }
 
@@ -13,6 +13,7 @@
   flex-direction: column;
   padding: 0.2em;
   text-align: center;
+  min-width: 12%;
 }
 
 .game-name {
@@ -20,7 +21,7 @@
   font-weight: 700;
 }
 
-.game-comments {
+.game-comment {
   margin: 0em 1em 1em;
 }
 
@@ -34,8 +35,4 @@
   width: 100%;
   text-align: center;
   padding: 0.5em;
-}
-
-.avg-rating {
-  background-color: green;
 }
