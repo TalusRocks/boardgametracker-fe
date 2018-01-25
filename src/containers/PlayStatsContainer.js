@@ -8,7 +8,11 @@ const PlayStatsContainer = ({ gameCollection }) => {
   return (
     <div className="play-stats-container">
       {gameCollection.byPlays.map((el, i) => {
-        return <p key={el.gameid} className="m-1"><span className="mr-1 bold">{el.totalplays}</span>{el.gamename}</p>
+        return <div key={el.gameid} className="m-1 plays-by-game-div">
+          <div key={`${el.gameid}-${el.totalplays}`} className="mr-1 bold">{el.totalplays}</div>
+          <div key={`${el.gamename}-${i}`}>{el.gamename}</div>
+        </div>
+
 
       })}
     </div>

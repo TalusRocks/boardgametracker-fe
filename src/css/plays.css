@@ -5,9 +5,15 @@
 
 .play-stats-container {
   margin-top: 7em;
+  margin-bottom: 7em;
 }
 
 .date-divider {
   background-color: #EFEFEF;
   padding: 0.2em 0em 0.2em 0.5em;
+}
+
+.plays-by-game-div {
+  display: flex;
+  align-items: center;
 }

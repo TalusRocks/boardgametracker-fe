@@ -32,7 +32,7 @@ const AllPlaysContainer = ({ allPlays, fetchPlays }) => {
       <AddPlayButton />
     </div>
   )
-} 
+}
 
 const mapStateToProps = state => ({
   allPlays: state.allPlays
