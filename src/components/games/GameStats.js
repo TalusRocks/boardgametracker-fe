@@ -12,12 +12,12 @@ const GameStats = ({ gameStats }) => {
           <div className="game-stats">
             <div className="stat avg-rating">{avgRating}</div>
             <div className="stat user-rating">{userRating !== 'N/A' ? userRating : '-'}</div>
-            <div className="stat min-player">2</div>
-            <div className="stat best-player">3</div>
-            <div className="stat max-player">5</div>
-            <div className="stat min-time">90</div>
-            <div className="stat max-time">120</div>
-            <div className="stat weight">3.35</div>
+            <div className="stat min-player">{el.$.minplayers}</div>
+            <div className="stat best-player">X</div>
+            <div className="stat max-player">{el.$.maxplayers}</div>
+            <div className="stat min-time">{el.$.minplaytime}</div>
+            <div className="stat max-time">{el.$.maxplaytime}</div>
+            <div className="stat weight">X.XX</div>
           </div>
         )
       })}
