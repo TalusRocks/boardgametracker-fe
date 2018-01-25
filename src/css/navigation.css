@@ -38,6 +38,7 @@ nav {
 .top-mobile-nav {
   position: fixed;
   top: 3em;
+  background-color: #fff;
 }
 
 .mobile-nav-item {

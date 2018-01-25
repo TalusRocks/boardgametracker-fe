@@ -2,14 +2,20 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import GameStats from './GameStats'
-import GameText from './GameText'
 import GameComment from './GameComment'
 
 const Game = ({ gameCollection }) => {
   return (
     <div className="one-game-container">
-      <GameText/>
-      <GameStats/>
+      { gameCollection.all.map((el, i) => {
+        return (
+          <div>
+            <h2 key={`${el.name}-${i}`} className="game-name">{el.name[0]._}</h2>
+            <GameComment gameComment={el.comment ? el.comment : ''}/>
+            <GameStats />
+          </div>
+        )
+      })}
     </div>
   )
 }
