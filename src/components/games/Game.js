@@ -12,7 +12,7 @@ const Game = ({ gameCollection }) => {
           <div>
             <h2 key={`${el.name}-${i}`} className="game-name">{el.name[0]._}</h2>
             <GameComment gameComment={el.comment ? el.comment : ''}/>
-            <GameStats />
+            <GameStats gameStats={el.stats}/>
           </div>
         )
       })}

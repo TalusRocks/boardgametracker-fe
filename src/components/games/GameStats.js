@@ -1,9 +1,17 @@
 import React from 'react'
 
-const GameStats = () => {
+const GameStats = ({ gameStats }) => {
+  // console.log(gameStats, "from GameStats.js");
   return (
     <div className="game-stats">
-      <div className="stat avg-rating">8.2</div>
+      {gameStats.map((el, i) => {
+        let avgRating = Number(el.rating[0].average[0].$.value).toFixed(2)
+
+        return (
+          <div className="stat avg-rating">{avgRating}</div>
+        )
+      })}
+
       <div className="stat user-rating">7.5</div>
       <div className="stat min-player">2</div>
       <div className="stat best-player">3</div>
