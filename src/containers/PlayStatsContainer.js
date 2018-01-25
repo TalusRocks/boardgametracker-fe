@@ -12,8 +12,8 @@ const PlayStatsContainer = ({ gameCollection }) => {
       {gameCollection.byPlays.map((el, i) => {
         return (
           <div>
-            <div className={ i+1 >= el.totalplays && hindex === false ? `h-index` : '' }>
-              { i+1 >= el.totalplays && hindex === false ? (hindex = true,  `H-index is ${i}`) : null }
+            <div className={ i >= el.totalplays && hindex === false ? `h-index` : '' }>
+              { i >= el.totalplays && hindex === false ? (hindex = true,  `H-index is ${i}`) : null }
             </div>
             <div key={el.gameid} className="m-1 plays-by-game-div">
               <div key={`${el.gameid}-${el.totalplays}`} className="mr-1 bold">{el.totalplays}</div>
