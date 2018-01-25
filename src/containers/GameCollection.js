@@ -6,7 +6,7 @@ import FilterGamesButton from '../components/games/FilterGamesButton'
 
 
 const GameCollection = ({ username, gameCollection, fetchGameCollection }) => {
-  console.log(gameCollection);
+  // console.log(gameCollection);
   return (
       <div>
         <div className="m-1 games-container">

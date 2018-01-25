@@ -1,6 +1,10 @@
 .plays-container {
   margin-top: 6em;
-  margin-bottom: 15em;
+  margin-bottom: 10em;
+}
+
+.play-stats-container {
+  margin-top: 7em;
 }
 
 .date-divider {

@@ -19,7 +19,7 @@ function gameCollection(state = { all: [], byPlays: [] }, action) {
         let gamePlays = { gamename, gameid, totalplays }
         playsByGame.push(gamePlays)
       }
-      console.log(playsByGame, "PLAYS BY GAME");
+      // console.log(playsByGame, "PLAYS BY GAME");
       return {
         ...state,
         all: action.payload,
