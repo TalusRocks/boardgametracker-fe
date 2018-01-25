@@ -2,3 +2,40 @@
   margin-top: 4em;
   margin-bottom: 15em;
 }
+
+.game-stats-headers {
+  display: flex;
+  font-size: 0.8em;
+}
+
+.stat-header {
+  display: flex;
+  flex-direction: column;
+  padding: 0.2em;
+  text-align: center;
+}
+
+.game-name {
+  margin: 1em 0.8em 0.5em 0.8em;
+  font-weight: 700;
+}
+
+.game-comments {
+  margin: 0em 1em 1em;
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat {
+  background-color: #e1e1e1;
+  width: 100%;
+  text-align: center;
+  padding: 0.5em;
+}
+
+.avg-rating {
+  background-color: green;
+}

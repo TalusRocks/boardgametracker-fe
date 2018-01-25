@@ -6,13 +6,13 @@ import { fetchGameCollection } from '../actions'
 const PlayStatsContainer = ({ gameCollection }) => {
   // console.log(gameCollection.byPlays, "from Play Stats Containers");
   let hindex = false
-
+  //is state only growing? deleted play on BGG and h-index won't go back down
   return (
     <div className="play-stats-container">
       {gameCollection.byPlays.map((el, i) => {
         return (
-          <div>
-            <div className={ i >= el.totalplays && hindex === false ? `h-index` : '' }>
+          <div key={i}>
+            <div key={`h-index=${i}`} className={ i >= el.totalplays && hindex === false ? `h-index` : '' }>
               { i >= el.totalplays && hindex === false ? (hindex = true,  `H-index is ${i}`) : null }
             </div>
             <div key={el.gameid} className="m-1 plays-by-game-div">

@@ -2,6 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { fetchGameCollection } from '../actions'
+import Game from '../components/games/Game'
 import FilterGamesButton from '../components/games/FilterGamesButton'
 
 
@@ -9,10 +10,8 @@ const GameCollection = ({ username, gameCollection, fetchGameCollection }) => {
   console.log("gameCollection", gameCollection);
   return (
       <div>
-        <div className="m-1 games-container">
-          { gameCollection.all.map((el, i) => {
-            return <p key={i} className="m-1">{el.name[0]._}</p>
-          })}
+        <div className="games-container">
+          <Game />
         </div>
         <FilterGamesButton/>
       </div>
