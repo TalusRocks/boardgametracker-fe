@@ -1,17 +1,17 @@
 export const GAMES_LOADED = 'GAMES_LOADED'
 export const PLAYS_LOADED = 'PLAYS_LOADED'
 export const SET_BGG_USERNAME = 'SET_BGG_USERNAME'
+export const SORT_GAMES = 'SORT_GAMES'
 
-//https://github.com/Leonidas-from-XIV/node-xml2js
 var parseString = require('xml2js').parseString;
 
-//DEMO:
-// var xml = "<root>Hello xml2js!</root>"
-// parseString(xml, function (err, result) {
-//     console.log(result, "PARSED");
-//     console.log(JSON.stringify(result), "STRINGified");
-// });
-
+export function sortGameCollection(key){
+  console.log(key, "key from the ACTION sortGameCollection");
+  return {
+    type: SORT_GAMES,
+    payload: key
+  }
+}
 
 export function sendBGGUsername(bggusername){
   //********TO-DO: ping API to check username
@@ -52,9 +52,10 @@ export function fetchPlays(){
     // then PLAYS_LOADED (can have >1 dispatch)
     let page = 1
 
-    let going = true
-
-    while (going) {
+    //*** turn off getting all pages for development 
+    // let going = true
+    //
+    // while (going) {
 
       const playData = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=PlayBosco&page=${page}`)
       .then(response => response.text())
@@ -62,7 +63,7 @@ export function fetchPlays(){
 
       parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, function (err, result){
 
-        if(result.AllPlays.play.length < 100) going = false
+        // if(result.AllPlays.play.length < 100) going = false
 
         dispatch({
           type: PLAYS_LOADED,
@@ -71,11 +72,11 @@ export function fetchPlays(){
 
       })
 
-      console.log(page, "page");
-      page += 1
-      await fetchPlays()
+      // console.log(page, "page");
+      // page += 1
+      // await fetchPlays()
 
-    }
+    // }
 
   }
 }

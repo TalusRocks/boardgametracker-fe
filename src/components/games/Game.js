@@ -1,15 +1,18 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { sortGameCollection } from '../../actions'
 import GameStats from './GameStats'
 import GameComment from './GameComment'
 
-const Game = ({ gameCollection }) => {
+const Game = ({ gameCollection, sortedGames }) => {
+  console.log(sortedGames, "sortedGames from Game.js");
+  //const sortedGameCollection
   return (
     <div className="one-game-container">
       { gameCollection.all.map((el, i) => {
         return (
-          <div>
+          <div key={`game-${i}`}>
             <h2 key={`${el.name}-${i}`} className="game-name">{el.name[0]._}</h2>
             <GameComment gameComment={el.comment ? el.comment : ''}/>
             <GameStats gameStats={el.stats}/>
@@ -21,10 +24,13 @@ const Game = ({ gameCollection }) => {
 }
 
 const mapStateToProps = state => ({
-  gameCollection: state.gameCollection
+  gameCollection: state.gameCollection,
+  sortedGames: state.sortedGames
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ sortGameCollection }, dispatch)
+}
 
 export default connect(
   mapStateToProps,

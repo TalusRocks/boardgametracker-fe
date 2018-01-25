@@ -9,15 +9,15 @@ const GameStats = ({ gameStats }) => {
         let userRating = el.rating[0].$.value
 
         return (
-          <div className="game-stats">
-            <div className="stat avg-rating">{avgRating}</div>
-            <div className="stat user-rating">{userRating !== 'N/A' ? userRating : '-'}</div>
-            <div className="stat min-player">{el.$.minplayers}</div>
-            <div className="stat best-player">X</div>
-            <div className="stat max-player">{el.$.maxplayers}</div>
-            <div className="stat min-time">{el.$.minplaytime}</div>
-            <div className="stat max-time">{el.$.maxplaytime}</div>
-            <div className="stat weight">X.XX</div>
+          <div key={`game-stats-${i}`} className="game-stats">
+            <div key={`avgrating-${i}`} className="stat avg-rating">{avgRating}</div>
+            <div key={`userrating-${i}`} className="stat user-rating">{userRating !== 'N/A' ? userRating : '-'}</div>
+            <div key={`minplayers-${i}`} className="stat min-player">{el.$.minplayers}</div>
+            <div key={`bestplayers-${i}`} className="stat best-player">X</div>
+            <div key={`maxplayers-${i}`} className="stat max-player">{el.$.maxplayers}</div>
+            <div key={`mintime-${i}`} className="stat min-time">{el.$.minplaytime}</div>
+            <div key={`maxtime-${i}`} className="stat max-time">{el.$.maxplaytime}</div>
+            <div key={`weight-${i}`} className="stat weight">X.XX</div>
           </div>
         )
       })}

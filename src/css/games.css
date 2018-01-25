@@ -14,6 +14,11 @@
   padding: 0.2em;
   text-align: center;
   min-width: 12%;
+  cursor: pointer;
+}
+
+.stat-header:hover {
+  background-color: #e1e1e1;
 }
 
 .game-name {

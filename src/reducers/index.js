@@ -1,13 +1,23 @@
 import { combineReducers } from 'redux'
-import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME } from '../actions'
+import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME, SORT_GAMES } from '../actions'
+
+function sortedGames(state = { sortBy: [] }, action){
+  console.log(action.payload, "action.payload from the REDUCER");
+  switch (action.type) {
+    case SORT_GAMES:
+      return {
+        ...state,
+        sortBy: action.payload
+      }
+    default:
+      return state
+  }
+}
 
 // (3)
 function gameCollection(state = { all: [], byPlays: [] }, action) {
-  // is this really different from the allPlays payload?
-  // console.log(action.payload, "GAAAAAME payload");
   switch (action.type) {
     case GAMES_LOADED:
-
       // 1) get game and total plays
       const playsByGame = []
       for (let i = 0; i < action.payload.length; i++){
@@ -19,17 +29,14 @@ function gameCollection(state = { all: [], byPlays: [] }, action) {
         let gamePlays = { gamename, gameid, totalplays }
         playsByGame.push(gamePlays)
       }
-      // console.log(playsByGame, "PLAYS BY GAME");
 
       for (let j = 0; j < playsByGame.length; j++){
 
       }
-
       //2) SORT into most play order
       playsByGame.sort(function(a, b) {
         return b.totalplays - a.totalplays
       })
-      // console.log("SORTED?=========================", playsByGame);
 
       return {
         ...state,
@@ -40,7 +47,6 @@ function gameCollection(state = { all: [], byPlays: [] }, action) {
       return state
   }
 }
-
 
 
 function allPlays(state = { all: [], byDate: [] }, action) {
@@ -94,7 +100,6 @@ function allPlays(state = { all: [], byDate: [] }, action) {
         }
 
       }
-      // console.log(action.payload, "PLAYYYY payload");
 
       return {
         ...state,
@@ -122,12 +127,5 @@ function currentUser(state = { username: '' }, action){
 
 
 export default combineReducers({
-  gameCollection, allPlays, currentUser
+  gameCollection, allPlays, currentUser, sortedGames
 })
-
-// in expanded form, object key can be whatever-
-// but that's what you'll call after state in App.js
-// e.g. gameCollection: state.banana (in mapStateToProps)
-// export default combineReducers({
-//   banana: gameCollection
-// })
