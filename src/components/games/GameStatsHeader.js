@@ -42,19 +42,19 @@ const GameStatsHeader = ({ sortGames, sortGameCollection }) => {
             </span>
             best player
           </div>
-          <div className="stat-header max-player-header">
+          <div onClick={ flip('maxPlayer', 'desc')} className="stat-header max-player-header">
             <span className="stat-arrow">
               <i className="material-icons">arrow_drop_down</i>
             </span>
             max player
           </div>
-          <div className="stat-header min-time-header">
+          <div onClick={ flip('minTime', 'desc')} className="stat-header min-time-header">
             <span className="stat-arrow">
               <i className="material-icons">arrow_drop_down</i>
             </span>
             min time
           </div>
-          <div className="stat-header max-time-header">
+          <div onClick={ flip('maxTime', 'desc')} className="stat-header max-time-header">
             <span className="stat-arrow">
               <i className="material-icons">arrow_drop_down</i>
             </span>

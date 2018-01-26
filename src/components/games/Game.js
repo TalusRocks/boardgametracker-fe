@@ -22,6 +22,15 @@ const Game = ({ gameCollection, sortGames }) => {
     case 'minPlayer':
       param = 'stats[0].$.minplayers'
       break
+    case 'maxPlayer':
+      param = 'stats[0].$.maxplayers'
+      break
+    case 'minTime':
+      param = 'stats[0].$.minplaytime'
+      break
+    case 'maxTime':
+      param = 'stats[0].$.maxplaytime'
+      break
     default:
       return ''
   }
@@ -31,7 +40,7 @@ const Game = ({ gameCollection, sortGames }) => {
 
   //sort games
   const result = orderBy(gameCollection.all,  [param], ['desc'])
-  console.log(result, "result");
+  // console.log(result, "result");
 
   //either display sorted games, or alphabetical collection by default
   sortGames.byOptions.key ? (displayGames = result) : (displayGames = gameCollection.all)
