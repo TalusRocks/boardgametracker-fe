@@ -7,14 +7,33 @@ import GameComment from './GameComment'
 const orderBy = require('lodash.orderby');
 
 const Game = ({ gameCollection, sortGames }) => {
-  console.log(gameCollection.all, "gameCollection.all from Game.js");
-  console.log(sortGames.byOptions.key, "sortGames.byOptions.key from Game.js");
+  // console.log(gameCollection.all, "gameCollection.all from Game.js");
+  // console.log(sortGames.byOptions.key, "sortGames.byOptions.key from Game.js");
+
+  let param
+
+  switch (sortGames.byOptions.key) {
+    case '':
+      param = ''
+      break
+    case 'bggRating':
+      param = 'stats[0].rating[0].average[0].$.value'
+      break
+    case 'minPlayer':
+      param = 'stats[0].$.minplayers'
+      break
+    default:
+      return ''
+  }
+
 
   let displayGames
 
-  const result = orderBy(gameCollection.all,  ['stats[0].rating[0].average[0].$.value'], ['desc'])
+  //sort games
+  const result = orderBy(gameCollection.all,  [param], ['desc'])
   console.log(result, "result");
 
+  //either display sorted games, or alphabetical collection by default
   sortGames.byOptions.key ? (displayGames = result) : (displayGames = gameCollection.all)
 
 

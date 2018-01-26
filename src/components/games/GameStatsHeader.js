@@ -18,7 +18,7 @@ const GameStatsHeader = ({ sortGames, sortGameCollection }) => {
     return (
       <div>
         <div className="game-stats-headers">
-          <div onClick={ flip('bggRating', 'descending')} className="stat-header avg-rating-header">
+          <div onClick={ flip('bggRating', 'desc')} className="stat-header avg-rating-header">
             <span className="stat-arrow">
               <i className="material-icons">arrow_drop_down</i>
             </span>
@@ -30,7 +30,7 @@ const GameStatsHeader = ({ sortGames, sortGameCollection }) => {
             </span>
             your rating
           </div>
-          <div className="stat-header min-player-header">
+          <div onClick={ flip('minPlayer', 'desc')} className="stat-header min-player-header">
             <span className="stat-arrow">
               <i className="material-icons">arrow_drop_down</i>
             </span>
