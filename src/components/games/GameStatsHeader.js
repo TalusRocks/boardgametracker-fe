@@ -7,12 +7,12 @@ class GameStatsHeader extends Component {
 
     //local state to track direction
     state = {
-      bggRating: 'desc',
-      yourRating: 'desc',
-      minPlayer: 'desc',
-      maxPlayer: 'desc',
-      minTime: 'desc',
-      maxTime: 'desc'
+      bggRating: '',
+      yourRating: '',
+      minPlayer: '',
+      maxPlayer: '',
+      minTime: '',
+      maxTime: ''
     }
 
     flip = (key, direction) => {
@@ -21,7 +21,14 @@ class GameStatsHeader extends Component {
         console.log('key', this.state[key]);
         // console.log(sortKey, "SORT KEY");
         //using closure to return a function
-        this.state[key] === 'asc' ? this.setState({ [key]: 'desc'}) : this.setState({ [key]: 'asc'})
+        this.state[key] === '' || this.state[key] === 'asc' ? this.setState({ [key]: 'desc'}) : this.setState({ [key]: 'asc'})
+
+        // if(this.state[key] === '' || this.state[key] === 'asc'){
+        //   this.setState({ [key]: 'desc'})
+        // } else {
+        //   this.setState({ [key]: 'asc'})
+        // }
+
         this.props.sortGameCollection(sortKeyDir)
       }
 
@@ -34,7 +41,13 @@ class GameStatsHeader extends Component {
           <div className="game-stats-headers">
             <div onClick={ this.flip('bggRating', this.state.bggRating)} className="stat-header avg-rating-header">
               <span className="stat-arrow">
-                <i className="material-icons">arrow_drop_down</i>
+
+<i className="material-icons">
+  {
+    this.state.bggRating === '' ? `` :
+    this.state.bggRating === 'desc' ? `arrow_drop_up` : `arrow_drop_down`
+  }
+</i>
               </span>
               BGG rating
             </div>
