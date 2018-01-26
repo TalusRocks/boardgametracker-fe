@@ -5,6 +5,8 @@ import { sortGameCollection } from '../../actions'
 
 const GameStatsHeader = ({ sortGames, sortGameCollection }) => {
 
+    //local state to track direction
+
     const flip = (key, direction) => {
       const sortKeyDir = { key, direction }
       // console.log(sortKey, "SORT KEY");
