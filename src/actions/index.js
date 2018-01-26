@@ -5,11 +5,11 @@ export const SORT_GAMES = 'SORT_GAMES'
 
 var parseString = require('xml2js').parseString;
 
-export function sortGameCollection(key){
-  console.log(key, "key from the ACTION sortGameCollection");
+export function sortGameCollection(sortKey){
+  console.log(sortKey, "sortKey from the ACTION sortGameCollection");
   return {
     type: SORT_GAMES,
-    payload: key
+    payload: sortKey
   }
 }
 
@@ -52,7 +52,7 @@ export function fetchPlays(){
     // then PLAYS_LOADED (can have >1 dispatch)
     let page = 1
 
-    //*** turn off getting all pages for development 
+    //*** turn off getting all pages for development
     // let going = true
     //
     // while (going) {

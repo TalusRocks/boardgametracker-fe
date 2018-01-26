@@ -6,8 +6,10 @@ import GameStats from './GameStats'
 import GameComment from './GameComment'
 
 const Game = ({ gameCollection, sortedGames }) => {
-  console.log(sortedGames, "sortedGames from Game.js");
-  //const sortedGameCollection
+  console.log(sortedGames.all.key, sortedGames.all.direction, "sortedGames!!!!!!!!!!");
+
+  //SORT!
+
   return (
     <div className="one-game-container">
       { gameCollection.all.map((el, i) => {

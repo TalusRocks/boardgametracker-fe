@@ -3,19 +3,25 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { sortGameCollection } from '../../actions'
 
-const flip = (key) => {
-  return () => {
-    const sortByThis = { [key]: !this.state[key]}
-    sortGameCollection(sortByThis)
-  }
-}
+
 // onClick={ flip('bggRating') }
-const GameStatsHeader = ({ sortedGames }) => {
-console.log(sortedGames, "SORT. GAMES. BY.");
+const GameStatsHeader = ({ sortedGames, sortGameCollection }) => {
+// console.log(sortedGames, "SORT. GAMES. BY.");
+
+    const flip = (key, direction) => {
+      const sortKey = { key, direction }
+      console.log(sortKey, "SORT KEY");
+      //using closure to return a function 
+      return () => {
+        sortGameCollection(sortKey)
+      }
+
+    }
+
     return (
       <div>
         <div className="game-stats-headers">
-          <div className="stat-header avg-rating-header">
+          <div onClick={ flip('bggRating', 'descending')} className="stat-header avg-rating-header">
             <span className="stat-arrow">
               <i className="material-icons">arrow_drop_down</i>
             </span>

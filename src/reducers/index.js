@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux'
 import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME, SORT_GAMES } from '../actions'
 
-function sortedGames(state = { sortBy: [] }, action){
+//sortedGames: {sortBy: '', direction: '', games: []}
+
+function sortedGames(state = { all: { key: '', direction: ''} }, action){
   console.log(action.payload, "action.payload from the REDUCER");
   switch (action.type) {
     case SORT_GAMES:
       return {
         ...state,
-        sortBy: action.payload
+        all: action.payload
       }
     default:
       return state
