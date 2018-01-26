@@ -7,7 +7,12 @@ class GameStatsHeader extends Component {
 
     //local state to track direction
     state = {
-      bggRating: 'asc',
+      bggRating: 'desc',
+      yourRating: 'desc',
+      minPlayer: 'desc',
+      maxPlayer: 'desc',
+      minTime: 'desc',
+      maxTime: 'desc'
     }
 
     flip = (key, direction) => {
@@ -33,13 +38,13 @@ class GameStatsHeader extends Component {
               </span>
               BGG rating
             </div>
-            <div className="stat-header user-rating-header">
+            <div onClick={ this.flip('yourRating', this.state.yourRating)} className="stat-header user-rating-header">
               <span className="stat-arrow">
                 <i className="material-icons">arrow_drop_down</i>
               </span>
               your rating
             </div>
-            <div onClick={ this.flip('minPlayer', 'desc')} className="stat-header min-player-header">
+            <div onClick={ this.flip('minPlayer', this.state.minPlayer)} className="stat-header min-player-header">
               <span className="stat-arrow">
                 <i className="material-icons">arrow_drop_down</i>
               </span>
@@ -51,19 +56,19 @@ class GameStatsHeader extends Component {
               </span>
               best player
             </div>
-            <div onClick={ this.flip('maxPlayer', 'desc')} className="stat-header max-player-header">
+            <div onClick={ this.flip('maxPlayer', this.state.maxPlayer)} className="stat-header max-player-header">
               <span className="stat-arrow">
                 <i className="material-icons">arrow_drop_down</i>
               </span>
               max player
             </div>
-            <div onClick={ this.flip('minTime', 'desc')} className="stat-header min-time-header">
+            <div onClick={ this.flip('minTime', this.state.minTime)} className="stat-header min-time-header">
               <span className="stat-arrow">
                 <i className="material-icons">arrow_drop_down</i>
               </span>
               min time
             </div>
-            <div onClick={ this.flip('maxTime', 'desc')} className="stat-header max-time-header">
+            <div onClick={ this.flip('maxTime', this.state.maxTime)} className="stat-header max-time-header">
               <span className="stat-arrow">
                 <i className="material-icons">arrow_drop_down</i>
               </span>

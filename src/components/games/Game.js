@@ -19,6 +19,9 @@ const Game = ({ gameCollection, sortGames }) => {
     case 'bggRating':
       param = 'stats[0].rating[0].average[0].$.value'
       break
+    case 'yourRating':
+      param = 'stats[0].rating[0].$.value'
+      break
     case 'minPlayer':
       param = 'stats[0].$.minplayers'
       break
