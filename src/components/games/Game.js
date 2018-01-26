@@ -8,28 +8,20 @@ const orderBy = require('lodash.orderby');
 
 const Game = ({ gameCollection, sortGames }) => {
   console.log(gameCollection.all, "gameCollection.all from Game.js");
-  console.log(sortGames, "sortGames from Game.js");
+  console.log(sortGames.byOptions.key, "sortGames.byOptions.key from Game.js");
 
-  // gameCollection.all.map((el, i) => {
-  //   console.log(el.stats[0].rating[0].average[0].$.value);
-  // })
-
-
-
-  //how does this fire? it needs to fire when header is clicked.
-  //on header click, fire this?
+  let displayGames
 
   const result = orderBy(gameCollection.all,  ['stats[0].rating[0].average[0].$.value'], ['desc'])
+  console.log(result, "result");
 
-  //map over collection by default
-  //map over result IF what?  if a value in SortGames? once there's one value, there'll always be a value until it's refreshed
-
+  sortGames.byOptions.key ? (displayGames = result) : (displayGames = gameCollection.all)
 
 
   return (
 
     <div className="one-game-container">
-      { result.map((el, i) => {
+      { displayGames.map((el, i) => {
         return (
           <div key={`game-${i}`}>
             <h2 key={`${el.name}-${i}`} className="game-name">{el.name[0]._}</h2>
