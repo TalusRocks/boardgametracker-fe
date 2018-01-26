@@ -4,15 +4,29 @@ import { connect } from 'react-redux'
 import { sortGameCollection } from '../../actions'
 import GameStats from './GameStats'
 import GameComment from './GameComment'
+const sortBy = require('lodash.sortby');
 
-const Game = ({ gameCollection, sortedGames }) => {
-  console.log(sortedGames.all.key, sortedGames.all.direction, "sortedGames!!!!!!!!!!");
+const Game = ({ gameCollection, sortGames }) => {
+  console.log(gameCollection.all, "gameCollection.all from Game.js");
+  console.log(sortGames, "sortGames from Game.js");
 
-  //SORT!
+  // gameCollection.all.map((el, i) => {
+  //   console.log(el.stats[0].rating[0].average[0].$.value);
+  // })
+
+
+
+  //how does this fire? it needs to fire when header is clicked.
+  //on header click, fire this?
+  const result = sortBy(gameCollection.all, (o) => o.stats[0].rating[0].average[0].$.value)
+  console.log(result, "lodash sortBy result");
+
+
 
   return (
+
     <div className="one-game-container">
-      { gameCollection.all.map((el, i) => {
+      { result.map((el, i) => {
         return (
           <div key={`game-${i}`}>
             <h2 key={`${el.name}-${i}`} className="game-name">{el.name[0]._}</h2>
@@ -27,7 +41,7 @@ const Game = ({ gameCollection, sortedGames }) => {
 
 const mapStateToProps = state => ({
   gameCollection: state.gameCollection,
-  sortedGames: state.sortedGames
+  sortGames: state.sortGames
 })
 
 const mapDispatchToProps = dispatch => {

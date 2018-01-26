@@ -3,17 +3,14 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { sortGameCollection } from '../../actions'
 
-
-// onClick={ flip('bggRating') }
-const GameStatsHeader = ({ sortedGames, sortGameCollection }) => {
-// console.log(sortedGames, "SORT. GAMES. BY.");
+const GameStatsHeader = ({ sortGames, sortGameCollection }) => {
 
     const flip = (key, direction) => {
-      const sortKey = { key, direction }
-      console.log(sortKey, "SORT KEY");
-      //using closure to return a function 
+      const sortKeyDir = { key, direction }
+      // console.log(sortKey, "SORT KEY");
+      //using closure to return a function
       return () => {
-        sortGameCollection(sortKey)
+        sortGameCollection(sortKeyDir)
       }
 
     }
@@ -77,7 +74,7 @@ const GameStatsHeader = ({ sortedGames, sortGameCollection }) => {
 
 const mapStateToProps = state => ({
   gameCollection: state.gameCollection,
-  sortedGames: state.sortedGames
+  sortGames: state.sortGames
 })
 
 const mapDispatchToProps = dispatch => {

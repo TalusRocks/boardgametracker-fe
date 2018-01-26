@@ -1,15 +1,14 @@
 import { combineReducers } from 'redux'
 import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME, SORT_GAMES } from '../actions'
 
-//sortedGames: {sortBy: '', direction: '', games: []}
-
-function sortedGames(state = { all: { key: '', direction: ''} }, action){
-  console.log(action.payload, "action.payload from the REDUCER");
+function sortGames(state = { byOptions: { key: '', direction: '' }
+  }, action){
+  // console.log(action.payload, "action.payload from the REDUCER");
   switch (action.type) {
     case SORT_GAMES:
       return {
         ...state,
-        all: action.payload
+        byOptions: action.payload
       }
     default:
       return state
@@ -129,5 +128,5 @@ function currentUser(state = { username: '' }, action){
 
 
 export default combineReducers({
-  gameCollection, allPlays, currentUser, sortedGames
+  gameCollection, allPlays, currentUser, sortGames
 })

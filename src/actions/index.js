@@ -5,11 +5,11 @@ export const SORT_GAMES = 'SORT_GAMES'
 
 var parseString = require('xml2js').parseString;
 
-export function sortGameCollection(sortKey){
-  console.log(sortKey, "sortKey from the ACTION sortGameCollection");
+export function sortGameCollection(sortKeyDir){
+  // console.log(sortKey, "sortKey from the ACTION sortGameCollection");
   return {
     type: SORT_GAMES,
-    payload: sortKey
+    payload: sortKeyDir
   }
 }
 
