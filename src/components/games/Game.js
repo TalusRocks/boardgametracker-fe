@@ -10,6 +10,7 @@ const Game = ({ gameCollection, sortGames }) => {
   // console.log(gameCollection.all, "gameCollection.all from Game.js");
   // console.log(sortGames.byOptions.key, "sortGames.byOptions.key from Game.js");
 
+
   let param
 
   switch (sortGames.byOptions.key) {
@@ -35,7 +36,8 @@ const Game = ({ gameCollection, sortGames }) => {
       param = 'stats[0].$.maxplaytime'
       break
     default:
-      return ''
+      param = ''
+      break
   }
 
 

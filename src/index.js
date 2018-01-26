@@ -9,6 +9,7 @@ import './css/plays.css'
 import './css/games.css'
 import './css/forms.css'
 import './css/buttons.css'
+import './css/statcolors.css'
 
 import store from './store'
 import { Provider } from 'react-redux'

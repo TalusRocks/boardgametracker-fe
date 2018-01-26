@@ -36,6 +36,7 @@ export function fetchGameCollection(){
         .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
 
         parseString(`<GamesOwned>${data.documentElement.innerHTML}</GamesOwned>`, {trim: true}, function (err, result){
+          //IF first time, POST to db *await 
           dispatch({
             type: GAMES_LOADED,
             payload: result.GamesOwned.item
