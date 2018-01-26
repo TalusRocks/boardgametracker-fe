@@ -17,11 +17,20 @@ class GameStatsHeader extends Component {
 
     flip = (key, direction) => {
       const sortKeyDir = { key, direction }
+
+      //using closure to return a function
       return () => {
         console.log('key', this.state[key]);
-        // console.log(sortKey, "SORT KEY");
-        //using closure to return a function
+
+        //sortKeyDir has already been set; flip it here for the next click
         this.state[key] === '' || this.state[key] === 'asc' ? this.setState({ [key]: 'desc'}) : this.setState({ [key]: 'asc'})
+
+        //turn all other keys to ''
+        for(var i in this.state){
+          if(this.state[i] !== key){
+            this.state[i] = ''
+          }
+        }
 
         this.props.sortGameCollection(sortKeyDir)
       }

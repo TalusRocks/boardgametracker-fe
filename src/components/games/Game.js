@@ -42,7 +42,7 @@ const Game = ({ gameCollection, sortGames }) => {
   let displayGames
 
   //sort games
-  const result = orderBy(gameCollection.all,  [param], [sortGames.byOptions.direction])
+  const result = orderBy(gameCollection.all, [param], [sortGames.byOptions.direction])
   // console.log(result, "result");
 
   //either display sorted games, or alphabetical collection by default
