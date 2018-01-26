@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { sortGameCollection } from '../../actions'
 import GameStats from './GameStats'
 import GameComment from './GameComment'
-const sortBy = require('lodash.sortby');
+const orderBy = require('lodash.orderby');
 
 const Game = ({ gameCollection, sortGames }) => {
   console.log(gameCollection.all, "gameCollection.all from Game.js");
@@ -18,8 +18,11 @@ const Game = ({ gameCollection, sortGames }) => {
 
   //how does this fire? it needs to fire when header is clicked.
   //on header click, fire this?
-  const result = sortBy(gameCollection.all, (o) => o.stats[0].rating[0].average[0].$.value)
-  console.log(result, "lodash sortBy result");
+
+  const result = orderBy(gameCollection.all,  ['stats[0].rating[0].average[0].$.value'], ['desc'])
+
+  //map over collection by default
+  //map over result IF what?  if a value in SortGames? once there's one value, there'll always be a value until it's refreshed
 
 
 
