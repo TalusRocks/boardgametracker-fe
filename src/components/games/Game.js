@@ -7,9 +7,6 @@ import GameComment from './GameComment'
 const orderBy = require('lodash.orderby');
 
 const Game = ({ gameCollection, sortGames, filterGames }) => {
-  // console.log(gameCollection.all, "gameCollection.all from Game.js");
-  // console.log(sortGames.byOptions.key, "sortGames.byOptions.key from Game.js");
-  console.log(filterGames, "filterGames from staaaaaate");
 
   let param
 
@@ -40,6 +37,20 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
       break
   }
 
+  // console.log(gameCollection.all, "gameCollection.all from Game.js");
+  // console.log(sortGames.byOptions.key, "sortGames.byOptions.key from Game.js");
+  // console.log(filterGames.byParams.maxTime, "filterGames from staaaaaate");
+
+  const filtered = gameCollection.all.filter(el => {
+    return parseInt(el.stats[0].$.maxplaytime) < parseInt(filterGames.byParams.maxTime)
+  })
+  console.log(filtered, "filtered");
+
+  console.log(filtered.length, "filtered.LENGTH");
+  //if there are filter options in redux, then filter the redux gameCollection and store the filtered games in redux state (?)... and when sorting, IF there are filtered games, sort through the _filtered_ games. Otherwise sort through the gamesColl.
+
+  //reset the filter options from here with a button. Fire off filterGames with everything set to empty.
+
 
   let displayGames
 
@@ -47,8 +58,10 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
   const result = orderBy(gameCollection.all, [param], [sortGames.byOptions.direction])
   // console.log(result, "result");
 
-  //either display sorted games, or alphabetical collection by default
-  sortGames.byOptions.key ? (displayGames = result) : (displayGames = gameCollection.all)
+  //either display sorted games or default
+  // sortGames.byOptions.key ? (displayGames = result) : (displayGames = gameCollection.all)
+
+  filtered.length > 0 ? displayGames = filtered : (displayGames = gameCollection.all)
 
 
   return (
