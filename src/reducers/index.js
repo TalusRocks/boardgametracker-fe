@@ -1,5 +1,17 @@
 import { combineReducers } from 'redux'
-import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME, SORT_GAMES } from '../actions'
+import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES } from '../actions'
+
+function filterGames(state = { byParams: {} }, action){
+  switch (action.type) {
+    case FILTER_GAMES:
+      return {
+        ...state,
+        byParams: action.payload
+      }
+    default:
+      return state
+  }
+}
 
 function sortGames(state = { byOptions: { key: '', direction: '' }
   }, action){

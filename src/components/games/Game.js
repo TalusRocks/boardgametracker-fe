@@ -6,10 +6,10 @@ import GameStats from './GameStats'
 import GameComment from './GameComment'
 const orderBy = require('lodash.orderby');
 
-const Game = ({ gameCollection, sortGames }) => {
+const Game = ({ gameCollection, sortGames, filterGames }) => {
   // console.log(gameCollection.all, "gameCollection.all from Game.js");
   // console.log(sortGames.byOptions.key, "sortGames.byOptions.key from Game.js");
-
+  console.log(filterGames, "filterGames from staaaaaate");
 
   let param
 
@@ -69,7 +69,8 @@ const Game = ({ gameCollection, sortGames }) => {
 
 const mapStateToProps = state => ({
   gameCollection: state.gameCollection,
-  sortGames: state.sortGames
+  sortGames: state.sortGames,
+  filterGames: state.filterGames
 })
 
 const mapDispatchToProps = dispatch => {

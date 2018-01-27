@@ -28,6 +28,7 @@ class GameStatsHeader extends Component {
         //turn all other keys to ''
         for(var i in this.state){
           if(this.state[i] !== key){
+            //!!! need to use setState here instead
             this.state[i] = ''
           }
         }

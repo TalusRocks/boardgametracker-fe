@@ -2,8 +2,17 @@ export const GAMES_LOADED = 'GAMES_LOADED'
 export const PLAYS_LOADED = 'PLAYS_LOADED'
 export const SET_BGG_USERNAME = 'SET_BGG_USERNAME'
 export const SORT_GAMES = 'SORT_GAMES'
+export const FILTER_GAMES = 'FILTER_GAMES'
 
 var parseString = require('xml2js').parseString;
+
+export function filterGameCollection(filterParams){
+  console.log(filterParams, "filterParams from ACTION/index.js");
+  return {
+    type: FILTER_GAMES,
+    payload: filterParams
+  }
+}
 
 export function sortGameCollection(sortKeyDir){
   // console.log(sortKey, "sortKey from the ACTION sortGameCollection");
@@ -36,7 +45,7 @@ export function fetchGameCollection(){
         .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
 
         parseString(`<GamesOwned>${data.documentElement.innerHTML}</GamesOwned>`, {trim: true}, function (err, result){
-          //IF first time, POST to db *await 
+          //IF first time, POST to db *await
           dispatch({
             type: GAMES_LOADED,
             payload: result.GamesOwned.item
