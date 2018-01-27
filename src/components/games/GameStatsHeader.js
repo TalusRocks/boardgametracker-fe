@@ -20,8 +20,6 @@ class GameStatsHeader extends Component {
 
       //using closure to return a function
       return () => {
-        console.log('key', this.state[key]);
-
         //sortKeyDir has already been set; flip it here for the next click
         this.state[key] === '' || this.state[key] === 'asc' ? this.setState({ [key]: 'desc'}) : this.setState({ [key]: 'asc'})
 
@@ -39,7 +37,6 @@ class GameStatsHeader extends Component {
     }
 
     render() {
-      console.log(this.state);
       return (
         <div>
           <div className="game-stats-headers">

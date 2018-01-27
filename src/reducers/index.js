@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES } from '../actions'
 
-function filterGames(state = { byParams: {} }, action){
+function filterGames(state = { byParams: { minBggRating: '', numPlayers: '', maxTime: '' } }, action){
   switch (action.type) {
     case FILTER_GAMES:
       return {
@@ -140,5 +140,5 @@ function currentUser(state = { username: '' }, action){
 
 
 export default combineReducers({
-  gameCollection, allPlays, currentUser, sortGames
+  gameCollection, allPlays, currentUser, sortGames, filterGames
 })
