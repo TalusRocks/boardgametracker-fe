@@ -19,7 +19,7 @@
 }
 
 .stat-header:hover {
-  background-color: #e1e1e1;
+  background-color: #f3f3f3;
 }
 
 .game-name {
@@ -45,4 +45,23 @@
 
 .stat-arrow {
   height: 28px;
+}
+
+.stat-header {
+  font-weight: 700;
+}
+.avg-rating-header, .user-rating-header {
+  color: #63B00D;
+}
+
+.min-player-header, .best-player-header, .max-player-header {
+  color: #E69426;
+}
+
+.min-time-header, .max-time-header {
+  color: #3C7ED8;
+}
+
+.weight-header {
+  color: #9013FE;
 }

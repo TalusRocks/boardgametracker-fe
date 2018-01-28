@@ -41,12 +41,17 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
   // console.log(sortGames.byOptions.key, "sortGames.byOptions.key from Game.js");
   // console.log(filterGames.byParams.maxTime, "filterGames from staaaaaate");
 
+  //***need to move this so it doesn't fire on load?
+
   const filtered = gameCollection.all.filter(el => {
     return parseInt(el.stats[0].$.maxplaytime) < parseInt(filterGames.byParams.maxTime)
   })
   console.log(filtered, "filtered");
 
-  console.log(filtered.length, "filtered.LENGTH");
+
+
+
+
   //if there are filter options in redux, then filter the redux gameCollection and store the filtered games in redux state (?)... and when sorting, IF there are filtered games, sort through the _filtered_ games. Otherwise sort through the gamesColl.
 
   //reset the filter options from here with a button. Fire off filterGames with everything set to empty.
@@ -54,14 +59,16 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
 
   let displayGames
 
+
+
   //sort games
   const result = orderBy(gameCollection.all, [param], [sortGames.byOptions.direction])
   // console.log(result, "result");
 
   //either display sorted games or default
-  // sortGames.byOptions.key ? (displayGames = result) : (displayGames = gameCollection.all)
+  sortGames.byOptions.key ? (displayGames = result) : (displayGames = gameCollection.all)
 
-  filtered.length > 0 ? displayGames = filtered : (displayGames = gameCollection.all)
+  // filtered.length > 0 ? displayGames = filtered : (displayGames = gameCollection.all)
 
 
   return (

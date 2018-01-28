@@ -1,0 +1,15 @@
+.avg-rating, .user-rating {
+  background-color: #87C641;
+}
+
+.min-player, .best-player, .max-player {
+  background-color: #F8D31C;
+}
+
+.min-time, .max-time {
+  background-color: #4A8AE2;
+}
+
+.weight {
+  background-color: #AD75DE;
+}
