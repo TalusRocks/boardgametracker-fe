@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
+import FrequentGames from '../components/games/FrequentGames'
 
 class AddPlayForm extends Component {
 
@@ -11,8 +12,14 @@ class AddPlayForm extends Component {
 
   submitNewPlay = (e) => {
     e.preventDefault()
-    console.log("submitted new play!");
-    this.setState({ fireRedirect: true })
+
+    const newPlayParams = {
+      playDate: e.target.playDate.value,
+      playGame: e.target.playGame.value,
+      playComments: e.target.playComments.value
+    }
+    console.log(newPlayParams);
+    // this.setState({ fireRedirect: true })
   }
 
   render() {
@@ -31,31 +38,29 @@ class AddPlayForm extends Component {
                 <span className="caps-title">
                 Date
                 </span>
-                <input className="mt-05 text-input" type="text" name="date"></input>
+                <input className="mt-05 text-input" type="text" name="playDate" defaultValue="2018-01-28"></input>
               </label>
             </div>
-            <div className="mtb-2">
+            <div className="mt-2 mb-1">
               <label>
                 <span className="caps-title">
                 Game
                 </span>
-                <input className="mt-05 text-input" type="text" name="game"></input>
+                <input className="mt-05 text-input" type="text" name="playGame" defaultValue="Splendor"></input>
               </label>
             </div>
-            <div>
-              <p className="blue-link text-center mtb-1">Grand Austria Hotel</p>
-              <p className="blue-link text-center mtb-1">Star Wars: Destiny</p>
-              <p className="blue-link text-center mtb-1">Scythe</p>
-              <p className="blue-link text-center mtb-1">FUSE</p>
-              <p className="blue-link text-center mtb-1">The Castles of Burgundy</p>
-            </div>
             <div className="button short-btn">Search BoardGameGeek</div>
+
+            <p className="text-center mt-1">Or choose from frequently played:</p>
+
+            <FrequentGames />
+
             <div className="mtb-2">
               <label>
                 <span className="caps-title">
                 Comments
                 </span>
-                <textarea className="mt-05" rows="4" name="date"></textarea>
+                <textarea className="mt-05" rows="4" name="playComments" defaultValue="with first module from new expansion"></textarea>
               </label>
             </div>
             <input className="button submit green mt-1" type="submit" value="Save Now"></input>

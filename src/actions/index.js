@@ -3,11 +3,14 @@ export const PLAYS_LOADED = 'PLAYS_LOADED'
 export const SET_BGG_USERNAME = 'SET_BGG_USERNAME'
 export const SORT_GAMES = 'SORT_GAMES'
 export const FILTER_GAMES = 'FILTER_GAMES'
+export const POST_PLAY = 'POST_PLAY'
 
 var parseString = require('xml2js').parseString;
 
+
+
 export function filterGameCollection(filterParams){
-  console.log(filterParams, "filterParams from ACTION/index.js");
+  // console.log(filterParams, "filterParams from ACTION/index.js");
   return {
     type: FILTER_GAMES,
     payload: filterParams
@@ -54,6 +57,27 @@ export function fetchGameCollection(){
       }
     }
 }
+
+export function postNewPlay(newPlayParams){
+  return {
+    type: POST_PLAY,
+    payload: newPlayParams
+  }
+}
+
+//fetch plays from _database_
+//when getting BGG plays, POST those to the database
+// export function fetchPlaysDB(newPlayParams){
+//   return async (dispatch) => {
+//     const response = await request(`/plays/${id}`, POST, newPlayParams)
+//     const json = await response.json()
+//
+//     dispatch({
+//       type: POST_PLAY,
+//       payload: json.newPlayParams
+//     })
+//   }
+// }
 
 export function fetchPlays(){
   return async (dispatch) => {
