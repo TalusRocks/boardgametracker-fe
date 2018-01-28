@@ -4,7 +4,10 @@ import { connect } from 'react-redux'
 import { sortGameCollection } from '../../actions'
 import GameStats from './GameStats'
 import GameComment from './GameComment'
-const orderBy = require('lodash.orderby');
+const orderBy = require('lodash.orderby')
+
+//used with ORDERBY 
+const identity = require('lodash.identity')
 
 const Game = ({ gameCollection, sortGames, filterGames }) => {
 
@@ -59,9 +62,7 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
 
   let displayGames
 
-
-
-  //sort games
+  //SORT GAMES
   const result = orderBy(gameCollection.all, [param], [sortGames.byOptions.direction])
   // console.log(result, "result");
 
@@ -69,6 +70,7 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
   sortGames.byOptions.key ? (displayGames = result) : (displayGames = gameCollection.all)
 
   // filtered.length > 0 ? displayGames = filtered : (displayGames = gameCollection.all)
+
 
 
   return (
