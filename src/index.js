@@ -13,7 +13,7 @@ import './css/statcolors.css'
 
 import store from './store'
 import { Provider } from 'react-redux'
-import { fetchGameCollection, fetchPlays } from './actions'
+import { fetchGameCollection, fetchPlays, downloadPlays } from './actions'
 
 // (1)
 //using local storage for development purposes

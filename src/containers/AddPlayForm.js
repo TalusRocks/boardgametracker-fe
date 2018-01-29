@@ -18,8 +18,8 @@ class AddPlayForm extends Component {
   }
 
   componentDidUpdate(){
-    console.log(this.state.selectedGame, "(GAME)=====from componentDidUpdate=====");
-    console.log(this.state.selectedGameId, "(ID)=====from componentDidUpdate=====");
+    // console.log(this.state.selectedGame, "(GAME)=====from componentDidUpdate=====");
+    // console.log(this.state.selectedGameId, "(ID)=====from componentDidUpdate=====");
   }
 
   selectBggGame = (e) => {
@@ -27,8 +27,8 @@ class AddPlayForm extends Component {
 
     this.setState({selectedGame: e.target.textContent, selectedGameId: e.target.id})
 
-    console.log(this.state.selectedGame, "selectedGame in STATE");
-    console.log(this.state.selectedGameId, "selectedGameId in STATE");
+    // console.log(this.state.selectedGame, "selectedGame in STATE");
+    // console.log(this.state.selectedGameId, "selectedGameId in STATE");
   }
 
   sendSearchParam = () => {

@@ -59,6 +59,7 @@ export function fetchGameCollection(){
     }
 }
 
+
 export function postNewPlay(newPlayParams){
   return async(dispatch) => {
     const data = await fetch(`${baseURL}/plays`, {
@@ -84,20 +85,6 @@ export function postNewPlay(newPlayParams){
 
 }
 
-//fetch plays from _database_
-//when getting BGG plays, POST those to the database
-// export function fetchPlaysDB(newPlayParams){
-//   return async (dispatch) => {
-//     const response = await request(`/plays/${id}`, POST, newPlayParams)
-//     const json = await response.json()
-//
-//     dispatch({
-//       type: POST_PLAY,
-//       payload: json.newPlayParams
-//     })
-//   }
-// }
-
 export function searchBoardGameGeek(searchParam){
   // console.log(searchParam, "searchParam from searchBoardGameGeek in ACTION/index");
   return async (dispatch) => {
@@ -121,38 +108,33 @@ export function searchBoardGameGeek(searchParam){
   }
 }
 
+
+
 export function fetchPlays(){
   return async (dispatch) => {
     //dispatch PLAYS_LOADING to make a spinner here
     //change PLAYS_LOADED to ADD_PLAYS
     // then PLAYS_LOADED (can have >1 dispatch)
     let page = 1
-
     //*** turn off getting all pages for development
     // let going = true
     //
     // while (going) {
-
       const playData = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=PlayBosco&page=${page}`)
       .then(response => response.text())
       .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
 
       parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, function (err, result){
-
         // if(result.AllPlays.play.length < 100) going = false
-
         dispatch({
           type: PLAYS_LOADED,
           payload: result.AllPlays.play
         })
-
       })
-
       // console.log(page, "page");
       // page += 1
       // await fetchPlays()
 
     // }
-
   }
 }
