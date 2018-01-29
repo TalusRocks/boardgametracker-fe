@@ -4,10 +4,9 @@ export const SET_BGG_USERNAME = 'SET_BGG_USERNAME'
 export const SORT_GAMES = 'SORT_GAMES'
 export const FILTER_GAMES = 'FILTER_GAMES'
 export const POST_PLAY = 'POST_PLAY'
+export const SEARCH_BGG = 'SEARCH_BGG'
 
 var parseString = require('xml2js').parseString;
-
-
 
 export function filterGameCollection(filterParams){
   // console.log(filterParams, "filterParams from ACTION/index.js");
@@ -78,6 +77,29 @@ export function postNewPlay(newPlayParams){
 //     })
 //   }
 // }
+
+export function searchBoardGameGeek(searchParam){
+  // console.log(searchParam, "searchParam from searchBoardGameGeek in ACTION/index");
+  return async (dispatch) => {
+    const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/search?type=boardgame&query=${searchParam}`)
+    .then(response => {
+      // console.log(response, "response from ACTION");
+      return response.text()
+    })
+    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+    // .then(res => {
+    //   console.log(res, "str?");
+    //   return res
+    // })
+
+    parseString(`<items>${data.documentElement.innerHTML}</items>`, {trim: true}, function (err, result){
+      dispatch({
+        type: SEARCH_BGG,
+        payload: result.items.item
+      })
+    })
+  }
+}
 
 export function fetchPlays(){
   return async (dispatch) => {

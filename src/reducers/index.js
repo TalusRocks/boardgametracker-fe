@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES } from '../actions'
+import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES, SEARCH_BGG } from '../actions'
 
 function filterGames(state = { byParams: { minBggRating: '', numPlayers: '', maxTime: '' } }, action){
   switch (action.type) {
@@ -55,6 +55,18 @@ function gameCollection(state = { all: [], byPlays: [] }, action) {
         ...state,
         all: action.payload,
         byPlays: [...state.byPlays, ...playsByGame]
+      }
+    default:
+      return state
+  }
+}
+
+function bggSearchResults(state = { all: [] }, action) {
+  switch (action.type) {
+    case SEARCH_BGG:
+      return {
+        ...state,
+        all: action.payload
       }
     default:
       return state
@@ -140,5 +152,5 @@ function currentUser(state = { username: '' }, action){
 
 
 export default combineReducers({
-  gameCollection, allPlays, currentUser, sortGames, filterGames
+  gameCollection, allPlays, currentUser, sortGames, filterGames, bggSearchResults
 })

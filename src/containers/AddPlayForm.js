@@ -3,12 +3,22 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import FrequentGames from '../components/games/FrequentGames'
+import { searchBoardGameGeek } from '../actions'
+
 
 class AddPlayForm extends Component {
+  constructor(props) {
+    super(props)
 
-  state = {
-    fireRedirect: false
+    this.state = {
+      fireRedirect: false
+    }
   }
+  //why choose a constructor over this?
+  // state = {
+  //   fireRedirect: false
+  // }
+
 
   submitNewPlay = (e) => {
     e.preventDefault()
@@ -18,11 +28,20 @@ class AddPlayForm extends Component {
       playGame: e.target.playGame.value,
       playComments: e.target.playComments.value
     }
-    console.log(newPlayParams);
+    // console.log(newPlayParams);
     // this.setState({ fireRedirect: true })
   }
 
+  sendSearchParam = () => {
+    // e.preventDefault()
+    let searchGame = document.getElementById('playGame').value
+    // console.log(searchGame);
+    // console.log(this.props.searchBoardGameGeek);
+    this.props.searchBoardGameGeek(searchGame)
+  }
+
   render() {
+    console.log(this.props.bggSearchResults.all, "bggSearchResults from redux state");
     return this.state.fireRedirect === true ? <Redirect to="/plays"/> : (
       <div>
         <div className="m-1 form-close">
@@ -46,10 +65,15 @@ class AddPlayForm extends Component {
                 <span className="caps-title">
                 Game
                 </span>
-                <input className="mt-05 text-input" type="text" name="playGame" defaultValue="Splendor"></input>
+                <input className="mt-05 text-input" type="text" name="playGame" id="playGame" defaultValue="Splendor"></input>
               </label>
             </div>
-            <div className="button short-btn">Search BoardGameGeek</div>
+
+            <div onClick={this.sendSearchParam} className="button short-btn">Search BoardGameGeek</div>
+
+            <div>{!this.props.bggSearchResults.all ? '' : this.props.bggSearchResults.all.map((el, i) => {
+              return <p key={`${el.name}-${i}`} className="text-center mt-1">{el.name[0].$.value}</p>
+            }) }</div>
 
             <p className="text-center mt-1">Or choose from frequently played:</p>
 
@@ -71,9 +95,13 @@ class AddPlayForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  bggSearchResults: state.bggSearchResults
+})
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ searchBoardGameGeek }, dispatch)
+}
 
 export default connect(
   mapStateToProps,
