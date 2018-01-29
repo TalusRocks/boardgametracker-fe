@@ -18,11 +18,11 @@ class AddPlayForm extends Component {
   }
 
   selectBggGame = (e) => {
-    console.log(e.target.id, "e.target.ID!!!");
+    // console.log(e.target.id, "e.target.ID!!!");
     this.setState({selectedGame: e.target.textContent})
     this.setState({selectedGameId: e.target.id})
-    console.log(this.state.selectedGame, "selectedGame in STATE");
-    console.log(this.state.selectedGameId, "selectedGameId in STATE");
+    // console.log(this.state.selectedGame, "selectedGame in STATE");
+    // console.log(this.state.selectedGameId, "selectedGameId in STATE");
     document.getElementById('playGame').value = e.target.textContent
   }
 
@@ -88,7 +88,7 @@ class AddPlayForm extends Component {
 
             <p className="text-center mt-1">Or choose from frequently played:</p>
 
-            <FrequentGames />
+            <FrequentGames selectGameFunction={(e) => this.selectBggGame(e)}/>
 
             <div className="mtb-2">
               <label>

@@ -2,7 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-const FrequentGames = ({ gameCollection }) => {
+const FrequentGames = ({ gameCollection, selectGameFunction }) => {
 
   const frequentGamesArray = []
 
@@ -13,7 +13,7 @@ const FrequentGames = ({ gameCollection }) => {
   return (
     <div>
       {frequentGamesArray.map((el, i) => {
-        return !el ? '' : <p key={el.gameid} className="blue-link text-center mtb-1" data-gameid={el.gameid}>{el.gamename}</p>
+        return !el ? '' : <p onClick={(e) => selectGameFunction(e)} key={`${el.name}-frequent-${i}`} className="blue-link text-center mtb-1" id={el.gameid}>{el.gamename}</p>
       })}
     </div>
   )
