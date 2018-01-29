@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import FrequentGames from '../components/games/FrequentGames'
-import { searchBoardGameGeek } from '../actions'
+import { searchBoardGameGeek, postNewPlay } from '../actions'
 
 
 class AddPlayForm extends Component {
@@ -17,17 +17,21 @@ class AddPlayForm extends Component {
     }
   }
 
+  componentDidUpdate(){
+    console.log(this.state.selectedGame, "(GAME)=====from componentDidUpdate=====");
+    console.log(this.state.selectedGameId, "(ID)=====from componentDidUpdate=====");
+  }
+
   selectBggGame = (e) => {
-    // console.log(e.target.id, "e.target.ID!!!");
-    this.setState({selectedGame: e.target.textContent})
-    this.setState({selectedGameId: e.target.id})
-    // console.log(this.state.selectedGame, "selectedGame in STATE");
-    // console.log(this.state.selectedGameId, "selectedGameId in STATE");
     document.getElementById('playGame').value = e.target.textContent
+
+    this.setState({selectedGame: e.target.textContent, selectedGameId: e.target.id})
+
+    console.log(this.state.selectedGame, "selectedGame in STATE");
+    console.log(this.state.selectedGameId, "selectedGameId in STATE");
   }
 
   sendSearchParam = () => {
-    // e.preventDefault()
     let searchGame = document.getElementById('playGame').value
     // console.log(searchGame);
     // console.log(this.props.searchBoardGameGeek);
@@ -38,18 +42,25 @@ class AddPlayForm extends Component {
     e.preventDefault()
 
     const newPlayParams = {
-      playDate: e.target.playDate.value,
-      playGame: this.state.selectedGame,
-      playGameId: this.state.selectedGameId,
-      playComments: e.target.playComments.value
+      user_id: 1,
+      game_id: this.state.selectedGameId,
+      comment: e.target.playComments.value,
+      played_on: e.target.playDate.value
+      // playGame: e.target.playGame.value,
     }
-    // console.log(newPlayParams);
+    console.log(newPlayParams, "new play params... ");
+
+    this.props.postNewPlay(newPlayParams)
     // REDIRECT OFF FOR DEVELOPMENT
     // this.setState({ fireRedirect: true })
   }
 
+  removeGameNameState = () => {
+    this.setState({selectedGame: ''})
+  }
+
   render() {
-    // console.log(this.props.bggSearchResults.all, "bggSearchResults from redux state");
+    // console.log(this.state.selectedGame, "selectedGame from render");
     return this.state.fireRedirect === true ? <Redirect to="/plays"/> : (
       <div>
         <div className="m-1 form-close">
@@ -74,7 +85,7 @@ class AddPlayForm extends Component {
                 Game
                 </span>
 
-                <input className="mt-05 text-input" type="text" name="playGame" id="playGame" defaultValue="Grand Austria Hotel"></input>
+                <input onChange={this.removeGameNameState} className={`mt-05 text-input ${this.state.selectedGame ? 'blue-link' : 'noGameInState'}`} type="text" name="playGame" id="playGame" placeholder="Game to search for"></input>
 
               </label>
             </div>
@@ -111,7 +122,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ searchBoardGameGeek }, dispatch)
+  return bindActionCreators({ searchBoardGameGeek, postNewPlay }, dispatch)
 }
 
 export default connect(

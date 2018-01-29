@@ -6,6 +6,8 @@ export const FILTER_GAMES = 'FILTER_GAMES'
 export const POST_PLAY = 'POST_PLAY'
 export const SEARCH_BGG = 'SEARCH_BGG'
 
+const baseURL = 'http://localhost:3000'
+
 var parseString = require('xml2js').parseString;
 
 export function filterGameCollection(filterParams){
@@ -58,10 +60,28 @@ export function fetchGameCollection(){
 }
 
 export function postNewPlay(newPlayParams){
-  return {
-    type: POST_PLAY,
-    payload: newPlayParams
+  return async(dispatch) => {
+    const data = await fetch(`${baseURL}/plays`, {
+      method: 'POST',
+      body: JSON.stringify(newPlayParams),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+    if(data.ok){
+      const json = await data.json()
+      //or use json below in payload?
+      return {
+        type: POST_PLAY,
+        payload: newPlayParams
+      }
+    } else {
+      console.log("add error handling...");
+    }
+
+
   }
+
 }
 
 //fetch plays from _database_

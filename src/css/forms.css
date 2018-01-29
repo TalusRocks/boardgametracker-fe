@@ -14,3 +14,12 @@
 textarea {
   height: 8em;
 }
+
+.noGameInState {
+  font-style: italic;
+  color: #808080;
+}
+
+.foundGame {
+  font-weight: 700;
+}
