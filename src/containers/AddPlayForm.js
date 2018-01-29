@@ -43,7 +43,7 @@ class AddPlayForm extends Component {
 
     const newPlayParams = {
       user_id: 1,
-      game_id: this.state.selectedGameId,
+      bgg_game_id: this.state.selectedGameId,
       comment: e.target.playComments.value,
       played_on: e.target.playDate.value
       // playGame: e.target.playGame.value,
