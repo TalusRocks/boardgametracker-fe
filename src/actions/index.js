@@ -142,7 +142,11 @@ export function downloadPlays(){
       parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, async function (err, result){
 
         const playsForDb = result.AllPlays.play.map((el, i) => {
-          return { played_on: el.$.date, comment: el.comments ? el.comments[0] : '', bgg_game_id: el.item[0].$.objectid}
+          console.log(el, "each play for database, from BGG");
+          return { played_on: el.$.date, 
+            bgg_game_id: el.item[0].$.objectid,
+            game_name: el.item[0].$.name,
+            comment: el.comments ? el.comments[0] : '' }
         })
         const data = await fetch(`${baseURL}/plays`, {
           method: 'POST',

@@ -43,16 +43,16 @@ class AddPlayForm extends Component {
 
     const newPlayParams = {
       user_id: 1,
+      game_name: e.target.playGame.value,
       bgg_game_id: this.state.selectedGameId,
       comment: e.target.playComments.value,
       played_on: e.target.playDate.value
-      // playGame: e.target.playGame.value,
     }
     console.log(newPlayParams, "new play params... ");
 
     this.props.postNewPlay(newPlayParams)
-    // REDIRECT OFF FOR DEVELOPMENT
-    // this.setState({ fireRedirect: true })
+
+    this.setState({ fireRedirect: true })
   }
 
   removeGameNameState = () => {
