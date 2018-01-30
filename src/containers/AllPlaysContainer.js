@@ -5,8 +5,10 @@ import { connect } from 'react-redux'
 import AddPlayButton from '../components/plays/AddPlayButton'
 
 
-const AllPlaysContainer = ({ allPlays }) => {
-console.log(allPlays.all.plays, "***allPlays.all from AllPlaysContainer****");
+const AllPlaysContainer = ({ allPlays, byDate }) => {
+console.log(allPlays.all, "***allPlays.all from AllPlaysContainer****");
+console.log(byDate, "byDate");
+
   return (
     <div>
       <div className="plays-container">
@@ -44,7 +46,8 @@ console.log(allPlays.all.plays, "***allPlays.all from AllPlaysContainer****");
 }
 
 const mapStateToProps = state => ({
-  allPlays: state.allPlays
+  allPlays: state.allPlays,
+  byDate: state.byDate
 })
 
 const mapDispatchToProps = dispatch => ({

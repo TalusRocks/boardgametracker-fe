@@ -74,74 +74,73 @@ function bggSearchResults(state = { all: [] }, action) {
   }
 }
 
-//, byDate: []
-function allPlays(state = { all: [] }, action) {
+
+function allPlays(state = { all: [], byDate: [] }, action) {
   switch (action.type) {
     case FETCH_DB_PLAYS:
     console.log("PAYLOAD BEFORE PROCESSESING==========NEEDS TO BE ORDERED BY DATE", action.payload);
 
-      //
       // //***** BY DATE *****
-
-      //1) turn dates into sortable numbers
-      const numberDates = action.payload.plays.map((el, i) => {
+      // 1) turn dates into sortable numbers
+      const formattedDates = action.payload.plays.map((el, i) => {
         return {...el, played_on: moment(el.played_on).format('YYYYMMDD')}
-
       })
-      console.log(numberDates, "####NUMBER dates, no hyphen?");
+      console.log(formattedDates, "####NUMBER dates, no hyphen?");
 
       // 2) SORT
       const sortedPlays =
-      action.payload.plays.sort(function(a, b){
+      formattedDates.sort(function(a, b){
         return b.played_on - a.played_on
       })
       console.log(sortedPlays, "??SORTED?? PLAYS");
 
       // // 3) group dates
-      // const playsByDate = []
-      // for (let i = 0; i < action.payload.plays.length; i++) {
-      //   let prevdate
-      //   if(i >= 1){
-      //     prevdate = action.payload.plays[i-1].played_on
-      //   } else if(i < 1) {
-      //     prevdate = ''
-      //   }
-      //   let date = action.payload.plays[i].played_on
-      //
-      //   let dateGroup = { date: '', plays: []}
-      //   if(date !== prevdate){
-      //     dateGroup.date = date
-      //     playsByDate.push(dateGroup)
-      //   }
-      // }
-      // console.log(playsByDate, "playsByDate#########");
+      const playsByDate = []
+      for (let i = 0; i < sortedPlays.length; i++) {
+        let prevdate
+        if(i >= 1){
+          prevdate = sortedPlays[i-1].played_on
+        } else if(i < 1) {
+          prevdate = ''
+        }
+        let date = sortedPlays[i].played_on
 
+        let dateGroup = { date: '', plays: []}
+        if(date !== prevdate){
+          dateGroup.date = date
+          playsByDate.push(dateGroup)
+        }
+      }
+      console.log(playsByDate, "@@@@@@@playsByDate");
 
-      //
+      //moment(date).format('MMMM D, YYYY')
+
       // // 4) add nested game name and comments
-      // for (let j = 0; j < action.payload.length; j++) {
-      //   let date = action.payload[j].$.date
-      //   let gamename = action.payload[j].item[0].$.name
-      //   let comments
-      //   if(action.payload[j].comments){
-      //     comments = action.payload[j].comments
-      //   } else {
-      //     comments = ''
-      //   }
-      //   let playid = action.payload[j].$.id
-      //
-      //   for (let k = 0; k < playsByDate.length; k++){
-      //
-      //     if(date === playsByDate[k].date){
-      //       playsByDate[k].plays.push({playid, gamename, comments})
-      //     }
-      //   }
-      // }
+      for (let j = 0; j < action.payload.plays.length; j++) {
+
+        let date = action.payload.plays[j].played_on
+        let gamename = action.payload.plays[j].game_name
+        let comments
+        if(action.payload.plays[j].comment){
+          comments = action.payload.plays[j].comment
+        } else {
+          comments = ''
+        }
+        // let playid = action.payload.plays[j].$.id
+
+        for (let k = 0; k < playsByDate.length; k++){
+          if(moment(date).format('YYYYMMDD') === playsByDate[k].date){
+            playsByDate[k].plays.push({gamename, comments})
+          }
+        }
+      }
+
+      console.log("TADAAAAAAA------:", playsByDate);
 
       return {
         ...state,
-        all: action.payload
-        // byDate: [...state.byDate, ...playsByDate]
+        all: action.payload,
+        byDate: [...state.byDate, ...playsByDate]
       }
     default:
       return state
