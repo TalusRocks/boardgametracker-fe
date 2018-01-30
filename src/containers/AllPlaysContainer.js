@@ -13,7 +13,7 @@ console.log(allPlays.all.plays, "***allPlays.all from AllPlaysContainer****");
 
         {!allPlays.all.plays ? '' : allPlays.all.plays.map((el, i) => {
           return (
-            <p>{el.game_name} {el.played_on}</p>
+            <p key={`${el.bgg_gameid}-${i}`}>{el.game_name} {el.played_on}</p>
           )
         })}
 
