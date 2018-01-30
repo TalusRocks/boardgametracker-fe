@@ -1,8 +1,8 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-// import { fetchPlays } from '../actions'
 import AddPlayButton from '../components/plays/AddPlayButton'
+import moment from 'moment'
 
 
 const AllPlaysContainer = ({ allPlays, byDate }) => {
@@ -12,21 +12,15 @@ console.log(allPlays.byDate, "***allPlays from AllPlaysContainer****");
     <div>
       <div className="plays-container">
 
-        {/* {!allPlays.all.plays ? '' : allPlays.all.plays.map((el, i) => {
-          return (
-            <p key={`${el.bgg_gameid}-${i}`}>{el.game_name} {el.played_on}</p>
-          )
-        })} */}
-
         { allPlays.byDate.map((el, i) => {
 
           return (
             <div key={`${el.date}-wrapper-${i}`}>
-              <div key={`${el.date}-date-${i}`} className="date-divider">{el.date}</div>
+              <div key={`${el.date}-date-${i}`} className="date-divider">{moment(el.date).format('D MMMM, YYYY')}</div>
 
               {el.plays.map((el, j) => {
                 return (
-                  <div key={`${el.gamename}-wrapper-${i}`} className="m-1">
+                  <div key={`${el.gamename}-wrapper-${j}`} className="m-1">
                     <h2 key={`${i}-gamename`} className="mb-025">{el.gamename}</h2>
                     <p key={`${i}-comments`}>{el.comments ? el.comments : ''}</p>
                   </div>

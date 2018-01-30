@@ -94,13 +94,14 @@ export function postNewPlay(newPlayParams){
         'Content-Type': 'application/json'
       })
     })
+    console.log('inside of postNewPlay', data);
     if(data.ok){
       const json = await data.json()
       //or use json below in payload?
-      return {
+      dispatch({
         type: POST_PLAY,
         payload: newPlayParams
-      }
+      })
     } else {
       console.log("add error handling...");
     }
@@ -142,8 +143,10 @@ export function downloadPlays(){
       parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, async function (err, result){
 
         const playsForDb = result.AllPlays.play.map((el, i) => {
-          console.log(el, "each play for database, from BGG");
-          return { played_on: el.$.date, 
+          console.log(el, "--!GET BGG DATA FOR THE DB HERE!--");
+          return {
+            // play_id:
+            played_on: el.$.date,
             bgg_game_id: el.item[0].$.objectid,
             game_name: el.item[0].$.name,
             comment: el.comments ? el.comments[0] : '' }
