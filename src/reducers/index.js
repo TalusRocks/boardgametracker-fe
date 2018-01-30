@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { GAMES_LOADED, PLAYS_LOADED, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES, SEARCH_BGG } from '../actions'
+import { GAMES_LOADED, DOWNLOAD_PLAYS, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES, SEARCH_BGG } from '../actions'
 
 function filterGames(state = { byParams: { minBggRating: '', numPlayers: '', maxTime: '' } }, action){
   switch (action.type) {
@@ -73,18 +73,17 @@ function bggSearchResults(state = { all: [] }, action) {
   }
 }
 
-
 function allPlays(state = { all: [], byDate: [] }, action) {
   switch (action.type) {
-    case PLAYS_LOADED:
+    case DOWNLOAD_PLAYS:
     // console.log("PAYLOAD BEFORE PROCESSESING==========", action.payload);
-      // const byDate = action.payload.reduce(function(acc, el){
-      //   const date = el.$.date
-      //   acc[date] = acc[date] || []
-      //   acc[date].push({ name: el.item[0].$.name,
-      //   comments: el.comments ? el.comments[0] : '' })
-      //   return acc
-      // }, {})
+      const byDate = action.payload.reduce(function(acc, el){
+        const date = el.$.date
+        acc[date] = acc[date] || []
+        acc[date].push({ name: el.item[0].$.name,
+        comments: el.comments ? el.comments[0] : '' })
+        return acc
+      }, {})
 
       //***** BY DATE *****
       // 1) group dates

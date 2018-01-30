@@ -20,7 +20,7 @@ import { fetchGameCollection, fetchPlays, downloadPlays } from './actions'
 let bggusername = localStorage.getItem('bggusername')
 if(bggusername){
   store.dispatch(fetchGameCollection())
-  store.dispatch(fetchPlays())
+  store.dispatch(downloadPlays())
 }
 
 

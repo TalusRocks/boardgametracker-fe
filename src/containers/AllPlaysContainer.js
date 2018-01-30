@@ -1,16 +1,18 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { fetchPlays } from '../actions'
+// import { fetchPlays } from '../actions'
 import AddPlayButton from '../components/plays/AddPlayButton'
 
-const AllPlaysContainer = ({ allPlays, fetchPlays }) => {
+
+const AllPlaysContainer = ({ allPlays }) => {
 
   return (
     <div>
       <div className="plays-container">
 
         { allPlays.byDate.map((el, i) => {
+
           return (
             <div key={`${el.date}-00-${i}`}>
               <div key={el.date} className="date-divider">{el.date}</div>
@@ -26,6 +28,7 @@ const AllPlaysContainer = ({ allPlays, fetchPlays }) => {
 
             </div>
           )
+
         })}
 
       </div>
@@ -35,12 +38,13 @@ const AllPlaysContainer = ({ allPlays, fetchPlays }) => {
 }
 
 const mapStateToProps = state => ({
-  allPlays: state.allPlays
+  allPlays: state.allPlays,
+  byDate: state.byDate
 })
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ fetchPlays }, dispatch)
-}
+const mapDispatchToProps = dispatch => ({
+  // return bindActionCreators({ fetchPlays }, dispatch)
+})
 
 export default connect(
   mapStateToProps,

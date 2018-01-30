@@ -1,5 +1,6 @@
+import axios from 'axios'
 export const GAMES_LOADED = 'GAMES_LOADED'
-export const PLAYS_LOADED = 'PLAYS_LOADED'
+export const DOWNLOAD_PLAYS = 'DOWNLOAD_PLAYS'
 export const SET_BGG_USERNAME = 'SET_BGG_USERNAME'
 export const SORT_GAMES = 'SORT_GAMES'
 export const FILTER_GAMES = 'FILTER_GAMES'
@@ -109,8 +110,8 @@ export function searchBoardGameGeek(searchParam){
 }
 
 
-
-export function fetchPlays(){
+export function downloadPlays(){
+  console.log("hellow from downloadPlays");
   return async (dispatch) => {
     //dispatch PLAYS_LOADING to make a spinner here
     //change PLAYS_LOADED to ADD_PLAYS
@@ -124,13 +125,28 @@ export function fetchPlays(){
       .then(response => response.text())
       .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
 
-      parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, function (err, result){
+      parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, async function (err, result){
+
+        // const playsForDb = result.AllPlays.play.map((el, i) => {
+        //   // console.log(el.$.date, el.comments, el.item[0].$.objectid);
+        //   return { played_on: el.$.date, comment: el.comments ? el.comments[0] : '', bgg_game_id: el.item[0].$.objectid}
+        // })
+        // const data = await fetch(`${baseURL}/plays`, {
+        //   method: 'POST',
+        //   body: JSON.stringify(playsForDb),
+        //   headers: new Headers({
+        //     'Content-Type': 'application/json'
+        //   })
+        // })
+        // const json = await data.json()
+
         // if(result.AllPlays.play.length < 100) going = false
         dispatch({
-          type: PLAYS_LOADED,
+          type: DOWNLOAD_PLAYS,
           payload: result.AllPlays.play
         })
       })
+
       // console.log(page, "page");
       // page += 1
       // await fetchPlays()
