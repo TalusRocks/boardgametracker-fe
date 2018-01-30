@@ -6,12 +6,18 @@ import AddPlayButton from '../components/plays/AddPlayButton'
 
 
 const AllPlaysContainer = ({ allPlays }) => {
-
+console.log(allPlays.all.plays, "***allPlays.all from AllPlaysContainer****");
   return (
     <div>
       <div className="plays-container">
 
-        { allPlays.byDate.map((el, i) => {
+        {!allPlays.all.plays ? '' : allPlays.all.plays.map((el, i) => {
+          return (
+            <div>{el.played_on}</div>
+          )
+        })}
+
+        {/* { allPlays.byDate.map((el, i) => {
 
           return (
             <div key={`${el.date}-00-${i}`}>
@@ -29,7 +35,7 @@ const AllPlaysContainer = ({ allPlays }) => {
             </div>
           )
 
-        })}
+        })} */}
 
       </div>
       <AddPlayButton />
@@ -38,8 +44,7 @@ const AllPlaysContainer = ({ allPlays }) => {
 }
 
 const mapStateToProps = state => ({
-  allPlays: state.allPlays,
-  byDate: state.byDate
+  allPlays: state.allPlays
 })
 
 const mapDispatchToProps = dispatch => ({

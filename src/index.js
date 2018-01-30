@@ -13,14 +13,16 @@ import './css/statcolors.css'
 
 import store from './store'
 import { Provider } from 'react-redux'
-import { fetchGameCollection, fetchPlays, downloadPlays } from './actions'
+import { fetchGameCollection, fetchDbPlays, downloadPlays } from './actions'
 
 // (1)
 //using local storage for development purposes
 let bggusername = localStorage.getItem('bggusername')
 if(bggusername){
   store.dispatch(fetchGameCollection())
-  store.dispatch(downloadPlays())
+  // store.dispatch(downloadPlays())
+  //!!!NEED a CHECK HERE!!!!!
+  store.dispatch(fetchDbPlays())
 }
 
 

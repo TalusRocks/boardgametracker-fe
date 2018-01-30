@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { GAMES_LOADED, DOWNLOAD_PLAYS, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES, SEARCH_BGG } from '../actions'
+import { GAMES_LOADED, DOWNLOAD_BGG_PLAYS, FETCH_DB_PLAYS, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES, SEARCH_BGG } from '../actions'
 
 function filterGames(state = { byParams: { minBggRating: '', numPlayers: '', maxTime: '' } }, action){
   switch (action.type) {
@@ -73,62 +73,63 @@ function bggSearchResults(state = { all: [] }, action) {
   }
 }
 
-function allPlays(state = { all: [], byDate: [] }, action) {
+//, byDate: []
+function allPlays(state = { all: [] }, action) {
   switch (action.type) {
-    case DOWNLOAD_PLAYS:
+    case FETCH_DB_PLAYS:
     // console.log("PAYLOAD BEFORE PROCESSESING==========", action.payload);
-      const byDate = action.payload.reduce(function(acc, el){
-        const date = el.$.date
-        acc[date] = acc[date] || []
-        acc[date].push({ name: el.item[0].$.name,
-        comments: el.comments ? el.comments[0] : '' })
-        return acc
-      }, {})
 
-      //***** BY DATE *****
-      // 1) group dates
-      const playsByDate = []
-      for (let i = 0; i < action.payload.length; i++) {
-        let prevdate
-        if(i >= 1){
-          prevdate = action.payload[i-1].$.date
-        } else if(i < 1) {
-          prevdate = ''
-        }
-        let date = action.payload[i].$.date
-
-        let dateGroup = { date: '', plays: []}
-        if(date !== prevdate){
-          dateGroup.date = date
-          playsByDate.push(dateGroup)
-        }
-      }
-
-      // 2) add nested game name and comments
-      for (let j = 0; j < action.payload.length; j++) {
-        let date = action.payload[j].$.date
-        let gamename = action.payload[j].item[0].$.name
-        let comments
-        if(action.payload[j].comments){
-          comments = action.payload[j].comments
-        } else {
-          comments = ''
-        }
-        let playid = action.payload[j].$.id
-
-        for (let k = 0; k < playsByDate.length; k++){
-
-          if(date === playsByDate[k].date){
-            playsByDate[k].plays.push({playid, gamename, comments})
-          }
-        }
-
-      }
+      // const byDate = action.payload.reduce(function(acc, el){
+      //   const date = el.$.date
+      //   acc[date] = acc[date] || []
+      //   acc[date].push({ name: el.item[0].$.name,
+      //   comments: el.comments ? el.comments[0] : '' })
+      //   return acc
+      // }, {})
+      //
+      // //***** BY DATE *****
+      // // 1) group dates
+      // const playsByDate = []
+      // for (let i = 0; i < action.payload.length; i++) {
+      //   let prevdate
+      //   if(i >= 1){
+      //     prevdate = action.payload[i-1].$.date
+      //   } else if(i < 1) {
+      //     prevdate = ''
+      //   }
+      //   let date = action.payload[i].$.date
+      //
+      //   let dateGroup = { date: '', plays: []}
+      //   if(date !== prevdate){
+      //     dateGroup.date = date
+      //     playsByDate.push(dateGroup)
+      //   }
+      // }
+      //
+      // // 2) add nested game name and comments
+      // for (let j = 0; j < action.payload.length; j++) {
+      //   let date = action.payload[j].$.date
+      //   let gamename = action.payload[j].item[0].$.name
+      //   let comments
+      //   if(action.payload[j].comments){
+      //     comments = action.payload[j].comments
+      //   } else {
+      //     comments = ''
+      //   }
+      //   let playid = action.payload[j].$.id
+      //
+      //   for (let k = 0; k < playsByDate.length; k++){
+      //
+      //     if(date === playsByDate[k].date){
+      //       playsByDate[k].plays.push({playid, gamename, comments})
+      //     }
+      //   }
+      // }
 
       return {
         ...state,
-        all: action.payload,
-        byDate: [...state.byDate, ...playsByDate]
+        all: action.payload
+        // byDate: [...state.byDate, ...playsByDate]
       }
     default:
       return state

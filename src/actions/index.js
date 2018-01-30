@@ -1,6 +1,7 @@
 import axios from 'axios'
 export const GAMES_LOADED = 'GAMES_LOADED'
-export const DOWNLOAD_PLAYS = 'DOWNLOAD_PLAYS'
+export const DOWNLOAD_BGG_PLAYS = 'DOWNLOAD_BGG_PLAYS'
+export const FETCH_DB_PLAYS = 'FETCH_DB_PLAYS'
 export const SET_BGG_USERNAME = 'SET_BGG_USERNAME'
 export const SORT_GAMES = 'SORT_GAMES'
 export const FILTER_GAMES = 'FILTER_GAMES'
@@ -61,6 +62,29 @@ export function fetchGameCollection(){
 }
 
 
+export function searchBoardGameGeek(searchParam){
+  // console.log(searchParam, "searchParam from searchBoardGameGeek in ACTION/index");
+  return async (dispatch) => {
+    const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/search?type=boardgame&query=${searchParam}`)
+    .then(response => {
+      // console.log(response, "response from ACTION");
+      return response.text()
+    })
+    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+    // .then(res => {
+    //   console.log(res, "str?");
+    //   return res
+    // })
+
+    parseString(`<items>${data.documentElement.innerHTML}</items>`, {trim: true}, function (err, result){
+      dispatch({
+        type: SEARCH_BGG,
+        payload: result.items.item
+      })
+    })
+  }
+}
+
 export function postNewPlay(newPlayParams){
   return async(dispatch) => {
     const data = await fetch(`${baseURL}/plays`, {
@@ -86,32 +110,22 @@ export function postNewPlay(newPlayParams){
 
 }
 
-export function searchBoardGameGeek(searchParam){
-  // console.log(searchParam, "searchParam from searchBoardGameGeek in ACTION/index");
-  return async (dispatch) => {
-    const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/search?type=boardgame&query=${searchParam}`)
-    .then(response => {
-      // console.log(response, "response from ACTION");
-      return response.text()
-    })
-    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-    // .then(res => {
-    //   console.log(res, "str?");
-    //   return res
-    // })
 
-    parseString(`<items>${data.documentElement.innerHTML}</items>`, {trim: true}, function (err, result){
-      dispatch({
-        type: SEARCH_BGG,
-        payload: result.items.item
-      })
+export function fetchDbPlays(dispatch){
+  return async(dispatch) => {
+    const data = await fetch(`${baseURL}/plays`)
+    const json = await data.json()
+
+    dispatch({
+      type: FETCH_DB_PLAYS,
+      payload: json
     })
   }
 }
 
 
 export function downloadPlays(){
-  console.log("hellow from downloadPlays");
+  console.log("hello from downloadPlays");
   return async (dispatch) => {
     //dispatch PLAYS_LOADING to make a spinner here
     //change PLAYS_LOADED to ADD_PLAYS
@@ -127,24 +141,23 @@ export function downloadPlays(){
 
       parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, async function (err, result){
 
-        // const playsForDb = result.AllPlays.play.map((el, i) => {
-        //   // console.log(el.$.date, el.comments, el.item[0].$.objectid);
-        //   return { played_on: el.$.date, comment: el.comments ? el.comments[0] : '', bgg_game_id: el.item[0].$.objectid}
-        // })
-        // const data = await fetch(`${baseURL}/plays`, {
-        //   method: 'POST',
-        //   body: JSON.stringify(playsForDb),
-        //   headers: new Headers({
-        //     'Content-Type': 'application/json'
-        //   })
-        // })
+        const playsForDb = result.AllPlays.play.map((el, i) => {
+          return { played_on: el.$.date, comment: el.comments ? el.comments[0] : '', bgg_game_id: el.item[0].$.objectid}
+        })
+        const data = await fetch(`${baseURL}/plays`, {
+          method: 'POST',
+          body: JSON.stringify(playsForDb),
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+        })
         // const json = await data.json()
 
         // if(result.AllPlays.play.length < 100) going = false
-        dispatch({
-          type: DOWNLOAD_PLAYS,
-          payload: result.AllPlays.play
-        })
+        // dispatch({
+        //   type: DOWNLOAD_BGG_PLAYS,
+        //   payload: result.AllPlays.play
+        // })
       })
 
       // console.log(page, "page");
