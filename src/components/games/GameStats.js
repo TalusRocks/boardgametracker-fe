@@ -12,13 +12,13 @@ const GameStats = ({ gameStats }) => {
         return (
           <div key={`game-stats-${i}`} className="game-stats">
             <div key={`avgrating-${i}`} className="stat avg-rating">{avgRating}</div>
-            <div key={`userrating-${i}`} className="stat user-rating">{userRating !== 'N/A' ? userRating : '-'}</div>
+            {/* <div key={`userrating-${i}`} className="stat user-rating">{userRating !== 'N/A' ? userRating : '-'}</div> */}
             <div key={`minplayers-${i}`} className="stat min-player">{el.$.minplayers}</div>
-            <div key={`bestplayers-${i}`} className="stat best-player">X</div>
+            {/* <div key={`bestplayers-${i}`} className="stat best-player">X</div> */}
             <div key={`maxplayers-${i}`} className="stat max-player">{el.$.maxplayers}</div>
             <div key={`mintime-${i}`} className="stat min-time">{el.$.minplaytime}</div>
             <div key={`maxtime-${i}`} className="stat max-time">{el.$.maxplaytime ? el.$.maxplaytime : el.$.minplaytime}</div>
-            <div key={`weight-${i}`} className="stat weight">X.XX</div>
+            {/* <div key={`weight-${i}`} className="stat weight">X.XX</div> */}
           </div>
         )
       })}

@@ -12,9 +12,10 @@
 .stat-header {
   display: flex;
   flex-direction: column;
-  padding: 0.2em;
+  padding: 0.2em 0.2em 1em 0.2em;
   text-align: center;
-  min-width: 12%;
+  min-width: 20%;
+  user-select: none;
   cursor: pointer;
 }
 

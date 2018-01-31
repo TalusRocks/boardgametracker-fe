@@ -51,7 +51,7 @@ class GameStatsHeader extends Component {
               </span>
               BGG<br></br>rating
             </div>
-            <div onClick={ this.flip('yourRating', this.state.yourRating)} className="stat-header user-rating-header">
+            {/* <div onClick={ this.flip('yourRating', this.state.yourRating)} className="stat-header user-rating-header">
               <span className="stat-arrow">
                 <i className="material-icons">
                   {this.state.yourRating === '' ? `` :
@@ -59,7 +59,7 @@ class GameStatsHeader extends Component {
                 </i>
               </span>
               your<br></br>rating
-            </div>
+            </div> */}
             <div onClick={ this.flip('minPlayer', this.state.minPlayer)} className="stat-header min-player-header">
               <span className="stat-arrow">
                 <i className="material-icons">
@@ -69,12 +69,12 @@ class GameStatsHeader extends Component {
               </span>
               min<br></br>player
             </div>
-            <div className="stat-header best-player-header">
+            {/* <div className="stat-header best-player-header">
               <span className="stat-arrow">
-                {/* <i className="material-icons">arrow_drop_down</i> */}
+                <i className="material-icons">arrow_drop_down</i>
               </span>
               best<br></br>player
-            </div>
+            </div> */}
             <div onClick={ this.flip('maxPlayer', this.state.maxPlayer)} className="stat-header max-player-header">
               <span className="stat-arrow">
                 <i className="material-icons">
@@ -102,12 +102,12 @@ class GameStatsHeader extends Component {
               </span>
               max<br></br>time
             </div>
-            <div className="stat-header weight-header">
+            {/* <div className="stat-header weight-header">
               <span className="stat-arrow">
-                {/* <i className="material-icons">arrow_drop_down</i> */}
+                <i className="material-icons">arrow_drop_down</i>
               </span>
               weight
-            </div>
+            </div> */}
           </div>
         </div>
       )

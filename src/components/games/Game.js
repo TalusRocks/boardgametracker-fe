@@ -43,7 +43,6 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
   //   return parseInt(el.stats[0].$.maxplaytime) < parseInt(filterGames.byParams.maxTime)
   // })
 
-
   let displayGames
 
   //SORT GAMES
@@ -51,7 +50,6 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
 
   //either display sorted games or default
   sortGames.byOptions.key ? (displayGames = result) : (displayGames = gameCollection.all)
-
 
   return (
 
