@@ -126,37 +126,45 @@ function sortPlaysByDate(payload){
       }
     }
   }
-  console.log("TADAAAAAAA------:", playsByDate);
+  // console.log("TADAAAAAAA------:", playsByDate);
 
   return playsByDate
 }
 
-function allPlays(state = { all: [], byDate: [] }, action) {
+function allPlays(state = { byDate: [] }, action) {
   switch (action.type) {
+
     case FETCH_DB_PLAYS:
-    // console.log("PAYLOAD BEFORE PROCESSESING==========NEEDS TO BE ORDERED BY DATE", action.payload/plays);
-
-    const playsByDate = sortPlaysByDate(action.payload.plays)
-    console.log(playsByDate, "playsByDate before it gets put in state");
-
+      const playsByDate = sortPlaysByDate(action.payload.plays)
       return {
         ...state,
-        all: action.payload,
         byDate: playsByDate
       }
 
     case POST_PLAY:
-      console.log("hello, from the POST_PLAY reducer");
-      console.log('POST_PLAY--> change this format', action.payload);
+      //get into date: '', plays: [] format
+      const newPlayByDate = sortPlaysByDate([action.payload])
 
-      //convert payload into right format for state? Like I do with the sortPlaysByDate function above?
-      // let newPost = { date: action.payload.played_on, plays: etc.. }
+      //find where to put the new play
+      function insertNewPlay(plays, newPlay){
+        const singlePlay = newPlay[0]
+        const match = plays.find(play => play.date === singlePlay.date)
 
-      //OR just update state.all, and let FETCH_DB_PLAYS take care turning it into the right format for byDate and sticking it in there?
+        if (match) {
+          match.plays.unshift(singlePlay.plays[0])
+          return plays
+        } else {
+          // put in middle or something
+          return [newPlay, ...plays]
+        }
+      }
+
+      const playsWithNewPost = insertNewPlay(state.byDate, newPlayByDate)
+
 
       return {
         ...state,
-        all: [...state.all, action.payload]
+        byDate: playsWithNewPost
       }
     default:
       return state

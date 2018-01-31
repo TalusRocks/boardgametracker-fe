@@ -93,10 +93,10 @@ export function postNewPlay(newPlayParams){
         'Content-Type': 'application/json'
       })
     })
-    console.log('inside of postNewPlay', data);
+
     if(data.ok){
-      const json = await data.json()
-      //or use json below in payload???
+
+      // console.log(newPlayParams, "newPlayParams just before dispatching");
       dispatch({
         type: POST_PLAY,
         payload: newPlayParams

@@ -21,7 +21,6 @@ class AddPlayForm extends Component {
     document.getElementById('playGame').value = e.target.textContent
 
     this.setState({selectedGame: e.target.textContent, selectedGameId: e.target.id})
-
   }
 
   sendSearchParam = () => {
@@ -40,13 +39,6 @@ class AddPlayForm extends Component {
       comment: e.target.playComments.value,
       played_on: e.target.playDate.value
     }
-    //this doesn't post at all
-    // const newPlayParams = {
-    //   date: e.target.playDate.value,
-    //   plays: [{ gamename: e.target.playGame.value,
-    //   comments: e.target.playComments.value }]
-    // }
-    console.log(newPlayParams, "new play params... ");
 
     this.props.postNewPlay(newPlayParams)
     this.setState({ fireRedirect: true })
