@@ -142,10 +142,10 @@ function allPlays(state = { byDate: [] }, action) {
       }
 
     case POST_PLAY:
-      //get into date: '', plays: [] format
+      //get into {date: '', plays: []} format
       const newPlayByDate = sortPlaysByDate([action.payload])
 
-      //find where to put the new play
+      //see if the new play needs to be nested in an existing date
       function insertNewPlay(plays, newPlay){
         const singlePlay = newPlay[0]
         const match = plays.find(play => play.date === singlePlay.date)
@@ -154,13 +154,18 @@ function allPlays(state = { byDate: [] }, action) {
           match.plays.unshift(singlePlay.plays[0])
           return plays
         } else {
-          // put in middle or something
-          return [newPlay, ...plays]
+          //or if it doesn't overlap a date,
+          //then add as a new date,
+          const allThePlays = [newPlay[0], ...plays]
+          //then sort again to put in right spot
+          allThePlays.sort(function(a, b){
+            return b.date - a.date
+          })
+          return allThePlays
         }
       }
 
       const playsWithNewPost = insertNewPlay(state.byDate, newPlayByDate)
-
 
       return {
         ...state,
