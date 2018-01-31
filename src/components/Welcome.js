@@ -30,7 +30,7 @@ const Welcome = ({ username, sendBGGUsername, fetchGameCollection, downloadPlays
 
       <input className="button submit green mt-1" type="submit" value="Get BGG Data" />
     </form>
-    <Link to='/games'>
+    <Link to='/plays'>
       <p className="green-link mtb-2">SKIP THIS</p>
     </Link>
   </div>

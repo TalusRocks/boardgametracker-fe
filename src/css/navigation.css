@@ -17,6 +17,8 @@ nav {
 
 .brand, .menu-burger {
   margin: auto 0.5em;
+  cursor: pointer;
+  user-select: none;
 }
 
 /*=====BOTTOM MOBILE NAV=====*/
