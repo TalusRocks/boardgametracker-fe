@@ -8,7 +8,7 @@ import Game from '../components/games/Game'
 
 
 const GameCollection = ({ username, gameCollection, fetchGameCollection }) => {
-  // console.log("gameCollection", gameCollection);
+
   return (
       <div>
         <div className="games-container">
