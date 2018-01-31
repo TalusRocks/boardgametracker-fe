@@ -2,18 +2,6 @@ import { combineReducers } from 'redux'
 import { GAMES_LOADED, DOWNLOAD_BGG_PLAYS, FETCH_DB_PLAYS, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES, SEARCH_BGG, POST_PLAY } from '../actions'
 import moment from 'moment'
 
-// function newPlay(state = { all: [] }, action){
-//   switch (action.type) {
-//     case POST_PLAY:
-//       return {
-//         ...state,
-//         all: action.payload ///ehhhhhh
-//       }
-//       default:
-//         return state
-//   }
-// }
-
 function filterGames(state = { byParams: { minBggRating: '', numPlayers: '', maxTime: '' } }, action){
   switch (action.type) {
     case FILTER_GAMES:
@@ -156,13 +144,20 @@ function allPlays(state = { all: [], byDate: [] }, action) {
         all: action.payload,
         byDate: playsByDate
       }
+
     case POST_PLAY:
-      console.log('POST_PLAY', action.payload);
-      // return {
-      //   all: [...state.all, action.payload],
-      //   byDate: playsByDate
-      // }
-      return state
+      console.log("hello, from the POST_PLAY reducer");
+      console.log('POST_PLAY--> change this format', action.payload);
+
+      //convert payload into right format for state? Like I do with the sortPlaysByDate function above?
+      // let newPost = { date: action.payload.played_on, plays: etc.. }
+
+      //OR just update state.all, and let FETCH_DB_PLAYS take care turning it into the right format for byDate and sticking it in there?
+
+      return {
+        ...state,
+        all: [...state.all, action.payload]
+      }
     default:
       return state
   }

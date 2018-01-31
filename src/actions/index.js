@@ -1,4 +1,3 @@
-import axios from 'axios'
 export const GAMES_LOADED = 'GAMES_LOADED'
 export const DOWNLOAD_BGG_PLAYS = 'DOWNLOAD_BGG_PLAYS'
 export const FETCH_DB_PLAYS = 'FETCH_DB_PLAYS'
@@ -97,7 +96,7 @@ export function postNewPlay(newPlayParams){
     console.log('inside of postNewPlay', data);
     if(data.ok){
       const json = await data.json()
-      //or use json below in payload?
+      //or use json below in payload???
       dispatch({
         type: POST_PLAY,
         payload: newPlayParams
@@ -105,7 +104,6 @@ export function postNewPlay(newPlayParams){
     } else {
       console.log("add error handling...");
     }
-
 
   }
 

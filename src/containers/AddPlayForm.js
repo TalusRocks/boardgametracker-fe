@@ -17,24 +17,16 @@ class AddPlayForm extends Component {
     }
   }
 
-  componentDidUpdate(){
-    // console.log(this.state.selectedGame, "(GAME)=====from componentDidUpdate=====");
-    // console.log(this.state.selectedGameId, "(ID)=====from componentDidUpdate=====");
-  }
-
   selectBggGame = (e) => {
     document.getElementById('playGame').value = e.target.textContent
 
     this.setState({selectedGame: e.target.textContent, selectedGameId: e.target.id})
 
-    // console.log(this.state.selectedGame, "selectedGame in STATE");
-    // console.log(this.state.selectedGameId, "selectedGameId in STATE");
   }
 
   sendSearchParam = () => {
     let searchGame = document.getElementById('playGame').value
-    // console.log(searchGame);
-    // console.log(this.props.searchBoardGameGeek);
+
     this.props.searchBoardGameGeek(searchGame)
   }
 
@@ -48,10 +40,15 @@ class AddPlayForm extends Component {
       comment: e.target.playComments.value,
       played_on: e.target.playDate.value
     }
+    //this doesn't post at all
+    // const newPlayParams = {
+    //   date: e.target.playDate.value,
+    //   plays: [{ gamename: e.target.playGame.value,
+    //   comments: e.target.playComments.value }]
+    // }
     console.log(newPlayParams, "new play params... ");
 
     this.props.postNewPlay(newPlayParams)
-
     this.setState({ fireRedirect: true })
   }
 
@@ -60,7 +57,6 @@ class AddPlayForm extends Component {
   }
 
   render() {
-    // console.log(this.state.selectedGame, "selectedGame from render");
     return this.state.fireRedirect === true ? <Redirect to="/plays"/> : (
       <div>
         <div className="m-1 form-close">
@@ -76,7 +72,7 @@ class AddPlayForm extends Component {
                 <span className="caps-title">
                 Date
                 </span>
-                <input className="mt-05 text-input" type="text" name="playDate" defaultValue="2018-01-28"></input>
+                <input className="mt-05 text-input" type="text" name="playDate" defaultValue="2018-01-30"></input>
               </label>
             </div>
             <div className="mt-2 mb-1">

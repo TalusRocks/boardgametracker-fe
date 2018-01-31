@@ -5,8 +5,8 @@ import AddPlayButton from '../components/plays/AddPlayButton'
 import moment from 'moment'
 
 
-const AllPlaysContainer = ({ allPlays, byDate }) => {
-console.log(allPlays.byDate, "***allPlays from AllPlaysContainer****");
+const AllPlaysContainer = ({ allPlays }) => {
+console.log(allPlays.byDate, "***THIS.IS.THE.STATE****");
 
   return (
     <div>
