@@ -16,7 +16,6 @@ function filterGames(state = { byParams: { minBggRating: '', numPlayers: '', max
 
 function sortGames(state = { byOptions: { key: '', direction: '' }
   }, action){
-  // console.log(action.payload, "action.payload from the REDUCER");
   switch (action.type) {
     case SORT_GAMES:
       return {
@@ -47,7 +46,7 @@ function gameCollection(state = { all: [], byPlays: [] }, action) {
       for (let j = 0; j < playsByGame.length; j++){
 
       }
-      //2) SORT into most play order
+      // 2) SORT into most play order
       playsByGame.sort(function(a, b) {
         return b.totalplays - a.totalplays
       })
@@ -75,21 +74,18 @@ function bggSearchResults(state = { all: [] }, action) {
 }
 
 function sortPlaysByDate(payload){
-  // console.log(payload, "payload");
   // 1) turn dates into sortable numbers
   const formattedDates = payload.map((el, i) => {
     return {...el, played_on: moment(el.played_on).format('YYYYMMDD')}
   })
-  // console.log(formattedDates, "####NUMBER dates, no hyphen?");
 
   // 2) SORT
   const sortedPlays =
   formattedDates.sort(function(a, b){
     return b.played_on - a.played_on
   })
-  // console.log(sortedPlays, "??SORTED?? PLAYS");
 
-  // // 3) group dates
+  // 3) group dates
   const playsByDate = []
   for (let i = 0; i < sortedPlays.length; i++) {
     let prevdate
@@ -106,9 +102,8 @@ function sortPlaysByDate(payload){
       playsByDate.push(dateGroup)
     }
   }
-  // console.log(playsByDate, "@@@@@@@playsByDate");
 
-  // // 4) add nested game name and comments
+  // 4) add nested game name and comments
   for (let j = 0; j < payload.length; j++) {
 
     let date = payload[j].played_on
@@ -126,7 +121,6 @@ function sortPlaysByDate(payload){
       }
     }
   }
-  // console.log("TADAAAAAAA------:", playsByDate);
 
   return playsByDate
 }
@@ -188,7 +182,6 @@ function currentUser(state = { username: '' }, action){
       return state
   }
 }
-
 
 
 export default combineReducers({

@@ -81,7 +81,6 @@ class AddPlayForm extends Component {
             <div onClick={this.sendSearchParam} className="button short-btn">Search BoardGameGeek</div>
 
             <div>{!this.props.bggSearchResults.all ? '' : this.props.bggSearchResults.all.map((el, i) => {
-              // console.log(el, "EL");
               return <p onClick={this.selectBggGame} key={`${el.name}-${i}`} className="blue-link text-center mtb-1" id={el.$.id}>{el.name[0].$.value}</p>
             }) }</div>
 

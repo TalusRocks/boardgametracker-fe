@@ -4,9 +4,8 @@ import { connect } from 'react-redux'
 import { fetchGameCollection } from '../actions'
 
 const PlayStatsContainer = ({ gameCollection }) => {
-  // console.log(gameCollection.byPlays, "from Play Stats Containers");
   let hindex = false
-  //is state only growing? deleted play on BGG and h-index won't go back down
+
   return (
     <div className="play-stats-container">
       {gameCollection.byPlays.map((el, i) => {
@@ -24,7 +23,24 @@ const PlayStatsContainer = ({ gameCollection }) => {
               '' }
               `}>
               <div key={`${el.gameid}-${el.totalplays}`} className="mr-1 bold">{el.totalplays}</div>
-              <div key={`${el.gamename}-${i}`}>{el.gamename}</div>
+              <div key={`${el.gamename}-${i}`}>
+                <span>{el.gamename}</span>
+
+                <span className={`stat-money
+                  ${el.totalplays >= 100 ? 'dark-purple-100' :
+                  el.totalplays >= 50 ? 'dark-blue-50' :
+                  el.totalplays >= 25 ? 'dark-green-25' :
+                  el.totalplays >= 10 ? 'dark-orange-10' :
+                  el.totalplays >= 5 ? 'dark-yellow-5' :
+                  ''}`}>
+                  {el.totalplays >= 100 ? '$1' :
+                  el.totalplays >= 50 ? '50c' :
+                  el.totalplays >= 25 ? '25c' :
+                  el.totalplays >= 10 ? '10c' :
+                  el.totalplays >= 5 ? '5c' :
+                  ''}
+                </span>
+              </div>
             </div>
           </div>
         )

@@ -12,7 +12,6 @@ const baseURL = 'http://localhost:3000'
 var parseString = require('xml2js').parseString;
 
 export function filterGameCollection(filterParams){
-  // console.log(filterParams, "filterParams from ACTION/index.js");
   return {
     type: FILTER_GAMES,
     payload: filterParams
@@ -20,7 +19,6 @@ export function filterGameCollection(filterParams){
 }
 
 export function sortGameCollection(sortKeyDir){
-  // console.log(sortKey, "sortKey from the ACTION sortGameCollection");
   return {
     type: SORT_GAMES,
     payload: sortKeyDir
@@ -39,11 +37,11 @@ export function sendBGGUsername(bggusername){
 export function fetchGameCollection(){
   return async (dispatch, getState) => {
 
-    // let bggusername = localStorage.getItem('bggusername')
+    let bggusername = localStorage.getItem('bggusername')
     //temporary holder for development:
-    let bggusername = 'PlayBosco'
+    // let bggusername = 'PlayBosco'
 
-    //****To do - add gameCollection length to 'if'
+    //****TO-DO: - add gameCollection length to 'if'
     if(bggusername){
         const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/collection?username=${bggusername}&own=1&stats=1`)
         .then(response => response.text())
@@ -62,18 +60,10 @@ export function fetchGameCollection(){
 
 
 export function searchBoardGameGeek(searchParam){
-  // console.log(searchParam, "searchParam from searchBoardGameGeek in ACTION/index");
   return async (dispatch) => {
     const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/search?type=boardgame&query=${searchParam}`)
-    .then(response => {
-      // console.log(response, "response from ACTION");
-      return response.text()
-    })
+    .then(response => response.text())
     .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-    // .then(res => {
-    //   console.log(res, "str?");
-    //   return res
-    // })
 
     parseString(`<items>${data.documentElement.innerHTML}</items>`, {trim: true}, function (err, result){
       dispatch({
@@ -95,8 +85,6 @@ export function postNewPlay(newPlayParams){
     })
 
     if(data.ok){
-
-      // console.log(newPlayParams, "newPlayParams just before dispatching");
       dispatch({
         type: POST_PLAY,
         payload: newPlayParams
@@ -109,8 +97,7 @@ export function postNewPlay(newPlayParams){
 
 }
 
-
-export function fetchDbPlays(dispatch){
+export function fetchDbPlays(){
   return async(dispatch) => {
     const data = await fetch(`${baseURL}/plays`)
     const json = await data.json()
@@ -126,6 +113,7 @@ export function fetchDbPlays(dispatch){
 export function downloadPlays(){
   console.log("hello from downloadPlays");
   return async (dispatch) => {
+    //TO DO
     //dispatch PLAYS_LOADING to make a spinner here
     //change PLAYS_LOADED to ADD_PLAYS
     // then PLAYS_LOADED (can have >1 dispatch)
@@ -141,7 +129,7 @@ export function downloadPlays(){
       parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, async function (err, result){
 
         const playsForDb = result.AllPlays.play.map((el, i) => {
-          console.log(el, "--!GET BGG DATA FOR THE DB HERE!--");
+          // console.log(el, "--!GET BGG DATA FOR THE DB HERE!--");
           return {
             // play_id:
             played_on: el.$.date,
@@ -159,10 +147,7 @@ export function downloadPlays(){
         // const json = await data.json()
 
         // if(result.AllPlays.play.length < 100) going = false
-        // dispatch({
-        //   type: DOWNLOAD_BGG_PLAYS,
-        //   payload: result.AllPlays.play
-        // })
+        dispatch(fetchDbPlays())
       })
 
       // console.log(page, "page");

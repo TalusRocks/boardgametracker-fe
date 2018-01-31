@@ -6,7 +6,6 @@ import moment from 'moment'
 
 
 const AllPlaysContainer = ({ allPlays }) => {
-console.log(allPlays.byDate, "***THIS.IS.THE.STATE****");
 
   return (
     <div>
@@ -42,9 +41,7 @@ const mapStateToProps = state => ({
   allPlays: state.allPlays
 })
 
-const mapDispatchToProps = dispatch => ({
-  // return bindActionCreators({ fetchPlays }, dispatch)
-})
+const mapDispatchToProps = dispatch => ({})
 
 export default connect(
   mapStateToProps,

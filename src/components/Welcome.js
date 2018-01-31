@@ -11,12 +11,11 @@ const Welcome = ({ username, sendBGGUsername, fetchGameCollection, downloadPlays
     sendBGGUsername(e.target.bggusername.value)
     fetchGameCollection()
     downloadPlays()
-    console.log("hello from submitBGGUsername");
   }
 
   return username ? <Redirect to="/plays"/> : <div className="m-1 text-center">
     <h1 className="mtb-1">Welcome!</h1>
-    <p>{username ? username : 'no username'}</p>
+    {/* <p>{username ? username : 'no username'}</p> */}
     <p className="mtb-2">Do you have a BoardGameGeek account?
       <br></br>
       If you do, enter your username here to load your logged plays and game collection! Otherwise, you can skip this step.
@@ -26,7 +25,7 @@ const Welcome = ({ username, sendBGGUsername, fetchGameCollection, downloadPlays
       <label>
         <span className="caps-title">BoardGameGeek UserName</span>
         <br></br>
-        <input className="mt-05 text-input" type="text" name="bggusername"  defaultValue="PlayBosco"></input>
+        <input className="mt-05 text-input text-center" type="text" name="bggusername" placeholder="BGG username"></input>
       </label>
 
       <input className="button submit green mt-1" type="submit" value="Get BGG Data" />
