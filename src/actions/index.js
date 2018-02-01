@@ -115,7 +115,7 @@ export function fetchDbPlays(){
 
 
 export function downloadPlays(){
-  console.log("hello from downloadPlays");
+
   return async (dispatch) => {
     //TO DO
     //dispatch PLAYS_LOADING to make a spinner here
@@ -123,19 +123,16 @@ export function downloadPlays(){
     // then PLAYS_LOADED (can have >1 dispatch)
 
     //** WIPE OUT DB before downloading BGG data
-    const data = await fetch(`${baseURL}/plays`, {
-      method: 'DELETE'
-    })
-    .then(response => response.json())
+    await fetch(`${baseURL}/plays`, { method: 'DELETE' })
 
     let page = 1
     //*** turn off getting all pages for development
     // let going = true
     //
     // while (going) {
-    const playData = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=PlayBosco&page=${page}`)
-    .then(response => response.text())
-    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+    const response = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=PlayBosco&page=${page}`)
+    const xml = await response.text()
+    const playData = new window.DOMParser().parseFromString(xml, "text/xml")
 
     parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, async function (err, result){
 
