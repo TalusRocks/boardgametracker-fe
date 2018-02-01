@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { GAMES_LOADED, FETCH_DB_PLAYS, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES, SEARCH_BGG, POST_PLAY } from '../actions'
+import { GAMES_LOADED, FETCH_DB_PLAYS, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES, SEARCH_BGG, POST_PLAY, PLAYS_PER_GAME } from '../actions'
 import moment from 'moment'
 
 function filterGames(state = { byParams: { minBggRating: '', numPlayers: '', maxTime: '' } }, action){
@@ -21,6 +21,46 @@ function sortGames(state = { byOptions: { key: '', direction: '' }
       return {
         ...state,
         byOptions: action.payload
+      }
+    default:
+      return state
+  }
+}
+
+function playsPerGame(state = { all: [] }, action){
+  switch (action.type) {
+    case PLAYS_PER_GAME:
+
+    // const match = plays.find(play => play.date === singlePlay.date)
+
+      const talliedPlaysPerGame = []
+      for (let i = 0; i < action.payload.plays.length; i++) {
+
+        //if the play has already been pushed to tallied...
+        if (talliedPlaysPerGame.find(el => el.bgg_game_id === action.payload.plays[i].bgg_game_id)){
+
+          //find it (again- doh!) and increase total plays by 1
+          for(let j = 0; j < talliedPlaysPerGame.length; j++){
+            if(talliedPlaysPerGame[j].bgg_game_id === action.payload.plays[i].bgg_game_id){
+              talliedPlaysPerGame[j].totalplays = talliedPlaysPerGame[j].totalplays + 1
+            }
+          }
+
+        } else {
+
+          //otherwise, add to new array in right format (with total of 1)
+          talliedPlaysPerGame.push({game_name: action.payload.plays[i].game_name,
+              bgg_game_id: action.payload.plays[i].bgg_game_id,
+              totalplays: 1})
+        }
+
+      }
+
+      console.log(talliedPlaysPerGame, "TALLIED");
+
+      return {
+        ...state,
+        all: talliedPlaysPerGame
       }
     default:
       return state
@@ -185,5 +225,5 @@ function currentUser(state = { username: '' }, action){
 
 
 export default combineReducers({
-  gameCollection, allPlays, currentUser, sortGames, filterGames, bggSearchResults
+  gameCollection, allPlays, currentUser, sortGames, filterGames, bggSearchResults, playsPerGame
 })

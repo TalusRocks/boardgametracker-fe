@@ -13,7 +13,7 @@ import './css/statcolors.css'
 
 import store from './store'
 import { Provider } from 'react-redux'
-import { fetchGameCollection, fetchDbPlays } from './actions'
+import { fetchGameCollection, fetchDbPlays, calculatePlaysPerGame } from './actions'
 
 // (1)
 //using local storage for development purposes
@@ -23,6 +23,7 @@ if(bggusername){
   // store.dispatch(downloadPlays())
   //!!!NEED a CHECK HERE!!!!!
   store.dispatch(fetchDbPlays())
+  store.dispatch(calculatePlaysPerGame())
 }
 
 

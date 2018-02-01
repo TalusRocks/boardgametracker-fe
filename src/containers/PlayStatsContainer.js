@@ -3,12 +3,17 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { fetchGameCollection } from '../actions'
 
-const PlayStatsContainer = ({ gameCollection }) => {
+const PlayStatsContainer = ({ gameCollection, playsPerGame }) => {
   let hindex = false
+  // console.log(gameCollection, "gameCollection");
+  // console.log(gameCollection.byPlays, "gameCollection.byPlays");
+
+  console.log(playsPerGame.all, "REDUX - playsPerGame");
 
   return (
     <div className="play-stats-container">
       {gameCollection.byPlays.map((el, i) => {
+        // console.log(el, "each game in gameCollection.byPlays");
         return (
           <div key={i}>
             <div key={`h-index=${i}`} className={ i >= el.totalplays && hindex === false ? `h-index` : '' }>
@@ -51,7 +56,8 @@ const PlayStatsContainer = ({ gameCollection }) => {
 
 const mapStateToProps = state => ({
   gameCollection: state.gameCollection,
-  username: state.currentUser.username
+  username: state.currentUser.username,
+  playsPerGame: state.playsPerGame
 })
 
 const mapDispatchToProps = dispatch => {

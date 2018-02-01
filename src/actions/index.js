@@ -1,4 +1,5 @@
 export const GAMES_LOADED = 'GAMES_LOADED'
+export const PLAYS_PER_GAME = 'PLAYS_PER_GAME'
 export const DOWNLOAD_BGG_PLAYS = 'DOWNLOAD_BGG_PLAYS'
 export const FETCH_DB_PLAYS = 'FETCH_DB_PLAYS'
 export const SET_BGG_USERNAME = 'SET_BGG_USERNAME'
@@ -99,6 +100,18 @@ export function postNewPlay(newPlayParams){
 
   }
 
+}
+
+export function calculatePlaysPerGame(){
+  return async(dispatch) => {
+    const data = await fetch(`${baseURL}/plays`)
+    const json = await data.json()
+
+    dispatch({
+      type: PLAYS_PER_GAME,
+      payload: json
+    })
+  }
 }
 
 export function fetchDbPlays(){
