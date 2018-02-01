@@ -32,7 +32,7 @@ function playsPerGame(state = { all: [] }, action){
     case PLAYS_PER_GAME:
 
     // const match = plays.find(play => play.date === singlePlay.date)
-
+      console.log(action.payload.plays);
       const talliedPlaysPerGame = []
       for (let i = 0; i < action.payload.plays.length; i++) {
 
@@ -49,14 +49,24 @@ function playsPerGame(state = { all: [] }, action){
         } else {
 
           //otherwise, add to new array in right format (with total of 1)
-          talliedPlaysPerGame.push({game_name: action.payload.plays[i].game_name,
+          talliedPlaysPerGame.push(
+            {
+              game_name: action.payload.plays[i].game_name,
               bgg_game_id: action.payload.plays[i].bgg_game_id,
-              totalplays: 1})
+              totalplays: 1
+            }
+          )
         }
 
       }
 
       console.log(talliedPlaysPerGame, "TALLIED");
+
+      talliedPlaysPerGame.sort(function(a, b) {
+        return b.totalplays - a.totalplays
+      })
+
+      console.log(talliedPlaysPerGame, "TALLIED & SORTED");
 
       return {
         ...state,
