@@ -7,7 +7,9 @@ export const FILTER_GAMES = 'FILTER_GAMES'
 export const POST_PLAY = 'POST_PLAY'
 export const SEARCH_BGG = 'SEARCH_BGG'
 
-const baseURL = 'https://serene-mesa-27676.herokuapp.com'
+// const baseURL = 'https://serene-mesa-27676.herokuapp.com'
+//DEVELOPMENT:
+const baseURL = 'http://localhost:3000'
 
 var parseString = require('xml2js').parseString;
 
@@ -27,7 +29,9 @@ export function sortGameCollection(sortKeyDir){
 
 export function sendBGGUsername(bggusername){
   //********TO-DO: ping API to check username
+  //then wipe out data, set new username
   localStorage.setItem('bggusername', bggusername)
+
   return {
     type: SET_BGG_USERNAME,
     payload: bggusername
@@ -117,43 +121,51 @@ export function downloadPlays(){
     //dispatch PLAYS_LOADING to make a spinner here
     //change PLAYS_LOADED to ADD_PLAYS
     // then PLAYS_LOADED (can have >1 dispatch)
+
+    //** WIPE OUT DB before downloading BGG data 
+    const data = await fetch(`${baseURL}/plays`, {
+      method: 'DELETE'
+    })
+    .then(response => response.json())
+
     let page = 1
     //*** turn off getting all pages for development
     // let going = true
     //
     // while (going) {
-      const playData = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=PlayBosco&page=${page}`)
-      .then(response => response.text())
-      .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+    const playData = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=PlayBosco&page=${page}`)
+    .then(response => response.text())
+    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
 
-      parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, async function (err, result){
+    parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, async function (err, result){
 
-        const playsForDb = result.AllPlays.play.map((el, i) => {
-          // console.log(el, "--!GET BGG DATA FOR THE DB HERE!--");
-          return {
-            // play_id:
-            played_on: el.$.date,
-            bgg_game_id: el.item[0].$.objectid,
-            game_name: el.item[0].$.name,
-            comment: el.comments ? el.comments[0] : '' }
-        })
-        const data = await fetch(`${baseURL}/plays`, {
-          method: 'POST',
-          body: JSON.stringify(playsForDb),
-          headers: new Headers({
-            'Content-Type': 'application/json'
-          })
-        })
-        // const json = await data.json()
-
-        // if(result.AllPlays.play.length < 100) going = false
-        dispatch(fetchDbPlays())
+      const playsForDb = result.AllPlays.play.map((el, i) => {
+        // console.log(el, "--!GET BGG DATA FOR THE DB HERE!--");
+        return {
+          // play_id:
+          played_on: el.$.date,
+          bgg_game_id: el.item[0].$.objectid,
+          game_name: el.item[0].$.name,
+          comment: el.comments ? el.comments[0] : '' }
       })
 
-      // console.log(page, "page");
-      // page += 1
-      // await fetchPlays()
+      const data = await fetch(`${baseURL}/plays`, {
+        method: 'POST',
+        body: JSON.stringify(playsForDb),
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
+      // const json = await data.json()
 
-    // }
+      // if(result.AllPlays.play.length < 100) going = false
+      dispatch(fetchDbPlays())
+    })
+
+    // console.log(page, "page");
+    // page += 1
+    // await fetchPlays()
+
+  // }
   }
 }
