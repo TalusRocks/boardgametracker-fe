@@ -5,10 +5,6 @@ import { fetchGameCollection } from '../actions'
 
 const PlayStatsContainer = ({ gameCollection, playsPerGame }) => {
   let hindex = false
-  // console.log(gameCollection, "gameCollection");
-  // console.log(gameCollection.byPlays, "gameCollection.byPlays");
-
-  console.log(playsPerGame.all, "REDUX - playsPerGame");
 
   return (
     <div className="play-stats-container">
