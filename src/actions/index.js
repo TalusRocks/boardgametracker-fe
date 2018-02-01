@@ -128,9 +128,9 @@ export function downloadPlays(){
     let page = 1
     //*** turn off getting all pages for development
     // let going = true
-    //
+    let bggusername = localStorage.getItem('bggusername')
     // while (going) {
-    const response = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=PlayBosco&page=${page}`)
+    const response = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=${bggusername}&page=${page}`)
     const xml = await response.text()
     const playData = new window.DOMParser().parseFromString(xml, "text/xml")
 
