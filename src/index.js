@@ -15,13 +15,11 @@ import store from './store'
 import { Provider } from 'react-redux'
 import { fetchGameCollection, fetchDbPlays, calculatePlaysPerGame } from './actions'
 
-// (1)
-//using local storage for development purposes
+//*using local storage for development purposes
 let bggusername = localStorage.getItem('bggusername')
 if(bggusername){
   store.dispatch(fetchGameCollection())
-  // store.dispatch(downloadPlays())
-  //!!!NEED a CHECK HERE!!!!!
+  //***** add a check here
   store.dispatch(fetchDbPlays())
   store.dispatch(calculatePlaysPerGame())
 }

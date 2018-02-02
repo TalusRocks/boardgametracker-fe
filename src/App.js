@@ -6,6 +6,7 @@ import GameCollection from './containers/GameCollection'
 import AllPlaysContainer from './containers/AllPlaysContainer'
 import PlayStatsContainer from './containers/PlayStatsContainer'
 import AddPlayForm from './containers/AddPlayForm'
+import EditPlayForm from './containers/EditPlayForm'
 import FilterGamesForm from './containers/FilterGamesForm'
 import TopNavigationBar from './components/shared/TopNavigationBar'
 import BottomMobileNav from './components/shared/BottomMobileNav'
@@ -43,6 +44,10 @@ const App = ( { gameCollection, allPlays }) => (
 
         <Route exact path='/plays/addplay' component={ props =>
           <AddPlayForm/>
+        }/>
+
+        <Route path='/plays/edit/:id' component={ props =>
+          <EditPlayForm/>
         }/>
 
         <Route exact path='/games' component={ props =>

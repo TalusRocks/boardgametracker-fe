@@ -29,8 +29,7 @@ export function sortGameCollection(sortKeyDir){
 }
 
 export function sendBGGUsername(bggusername){
-  //********TO-DO: ping API to check username
-  //then wipe out data, set new username
+  //*****TO-DO ping API to check username
   localStorage.setItem('bggusername', bggusername)
 
   return {
@@ -43,17 +42,16 @@ export function fetchGameCollection(){
   return async (dispatch, getState) => {
 
     let bggusername = localStorage.getItem('bggusername')
-    //temporary holder for development:
+    // DEVELOPMENT:
     // let bggusername = 'PlayBosco'
 
-    //****TO-DO: - add gameCollection length to 'if'
+    //****TO-DO check if need to download (instead of wiping)
     if(bggusername){
         const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/collection?username=${bggusername}&own=1&stats=1`)
         .then(response => response.text())
         .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
 
         parseString(`<GamesOwned>${data.documentElement.innerHTML}</GamesOwned>`, {trim: true}, function (err, result){
-          //IF first time, POST to db *await
           dispatch({
             type: GAMES_LOADED,
             payload: result.GamesOwned.item
@@ -88,7 +86,6 @@ export function postNewPlay(newPlayParams){
         'Content-Type': 'application/json'
       })
     })
-
     if(data.ok){
       dispatch({
         type: POST_PLAY,
@@ -97,10 +94,12 @@ export function postNewPlay(newPlayParams){
     } else {
       console.log("add error handling...");
     }
-
   }
-
 }
+
+// export function editPlay(newPlayParams, playId){
+//
+// }
 
 export function calculatePlaysPerGame(){
   return async(dispatch) => {
@@ -151,8 +150,9 @@ export function downloadPlays(){
 
       const playsForDb = result.AllPlays.play.map((el, i) => {
         // console.log(el, "--!GET BGG DATA FOR THE DB HERE!--");
+        //**** temporary user_id until login added
         return {
-          // play_id:
+          user_id: 1,
           played_on: el.$.date,
           bgg_game_id: el.item[0].$.objectid,
           game_name: el.item[0].$.name,
