@@ -70,7 +70,7 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
 
   //SORT GAMES
   const result = orderBy(gameCollection.all, (game) => {
-      return parseInt(at(game, param))
+      return parseFloat(at(game, param))
   }, [sortGames.byOptions.direction])
 
   //either display sorted games or default
