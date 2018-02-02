@@ -77,7 +77,6 @@ function playsPerGame(state = { all: [] }, action){
   }
 }
 
-// (3)
 function gameCollection(state = { all: [], byPlays: [] }, action) {
   switch (action.type) {
     case GAMES_LOADED:
