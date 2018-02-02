@@ -39,22 +39,62 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
       break
   }
 
-  // const filtered = gameCollection.all.filter(el => {
-  //   return parseInt(el.stats[0].$.maxplaytime) < parseInt(filterGames.byParams.maxTime)
+  // function conditionAfn (val) {
+  //   return val < 30
+  // }
+  //
+  // const fns = []
+  // if (something) fns.push()
+  // displayGames.filter(el => {
+  //   return fns.every(fn => {
+  //     return fn(el)
+  //   })
   // })
 
-  let displayGames
+
+  let displayGames = gameCollection.all
+
+  console.log(filterGames.byParams, "filterGames.byParams from Game.js");
+
+  if(filterGames.byParams.minBggRating){
+    displayGames = displayGames.filter(el => {
+
+      return parseInt(el.stats[0].rating[0].average[0].$.value) >= parseInt(filterGames.byParams.minBggRating)
+    })
+  }
+
+  if(filterGames.byParams.numPlayers){
+    //NUMBER OF PLAYERS
+    displayGames = displayGames.filter(el => {
+      let bggminplayers = el.stats[0].$.minplayers
+      let bggmaxplayers = el.stats[0].$.maxplayers
+      if(!bggminplayers) bggminplayers = "1"
+      if(!bggmaxplayers) bggmaxplayers = bggminplayers
+
+      return parseInt(bggminplayers) <=  parseInt(filterGames.byParams.numPlayers) && parseInt(bggmaxplayers) <=  parseInt(filterGames.byParams.numPlayers)
+    })
+  }
+
+  if(filterGames.byParams.maxTime){
+    //MAX TIME
+    displayGames = displayGames.filter(el => {
+      return parseInt(el.stats[0].$.maxplaytime) <= parseInt(filterGames.byParams.maxTime)
+    })
+  }
+
 
   //SORT GAMES
   const result = orderBy(gameCollection.all, [param], [sortGames.byOptions.direction])
 
   //either display sorted games or default
-  sortGames.byOptions.key ? (displayGames = result) : (displayGames = gameCollection.all)
+  sortGames.byOptions.key ? (displayGames = result) : displayGames
+
 
   return (
 
     <div className="one-game-container">
       { displayGames.map((el, i) => {
+        console.log(el, "each game");
         return (
           <div key={`game-${i}`}>
             <h2 key={`${el.name}-${i}`} className="game-name">{el.name[0]._}</h2>

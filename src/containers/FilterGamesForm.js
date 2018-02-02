@@ -19,7 +19,7 @@ class FilterGamesForm extends Component {
       numPlayers: e.target.numPlayers.value,
       maxTime: e.target.maxTime.value
     }
-    
+
     this.props.filterGameCollection(filterParams)
     this.setState({ fireRedirect: true })
   }
@@ -40,7 +40,7 @@ class FilterGamesForm extends Component {
                 <span className="caps-title">
                 Minimum BGG Rating
                 </span>
-                <input className="mt-05 text-input" type="text" name="bggRating" defaultValue="6"></input>
+                <input className="mt-05 text-input" type="text" name="bggRating"></input>
               </label>
             </div>
             <div className="mtb-2">
@@ -48,7 +48,7 @@ class FilterGamesForm extends Component {
                 <span className="caps-title">
                 Number of Players
                 </span>
-                <input className="mt-05 text-input" type="text" name="numPlayers" defaultValue="3"></input>
+                <input className="mt-05 text-input" type="text" name="numPlayers"></input>
               </label>
             </div>
             <div className="mtb-2">
@@ -56,7 +56,7 @@ class FilterGamesForm extends Component {
                 <span className="caps-title">
                 Max Time
                 </span>
-                <input className="mt-05 text-input" type="text" name="maxTime" defaultValue="60"></input>
+                <input className="mt-05 text-input" type="text" name="maxTime"></input>
               </label>
             </div>
             <input className="button submit mt-1" type="submit" value="Filter"></input>

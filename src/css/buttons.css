@@ -7,6 +7,9 @@
   background-color: #4A90E2;
   color: #fff;
   cursor: pointer;
+  /* turn off safari defaults */
+  -webkit-appearance: none;
+  border-radius: 0;
 }
 
 .short-btn {
@@ -18,11 +21,6 @@
   width: 100%;
   bottom: 3em;
   /*box-shadow: 0px -5px 50px 0px rgba(33,33,33,0.36);*/
-}
-
-.input[type="submit"] {
-  -webkit-appearance: none;
-  border-radius: 0;
 }
 
 .green {
