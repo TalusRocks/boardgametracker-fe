@@ -88,13 +88,28 @@ function gameCollection(state = { all: [], byPlays: [] }, action) {
         playsByGame.push(gamePlays)
       }
 
-      for (let j = 0; j < playsByGame.length; j++){
-
-      }
-      // 2) SORT into most play order
+      // 2) SORT into most played order
       playsByGame.sort(function(a, b) {
         return b.totalplays - a.totalplays
       })
+
+
+      //fill in undefined stats
+      for (let j = 0; j < action.payload.length; j++){
+        //if no min time, set to 0
+        if(!action.payload[j].stats[0].$.minplaytime){
+          action.payload[j].stats[0].$.minplaytime = 0
+        }
+        //if no max time, set to min time
+        if(!action.payload[j].stats[0].$.maxplaytime){
+          action.payload[j].stats[0].$.maxplaytime = action.payload[j].stats[0].$.minplaytime
+        }
+        //if no max player, set to min player
+        if(!action.payload[j].stats[0].$.maxplayers){
+          action.payload[j].stats[0].$.maxplayers= action.payload[j].stats[0].$.minplayers
+        }
+      }
+      console.log(action.payload, "action.payload");
 
       return {
         ...state,

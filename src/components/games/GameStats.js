@@ -17,7 +17,7 @@ const GameStats = ({ gameStats }) => {
             {/* <div key={`bestplayers-${i}`} className="stat best-player">X</div> */}
             <div key={`maxplayers-${i}`} className="stat max-player">{el.$.maxplayers}</div>
             <div key={`mintime-${i}`} className="stat min-time">{el.$.minplaytime}</div>
-            <div key={`maxtime-${i}`} className="stat max-time">{el.$.maxplaytime ? el.$.maxplaytime : el.$.minplaytime}</div>
+            <div key={`maxtime-${i}`} className="stat max-time">{el.$.maxplaytime}</div>
             {/* <div key={`weight-${i}`} className="stat weight">X.XX</div> */}
           </div>
         )

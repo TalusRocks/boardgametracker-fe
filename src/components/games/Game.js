@@ -38,18 +38,6 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
       break
   }
 
-  // function conditionAfn (val) {
-  //   return val < 30
-  // }
-  //
-  // const fns = []
-  // if (something) fns.push()
-  // displayGames.filter(el => {
-  //   return fns.every(fn => {
-  //     return fn(el)
-  //   })
-  // })
-
 
   let displayGames = gameCollection.all
 
