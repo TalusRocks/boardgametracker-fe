@@ -5,8 +5,7 @@ import { sortGameCollection } from '../../actions'
 import GameStats from './GameStats'
 import GameComment from './GameComment'
 const orderBy = require('lodash.orderby')
-//used with ORDERBY:
-// const identity = require('lodash.identity')
+const at = require('lodash.at')
 
 const Game = ({ gameCollection, sortGames, filterGames }) => {
 
@@ -54,8 +53,6 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
 
   let displayGames = gameCollection.all
 
-  console.log(filterGames.byParams, "filterGames.byParams from Game.js");
-
   if(filterGames.byParams.minBggRating){
     displayGames = displayGames.filter(el => {
 
@@ -84,7 +81,9 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
 
 
   //SORT GAMES
-  const result = orderBy(gameCollection.all, [param], [sortGames.byOptions.direction])
+  const result = orderBy(gameCollection.all, (game) => {
+      return parseInt(at(game, param))
+  }, [sortGames.byOptions.direction])
 
   //either display sorted games or default
   sortGames.byOptions.key ? (displayGames = result) : displayGames
@@ -94,7 +93,6 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
 
     <div className="one-game-container">
       { displayGames.map((el, i) => {
-        console.log(el, "each game");
         return (
           <div key={`game-${i}`}>
             <h2 key={`${el.name}-${i}`} className="game-name">{el.name[0]._}</h2>

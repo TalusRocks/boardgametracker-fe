@@ -60,13 +60,9 @@ function playsPerGame(state = { all: [] }, action){
 
       }
 
-      console.log(talliedPlaysPerGame, "TALLIED");
-
       talliedPlaysPerGame.sort(function(a, b) {
         return b.totalplays - a.totalplays
       })
-
-      console.log(talliedPlaysPerGame, "TALLIED & SORTED");
 
       return {
         ...state,

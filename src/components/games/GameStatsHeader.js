@@ -16,27 +16,29 @@ class GameStatsHeader extends Component {
     }
 
     flip = (key, direction) => {
-      const sortKeyDir = { key, direction }
 
-      //using closure to return a function
       return () => {
-        //sortKeyDir has already been set; flip it here for the next click
-        this.state[key] === '' || this.state[key] === 'asc' ? this.setState({ [key]: 'desc'}) : this.setState({ [key]: 'asc'})
 
-        //turn all other keys to ''
-        for(var i in this.state){
-          if(this.state[i] !== key){
-            //!!! need to use setState here instead
-            this.state[i] = ''
-          }
-        }
+        const newState = { [key]: null }
+        newState[key] = !this.state[key] || this.state[key] === 'asc' ? 'desc' : 'asc'
 
-        this.props.sortGameCollection(sortKeyDir)
+        this.setState({
+          bggRating: '',
+          yourRating: '',
+          minPlayer: '',
+          maxPlayer: '',
+          minTime: '',
+          maxTime: '',
+          ...newState
+        })
+
+        this.props.sortGameCollection({ key, direction: newState[key] })
       }
 
     }
 
     render() {
+      console.log(this.state, 'state in render');
       return (
         <div>
           <div className="game-stats-headers">
@@ -45,7 +47,7 @@ class GameStatsHeader extends Component {
                 <i className="material-icons">
                   {
                     this.state.bggRating === '' ? `` :
-                    this.state.bggRating === 'desc' ? `arrow_drop_up` : `arrow_drop_down`
+                    this.state.bggRating === 'asc' ? `arrow_drop_up` : `arrow_drop_down`
                   }
                 </i>
               </span>
@@ -55,7 +57,7 @@ class GameStatsHeader extends Component {
               <span className="stat-arrow">
                 <i className="material-icons">
                   {this.state.yourRating === '' ? `` :
-                    this.state.yourRating === 'desc' ? `arrow_drop_up` : `arrow_drop_down`}
+                    this.state.yourRating === 'asc' ? `arrow_drop_up` : `arrow_drop_down`}
                 </i>
               </span>
               your<br></br>rating
@@ -64,7 +66,7 @@ class GameStatsHeader extends Component {
               <span className="stat-arrow">
                 <i className="material-icons">
                   {this.state.minPlayer === '' ? `` :
-                    this.state.minPlayer === 'desc' ? `arrow_drop_up` : `arrow_drop_down`}
+                    this.state.minPlayer === 'asc' ? `arrow_drop_up` : `arrow_drop_down`}
                 </i>
               </span>
               min<br></br>player
@@ -79,7 +81,7 @@ class GameStatsHeader extends Component {
               <span className="stat-arrow">
                 <i className="material-icons">
                   {this.state.maxPlayer === '' ? `` :
-                    this.state.maxPlayer === 'desc' ? `arrow_drop_up` : `arrow_drop_down`}
+                    this.state.maxPlayer === 'asc' ? `arrow_drop_up` : `arrow_drop_down`}
                 </i>
               </span>
               max<br></br>player
@@ -88,7 +90,7 @@ class GameStatsHeader extends Component {
               <span className="stat-arrow">
                 <i className="material-icons">
                   {this.state.minTime === '' ? `` :
-                    this.state.minTime === 'desc' ? `arrow_drop_up` : `arrow_drop_down`}
+                    this.state.minTime === 'asc' ? `arrow_drop_up` : `arrow_drop_down`}
                 </i>
               </span>
               min<br></br>time
@@ -97,7 +99,7 @@ class GameStatsHeader extends Component {
               <span className="stat-arrow">
                 <i className="material-icons">
                   {this.state.maxTime === '' ? `` :
-                    this.state.maxTime === 'desc' ? `arrow_drop_up` : `arrow_drop_down`}
+                    this.state.maxTime === 'asc' ? `arrow_drop_up` : `arrow_drop_down`}
                 </i>
               </span>
               max<br></br>time
