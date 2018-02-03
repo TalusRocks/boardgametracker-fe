@@ -1,26 +1,38 @@
+/*MOBILE*/
 @media (max-width:879px){
   .add-play-button-desktop {
     display: none;
   }
 }
 
+/*DESKTOP*/
 @media (min-width: 880px){
   .desktop-menu-item {
     display: block;
   }
+
   .bottom-mobile-nav,
   .add-play-button-mobile, .filter-games-button {
     display: none;
   }
 
+  /*plays*/
   .top-mobile-nav {
     position: relative;
     top: 0em;
   }
 
-  .plays-container {
+  .plays-container, .play-stats-container {
     max-width: 600px;
     margin: 2em auto;
     box-shadow: 0px 4px 15px 0px rgba(0,0,0,0.5);
+  }
+
+  .play-stats-container {
+    margin-top: 5em;
+  }
+
+  .plays-by-game-div{
+    position: relative;
   }
 }

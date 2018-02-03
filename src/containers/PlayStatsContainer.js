@@ -2,14 +2,15 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { fetchGameCollection } from '../actions'
+import TopMobilePlayNav from '../components/shared/TopMobilePlayNav'
 
 const PlayStatsContainer = ({ gameCollection, playsPerGame }) => {
   let hindex = false
 
   return (
     <div className="play-stats-container">
+      <TopMobilePlayNav/>
       {playsPerGame.all.map((el, i) => {
-        // console.log(el, "each game in gameCollection.byPlays");
         return (
           <div key={i}>
             <div key={`h-index=${i}`} className={ i >= el.totalplays && hindex === false ? `h-index` : '' }>
