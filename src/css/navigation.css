@@ -33,6 +33,13 @@ nav {
   color: #fff;
   width: 140px;
   text-align: center;
+  transition: 0.5s;
+  padding-top: 15px;
+  height: 100%;
+}
+
+.desktop-menu-item:hover {
+  background-color: #2e2e2e;
 }
 
 .desktop-menu {
@@ -63,6 +70,10 @@ nav {
   position: fixed;
   top: 3em;
   background-color: #fff;
+}
+
+.top-mobile-nav-item:hover {
+  background-color: #ebf4ff;
 }
 
 .mobile-nav-item {
