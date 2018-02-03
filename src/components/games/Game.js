@@ -61,8 +61,9 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
   }
 
   if(filterGames.byParams.minTime){
-    //MAX TIME
+    //MIN TIME
     displayGames = displayGames.filter(el => {
+      console.log(el.stats[0].$.minplaytime);
       return parseInt(el.stats[0].$.minplaytime, 10) >= parseInt(filterGames.byParams.minTime, 10)
     })
   }
@@ -76,7 +77,7 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
 
 
   //SORT GAMES
-  const result = orderBy(gameCollection.all, (game) => {
+  const result = orderBy(displayGames, (game) => {
       return parseFloat(at(game, param))
   }, [sortGames.byOptions.direction])
 
