@@ -19,6 +19,7 @@ class GameCollection extends Component {
     const filterParams = {
       minBggRating: '',
       numPlayers: '',
+      minTime: '',
       maxTime: ''
     }
 
@@ -40,19 +41,20 @@ class GameCollection extends Component {
   }
 
   render () {
-
     return (
       <div>
         <div className="games-container">
           <GameStatsHeader/>
 
-          { this.state.activeFilters ? <div className="printed-filters m-1">
+          { this.state.activeFilters ? <div className="printed-filters">
             <div>
-              <div>{this.props.filterGames.byParams.minBggRating ? `min BGG rating:  ${this.props.filterGames.byParams.minBggRating}` : ''}</div>
+              <div className="mb-025">{this.props.filterGames.byParams.minBggRating ? `min BGG rating:  ${this.props.filterGames.byParams.minBggRating}` : ''}</div>
 
-              <div>{this.props.filterGames.byParams.numPlayers ? `number of players: ${this.props.filterGames.byParams.numPlayers}` : ''}</div>
+              <div className="mb-025">{this.props.filterGames.byParams.numPlayers ? `number of players: ${this.props.filterGames.byParams.numPlayers}` : ''}</div>
 
-              <div>{this.props.filterGames.byParams.maxTime ? `max time: ${this.props.filterGames.byParams.maxTime}` : ''}</div>
+              <div className="mb-025">{this.props.filterGames.byParams.minTime ? `min time: ${this.props.filterGames.byParams.minTime}` : ''}</div>
+
+              <div className="mb-025">{this.props.filterGames.byParams.maxTime ? `max time: ${this.props.filterGames.byParams.maxTime}` : ''}</div>
             </div>
 
             <i onClick={this.submitFilterParams} className="material-icons cursor-pointer">close</i>

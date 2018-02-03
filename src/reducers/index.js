@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { GAMES_LOADED, FETCH_DB_PLAYS, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES, SEARCH_BGG, POST_PLAY, PLAYS_PER_GAME } from '../actions'
 import moment from 'moment'
 
-function filterGames(state = { byParams: { minBggRating: '', numPlayers: '', maxTime: '' } }, action){
+function filterGames(state = { byParams: { minBggRating: '', numPlayers: '', minTime: '', maxTime: '' } }, action){
   switch (action.type) {
     case FILTER_GAMES:
       return {

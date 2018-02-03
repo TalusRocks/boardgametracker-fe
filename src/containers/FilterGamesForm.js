@@ -17,6 +17,7 @@ class FilterGamesForm extends Component {
     const filterParams = {
       minBggRating: e.target.bggRating.value,
       numPlayers: e.target.numPlayers.value,
+      minTime: e.target.minTime.value,
       maxTime: e.target.maxTime.value
     }
 
@@ -51,14 +52,25 @@ class FilterGamesForm extends Component {
                 <input className="mt-05 text-input" type="text" name="numPlayers"></input>
               </label>
             </div>
-            <div className="mtb-2">
-              <label>
-                <span className="caps-title">
-                Max Time
-                </span>
-                <input className="mt-05 text-input" type="text" name="maxTime"></input>
-              </label>
+            <div className="two-inputs">
+              <div className="mtb-2 input-left">
+                <label>
+                  <span className="caps-title">
+                  Min Time
+                  </span>
+                  <input className="mt-05 text-input" type="text" name="minTime"></input>
+                </label>
+              </div>
+              <div className="mtb-2 input-right">
+                <label>
+                  <span className="caps-title">
+                  Max Time
+                  </span>
+                  <input className="mt-05 text-input" type="text" name="maxTime"></input>
+                </label>
+              </div>
             </div>
+
             <input className="button submit mt-1" type="submit" value="Filter"></input>
           </form>
         </div>

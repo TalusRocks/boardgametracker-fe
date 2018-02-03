@@ -60,6 +60,13 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
     })
   }
 
+  if(filterGames.byParams.minTime){
+    //MAX TIME
+    displayGames = displayGames.filter(el => {
+      return parseInt(el.stats[0].$.minplaytime, 10) >= parseInt(filterGames.byParams.minTime, 10)
+    })
+  }
+
   if(filterGames.byParams.maxTime){
     //MAX TIME
     displayGames = displayGames.filter(el => {
@@ -79,10 +86,10 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
 
   return (
 
-    <div className="one-game-container">
+    <div>
       { displayGames.map((el, i) => {
         return (
-          <div key={`game-${i}`}>
+          <div className="mtb-2" key={`game-${i}`}>
             <h2 key={`${el.name}-${i}`} className="game-name">{el.name[0]._}</h2>
             <GameComment gameComment={el.comment ? el.comment : ''}/>
             <GameStats gameStats={el.stats}/>

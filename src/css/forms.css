@@ -23,3 +23,12 @@ textarea {
 .foundGame {
   font-weight: 700;
 }
+
+.two-inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-left, .input-right {
+  max-width: 48%;
+}
