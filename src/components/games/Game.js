@@ -56,7 +56,7 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
       if(!bggminplayers) bggminplayers = "1"
       if(!bggmaxplayers) bggmaxplayers = bggminplayers
 
-      return parseInt(bggminplayers, 10) <=  parseInt(filterGames.byParams.numPlayers, 10) && parseInt(bggmaxplayers, 10) <=  parseInt(filterGames.byParams.numPlayers, 10)
+      return parseInt(bggminplayers, 10) <=  parseInt(filterGames.byParams.numPlayers, 10) && parseInt(bggmaxplayers, 10) >=  parseInt(filterGames.byParams.numPlayers, 10)
     })
   }
 
