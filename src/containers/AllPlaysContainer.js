@@ -9,6 +9,9 @@ const AllPlaysContainer = ({ allPlays }) => {
 
   return (
     <div>
+      <div className="add-play-button-desktop">
+        <AddPlayButton />
+      </div>
       <div className="plays-container">
 
         { allPlays.byDate.map((el, i) => {
@@ -32,7 +35,9 @@ const AllPlaysContainer = ({ allPlays }) => {
         })}
 
       </div>
-      <AddPlayButton />
+      <div className="add-play-button-mobile">
+        <AddPlayButton />
+      </div>
     </div>
   )
 }

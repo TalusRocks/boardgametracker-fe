@@ -19,6 +19,11 @@ nav {
   margin: auto 0.5em;
   cursor: pointer;
   user-select: none;
+  width: 140px;
+}
+
+.menu-burger {
+  text-align: right;
 }
 
 .desktop-menu-item {
