@@ -8,8 +8,14 @@
   .desktop-menu-item {
     display: block;
   }
-  .mobile-nav, .add-play-button-mobile, .filter-games-button {
+  .bottom-mobile-nav,
+  .add-play-button-mobile, .filter-games-button {
     display: none;
+  }
+
+  .top-mobile-nav {
+    position: relative;
+    top: 0em;
   }
 
   .plays-container {

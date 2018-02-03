@@ -2,6 +2,7 @@ import React from 'react'
 // import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import AddPlayButton from '../components/plays/AddPlayButton'
+import TopMobilePlayNav from '../components/shared/TopMobilePlayNav'
 import moment from 'moment'
 
 
@@ -12,8 +13,9 @@ const AllPlaysContainer = ({ allPlays }) => {
       <div className="add-play-button-desktop">
         <AddPlayButton />
       </div>
-      <div className="plays-container">
 
+      <div className="plays-container">
+        <TopMobilePlayNav/>
         { allPlays.byDate.map((el, i) => {
 
           return (
