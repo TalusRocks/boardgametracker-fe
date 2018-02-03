@@ -50,14 +50,14 @@ class AddPlayForm extends Component {
 
   render() {
     return this.state.fireRedirect === true ? <Redirect to="/plays"/> : (
-      <div>
-        <div className="m-1 form-close">
+      <div className="form-wrapper">
+        <div className="p-1 form-close">
           Add New Play
           <Link to='/plays'>
             <i className="material-icons">close</i>
           </Link>
         </div>
-        <div className="m-1">
+        <div className="p-1">
           <form onSubmit={this.submitNewPlay}>
             <div className="mtb-2">
               <label>

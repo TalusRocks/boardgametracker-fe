@@ -27,14 +27,14 @@ class FilterGamesForm extends Component {
 
   render () {
     return this.state.fireRedirect === true ? <Redirect to="/games"/> : (
-      <div>
-        <div className="m-1 form-close">
+      <div className="form-wrapper">
+        <div className="p-1 form-close">
           Filter Games
           <Link to='/games'>
             <i className="material-icons">close</i>
           </Link>
         </div>
-        <div className="m-1">
+        <div className="p-1">
           <form onSubmit={this.submitFilterParams}>
             <div className="mtb-2">
               <label>
