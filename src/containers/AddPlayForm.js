@@ -59,12 +59,12 @@ class AddPlayForm extends Component {
         </div>
         <div className="p-1">
           <form onSubmit={this.submitNewPlay}>
-            <div className="mtb-2">
+            <div className="mtb-1">
               <label>
                 <span className="caps-title">
                 Date
                 </span>
-                <input className="mt-05 text-input" type="text" name="playDate" defaultValue="2018-01-30"></input>
+                <input className="mt-05 text-input" type="text" name="playDate" defaultValue="2018-02-06"></input>
               </label>
             </div>
             <div className="mt-2 mb-1">
@@ -73,7 +73,7 @@ class AddPlayForm extends Component {
                 Game
                 </span>
 
-                <input onChange={this.removeGameNameState} className={`mt-05 text-input ${this.state.selectedGame ? 'blue-link' : 'noGameInState'}`} type="text" name="playGame" id="playGame" placeholder="Game to search for"></input>
+                <input onChange={this.removeGameNameState} className={`mt-05 text-input ${this.state.selectedGame ? 'blue-link' : 'noGameInState'}`} type="text" name="playGame" id="playGame" placeholder="Search for a game on BoardGameGeek"></input>
 
               </label>
             </div>
@@ -93,7 +93,7 @@ class AddPlayForm extends Component {
                 <span className="caps-title">
                 Comments
                 </span>
-                <textarea className="mt-05" rows="4" name="playComments" defaultValue="with first module from new expansion"></textarea>
+                <textarea className="mt-05" rows="4" name="playComments" defaultValue="hello capstone audience!"></textarea>
               </label>
             </div>
             <input className="button submit green mt-1" type="submit" value="Save Now"></input>

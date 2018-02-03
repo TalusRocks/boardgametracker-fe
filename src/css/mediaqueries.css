@@ -26,7 +26,8 @@
   .plays-container,
   .play-stats-container,
   .games-container,
-  .form-wrapper {
+  .form-wrapper,
+  .welcome {
     max-width: 600px;
     margin: 2em auto;
     box-shadow: 0px 4px 15px 0px rgba(0,0,0,0.5);
