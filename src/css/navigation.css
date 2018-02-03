@@ -72,6 +72,10 @@ nav {
   background-color: #fff;
 }
 
+.top-mobile-nav-item {
+  transition: 0.5s;
+}
+
 .top-mobile-nav-item:hover {
   background-color: #ebf4ff;
 }
