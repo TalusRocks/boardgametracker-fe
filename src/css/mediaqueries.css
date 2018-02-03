@@ -12,7 +12,7 @@
   }
 
   .bottom-mobile-nav,
-  .add-play-button-mobile, .filter-games-button {
+  .add-play-button-mobile, .filter-games-button-mobile {
     display: none;
   }
 
@@ -22,7 +22,9 @@
     top: 0em;
   }
 
-  .plays-container, .play-stats-container {
+  .plays-container,
+  .play-stats-container,
+  .games-container {
     max-width: 600px;
     margin: 2em auto;
     box-shadow: 0px 4px 15px 0px rgba(0,0,0,0.5);

@@ -43,6 +43,9 @@ class GameCollection extends Component {
   render () {
     return (
       <div>
+        <div className="filter-games-button-desktop">
+          <FilterGamesButton/>
+        </div>
         <div className="games-container">
           <GameStatsHeader/>
 
@@ -62,7 +65,9 @@ class GameCollection extends Component {
 
           <Game />
         </div>
-        <FilterGamesButton/>
+        <div className="filter-games-button-mobile">
+          <FilterGamesButton/>
+        </div>
       </div>
     )
     }
