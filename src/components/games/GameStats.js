@@ -6,9 +6,8 @@ const GameStats = ({ gameStats }) => {
     <div >
       {gameStats.map((el, i) => {
         let avgRating = Number(el.rating[0].average[0].$.value).toFixed(2)
-        let userRating = el.rating[0].$.value
-        // console.log(typeof userRating, "typeof userRating");
-        // console.log(typeof avgRating, "typeof avgRating");
+        // let userRating = el.rating[0].$.value
+
         return (
           <div key={`game-stats-${i}`} className="game-stats">
             <div key={`avgrating-${i}`} className="stat avg-rating">{avgRating}</div>

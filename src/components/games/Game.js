@@ -44,7 +44,7 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
   if(filterGames.byParams.minBggRating){
     displayGames = displayGames.filter(el => {
 
-      return parseInt(el.stats[0].rating[0].average[0].$.value) >= parseInt(filterGames.byParams.minBggRating)
+      return parseInt(el.stats[0].rating[0].average[0].$.value, 10) >= parseInt(filterGames.byParams.minBggRating, 10)
     })
   }
 
@@ -56,14 +56,14 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
       if(!bggminplayers) bggminplayers = "1"
       if(!bggmaxplayers) bggmaxplayers = bggminplayers
 
-      return parseInt(bggminplayers) <=  parseInt(filterGames.byParams.numPlayers) && parseInt(bggmaxplayers) <=  parseInt(filterGames.byParams.numPlayers)
+      return parseInt(bggminplayers, 10) <=  parseInt(filterGames.byParams.numPlayers, 10) && parseInt(bggmaxplayers, 10) <=  parseInt(filterGames.byParams.numPlayers, 10)
     })
   }
 
   if(filterGames.byParams.maxTime){
     //MAX TIME
     displayGames = displayGames.filter(el => {
-      return parseInt(el.stats[0].$.maxplaytime) <= parseInt(filterGames.byParams.maxTime)
+      return parseInt(el.stats[0].$.maxplaytime, 10) <= parseInt(filterGames.byParams.maxTime, 10)
     })
   }
 
