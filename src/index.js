@@ -10,6 +10,7 @@ import './css/games.css'
 import './css/forms.css'
 import './css/buttons.css'
 import './css/statcolors.css'
+import './css/mediaqueries.css'
 
 import store from './store'
 import { Provider } from 'react-redux'

@@ -1,0 +1,8 @@
+@media (min-width: 880px){
+  .desktop-menu-item {
+    display: block;
+  }
+  .mobile-nav, .add-play-button {
+    display: none;
+  }
+}
