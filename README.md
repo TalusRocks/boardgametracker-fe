@@ -25,33 +25,33 @@ Backend:
 <kbd>
   <img src="./readme-images/welcome.png" width="250" alt="welcome" />  
 </kbd>
-\
-\
+
+
 <kbd>
   <img src="./readme-images/plays.png" width="250" alt="all plays" />
 </kbd>
-\
-\
+
+
 <kbd>
   <img src="./readme-images/add-play-form.png" width="250" alt="add a play form" />
 </kbd>
-\
-\
+
+
 <kbd>
   <img src="./readme-images/play-stats.png" width="250" alt="play stats" />
 </kbd>
-\
-\
+
+
 <kbd>
   <img src="./readme-images/filtered.png" width="250" alt="filtered games" />
 </kbd>
-\
-\
+
+
 <kbd>
   <img src="./readme-images/filter-form.png" width="250" alt="filter form" />
 </kbd>
-\
-\
+
+
 <kbd>
   <img src="./readme-images/desktop.png" width="700" alt="desktop view" />
 </kbd>
