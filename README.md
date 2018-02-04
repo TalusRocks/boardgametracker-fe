@@ -3,6 +3,7 @@ Gamify your games, and log your board game plays!
 
 by Rebecca Jensen
 
+
 ## MOTIVATION
 I log my board game plays because I find the stats to be interesting, and I like to see numbers go up. Plus, it's like gamifying games, which is so meta!
 
@@ -12,6 +13,7 @@ I currently track my plays on BoardGameGeek.com, but it's not a very mobile-frie
 2. See interesting stats (it's why we log after all!)  
 3. Choose a game to play by filtering and sorting their game collection  
 
+
 ## LINKS
 Frontend:  
 [Deployed site](https://boardgamefriend.surge.sh)  
@@ -20,6 +22,7 @@ Frontend:
 Backend:   
 [Heroku app](https://serene-mesa-27676.herokuapp.com/plays)  
 [Backend repo](https://github.com/TalusRocks/boardgametracker-be)  
+
 
 ## SCREENSHOTS
 <kbd>
