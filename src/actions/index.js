@@ -129,12 +129,8 @@ export function fetchDbPlays(){
 export function downloadPlays(){
 
   return async (dispatch) => {
-    //TO DO
-    //dispatch PLAYS_LOADING to make a spinner here
-    //change PLAYS_LOADED to ADD_PLAYS
-    // then PLAYS_LOADED (can have >1 dispatch)
 
-    //** WIPE OUT DB before downloading BGG data
+    //** WIPES OUT DB before downloading BGG data !!
     await fetch(`${baseURL}/plays`, { method: 'DELETE' })
 
     let page = 1
