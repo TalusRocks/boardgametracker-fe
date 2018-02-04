@@ -6,7 +6,6 @@ import GameStatsHeader from '../components/games/GameStatsHeader'
 import FilterGamesButton from '../components/games/FilterGamesButton'
 import Game from '../components/games/Game'
 
-
 class GameCollection extends Component {
 
   state = {
@@ -15,7 +14,6 @@ class GameCollection extends Component {
 
   submitFilterParams = (e) => {
     e.preventDefault()
-
     const filterParams = {
       minBggRating: '',
       numPlayers: '',

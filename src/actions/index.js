@@ -14,20 +14,6 @@ const baseURL = 'https://serene-mesa-27676.herokuapp.com'
 
 var parseString = require('xml2js').parseString;
 
-export function filterGameCollection(filterParams){
-  return {
-    type: FILTER_GAMES,
-    payload: filterParams
-  }
-}
-
-export function sortGameCollection(sortKeyDir){
-  return {
-    type: SORT_GAMES,
-    payload: sortKeyDir
-  }
-}
-
 export function sendBGGUsername(bggusername){
   //*****TO-DO ping API to check username
   localStorage.setItem('bggusername', bggusername)
@@ -38,6 +24,65 @@ export function sendBGGUsername(bggusername){
   }
 }
 
+export function downloadPlays(){
+
+  return async (dispatch) => {
+    //** WIPES OUT DB before downloading BGG data !!
+    await fetch(`${baseURL}/plays`, { method: 'DELETE' })
+
+    let bggusername = localStorage.getItem('bggusername')
+    let page = 1
+    // let going = true
+
+    // while (going) {
+      const response = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=${bggusername}&page=${page}`)
+      const xml = await response.text()
+      const playData = new window.DOMParser().parseFromString(xml, "text/xml")
+
+      parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, async function (err, result){
+
+        const playsForDb = result.AllPlays.play.map((el, i) => {
+          //*** temporary user_id until login added
+          return {
+            user_id: 1,
+            played_on: el.$.date,
+            bgg_game_id: el.item[0].$.objectid,
+            game_name: el.item[0].$.name,
+            comment: el.comments ? el.comments[0] : '' }
+        })
+
+        const data = await fetch(`${baseURL}/plays`, {
+          method: 'POST',
+          body: JSON.stringify(playsForDb),
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+        })
+
+        // if(result.AllPlays.play.length < 100) going = false
+        dispatch(fetchDbPlays())
+      })
+
+    // console.log(page, "page");
+    // page += 1
+    // await fetchPlays()
+
+  // }
+  }
+}
+
+export function fetchDbPlays(){
+  return async(dispatch) => {
+    const data = await fetch(`${baseURL}/plays`)
+    const json = await data.json()
+
+    dispatch({
+      type: FETCH_DB_PLAYS,
+      payload: json
+    })
+  }
+}
+
 export function fetchGameCollection(){
   return async (dispatch, getState) => {
 
@@ -45,7 +90,7 @@ export function fetchGameCollection(){
     // DEVELOPMENT:
     // let bggusername = 'PlayBosco'
 
-    //****TO-DO check if need to download (instead of wiping)
+    //****TO-DO check if need to download, and insert (instead of wiping)
     if(bggusername){
         const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/collection?username=${bggusername}&own=1&stats=1`)
         .then(response => response.text())
@@ -60,7 +105,6 @@ export function fetchGameCollection(){
       }
     }
 }
-
 
 export function searchBoardGameGeek(searchParam){
   return async (dispatch) => {
@@ -97,10 +141,6 @@ export function postNewPlay(newPlayParams){
   }
 }
 
-// export function editPlay(newPlayParams, playId){
-//
-// }
-
 export function calculatePlaysPerGame(){
   return async(dispatch) => {
     const data = await fetch(`${baseURL}/plays`)
@@ -113,65 +153,16 @@ export function calculatePlaysPerGame(){
   }
 }
 
-export function fetchDbPlays(){
-  return async(dispatch) => {
-    const data = await fetch(`${baseURL}/plays`)
-    const json = await data.json()
-
-    dispatch({
-      type: FETCH_DB_PLAYS,
-      payload: json
-    })
+export function filterGameCollection(filterParams){
+  return {
+    type: FILTER_GAMES,
+    payload: filterParams
   }
 }
 
-
-export function downloadPlays(){
-
-  return async (dispatch) => {
-
-    //** WIPES OUT DB before downloading BGG data !!
-    await fetch(`${baseURL}/plays`, { method: 'DELETE' })
-
-    let page = 1
-    //*** turn off getting all pages for development
-    // let going = true
-    let bggusername = localStorage.getItem('bggusername')
-    // while (going) {
-    const response = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=${bggusername}&page=${page}`)
-    const xml = await response.text()
-    const playData = new window.DOMParser().parseFromString(xml, "text/xml")
-
-    parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, async function (err, result){
-
-      const playsForDb = result.AllPlays.play.map((el, i) => {
-        // console.log(el, "--!GET BGG DATA FOR THE DB HERE!--");
-        //**** temporary user_id until login added
-        return {
-          user_id: 1,
-          played_on: el.$.date,
-          bgg_game_id: el.item[0].$.objectid,
-          game_name: el.item[0].$.name,
-          comment: el.comments ? el.comments[0] : '' }
-      })
-
-      const data = await fetch(`${baseURL}/plays`, {
-        method: 'POST',
-        body: JSON.stringify(playsForDb),
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        })
-      })
-      // const json = await data.json()
-
-      // if(result.AllPlays.play.length < 100) going = false
-      dispatch(fetchDbPlays())
-    })
-
-    // console.log(page, "page");
-    // page += 1
-    // await fetchPlays()
-
-  // }
+export function sortGameCollection(sortKeyDir){
+  return {
+    type: SORT_GAMES,
+    payload: sortKeyDir
   }
 }

@@ -84,9 +84,7 @@ const Game = ({ gameCollection, sortGames, filterGames }) => {
   //either display sorted games or default
   sortGames.byOptions.key ? (displayGames = result) : displayGames
 
-
   return (
-
     <div>
       { displayGames.map((el, i) => {
         return (

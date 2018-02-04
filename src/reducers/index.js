@@ -31,15 +31,13 @@ function playsPerGame(state = { all: [] }, action){
   switch (action.type) {
     case PLAYS_PER_GAME:
 
-    // const match = plays.find(play => play.date === singlePlay.date)
-      console.log(action.payload.plays);
       const talliedPlaysPerGame = []
       for (let i = 0; i < action.payload.plays.length; i++) {
 
         //if the play has already been pushed to tallied...
         if (talliedPlaysPerGame.find(el => el.bgg_game_id === action.payload.plays[i].bgg_game_id)){
 
-          //find it (again- doh!) and increase total plays by 1
+          //find it (again! **improve this) and increase total plays by 1
           for(let j = 0; j < talliedPlaysPerGame.length; j++){
             if(talliedPlaysPerGame[j].bgg_game_id === action.payload.plays[i].bgg_game_id){
               talliedPlaysPerGame[j].totalplays = talliedPlaysPerGame[j].totalplays + 1
@@ -93,7 +91,6 @@ function gameCollection(state = { all: [], byPlays: [] }, action) {
         return b.totalplays - a.totalplays
       })
 
-
       //fill in undefined stats
       for (let j = 0; j < action.payload.length; j++){
         //if no min time, set to 0
@@ -109,7 +106,6 @@ function gameCollection(state = { all: [], byPlays: [] }, action) {
           action.payload[j].stats[0].$.maxplayers= action.payload[j].stats[0].$.minplayers
         }
       }
-      console.log(action.payload, "action.payload");
 
       return {
         ...state,
@@ -230,7 +226,6 @@ function allPlays(state = { byDate: [] }, action) {
   }
 }
 
-
 function currentUser(state = { username: '' }, action){
   switch (action.type) {
     case SET_BGG_USERNAME:
@@ -242,7 +237,6 @@ function currentUser(state = { username: '' }, action){
       return state
   }
 }
-
 
 export default combineReducers({
   gameCollection, allPlays, currentUser, sortGames, filterGames, bggSearchResults, playsPerGame

@@ -5,7 +5,7 @@ import { sortGameCollection } from '../../actions'
 
 class GameStatsHeader extends Component {
 
-    //local state to track direction
+    //local state to track direction of sorting
     state = {
       bggRating: '',
       yourRating: '',
@@ -16,9 +16,7 @@ class GameStatsHeader extends Component {
     }
 
     flip = (key, direction) => {
-
       return () => {
-
         const newState = { [key]: null }
         newState[key] = !this.state[key] || this.state[key] === 'asc' ? 'desc' : 'asc'
 
@@ -31,10 +29,8 @@ class GameStatsHeader extends Component {
           maxTime: '',
           ...newState
         })
-
         this.props.sortGameCollection({ key, direction: newState[key] })
       }
-
     }
 
     render() {
@@ -53,15 +49,6 @@ class GameStatsHeader extends Component {
               </span>
               BGG<br></br>rating
             </div>
-            {/* <div onClick={ this.flip('yourRating', this.state.yourRating)} className="stat-header user-rating-header">
-              <span className="stat-arrow">
-                <i className="material-icons">
-                  {this.state.yourRating === '' ? `` :
-                    this.state.yourRating === 'asc' ? `arrow_drop_up` : `arrow_drop_down`}
-                </i>
-              </span>
-              your<br></br>rating
-            </div> */}
             <div onClick={ this.flip('minPlayer', this.state.minPlayer)} className="stat-header min-player-header">
               <span className="stat-arrow">
                 <i className="material-icons">
@@ -71,12 +58,6 @@ class GameStatsHeader extends Component {
               </span>
               min<br></br>player
             </div>
-            {/* <div className="stat-header best-player-header">
-              <span className="stat-arrow">
-                <i className="material-icons">arrow_drop_down</i>
-              </span>
-              best<br></br>player
-            </div> */}
             <div onClick={ this.flip('maxPlayer', this.state.maxPlayer)} className="stat-header max-player-header">
               <span className="stat-arrow">
                 <i className="material-icons">
@@ -104,12 +85,6 @@ class GameStatsHeader extends Component {
               </span>
               max<br></br>time
             </div>
-            {/* <div className="stat-header weight-header">
-              <span className="stat-arrow">
-                <i className="material-icons">arrow_drop_down</i>
-              </span>
-              weight
-            </div> */}
           </div>
         </div>
       )

@@ -1,11 +1,9 @@
 import React from 'react'
-// import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 const FrequentGames = ({ gameCollection, selectGameFunction }) => {
 
   const frequentGamesArray = []
-
   for (let i = 0; i < 6; i++) {
     frequentGamesArray.push(gameCollection.byPlays[i])
   }

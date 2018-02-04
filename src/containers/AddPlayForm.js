@@ -5,7 +5,6 @@ import { Link, Redirect } from 'react-router-dom'
 import FrequentGames from '../components/games/FrequentGames'
 import { searchBoardGameGeek, postNewPlay } from '../actions'
 
-
 class AddPlayForm extends Component {
   constructor(props) {
     super(props)

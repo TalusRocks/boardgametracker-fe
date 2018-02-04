@@ -15,7 +15,6 @@ const Welcome = ({ username, sendBGGUsername, fetchGameCollection, downloadPlays
 
   return username ? <Redirect to="/plays"/> : <div className="p-1 text-center welcome">
     <h1 className="mtb-1">Welcome to<br></br>Board Game Friend!</h1>
-    {/* <p>{username ? username : 'no username'}</p> */}
     <p className="mtb-2">Do you have a BoardGameGeek account?
       <br></br>
       If you do, enter your BGG username here to load your logged plays and game collection! Otherwise, you can skip this step.
