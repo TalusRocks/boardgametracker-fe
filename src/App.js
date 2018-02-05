@@ -9,7 +9,6 @@ import FilterGamesForm from './containers/FilterGamesForm'
 import TopNavigationBar from './components/shared/TopNavigationBar'
 import BottomMobileNav from './components/shared/BottomMobileNav'
 import './App.css';
-
 import { connect } from 'react-redux'
 
 const App = ( { gameCollection, allPlays }) => (

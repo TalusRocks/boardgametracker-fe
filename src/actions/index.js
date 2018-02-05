@@ -32,42 +32,31 @@ export function downloadPlays(){
 
     let bggusername = localStorage.getItem('bggusername')
     let page = 1
-    // let going = true
 
-    // while (going) {
-      const response = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=${bggusername}&page=${page}`)
-      const xml = await response.text()
-      const playData = new window.DOMParser().parseFromString(xml, "text/xml")
+    const response = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=${bggusername}&page=${page}`)
+    const xml = await response.text()
+    const playData = new window.DOMParser().parseFromString(xml, "text/xml")
 
-      parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, async function (err, result){
-
-        const playsForDb = result.AllPlays.play.map((el, i) => {
-          //*** temporary user_id until login added
-          return {
-            user_id: 1,
-            played_on: el.$.date,
-            bgg_game_id: el.item[0].$.objectid,
-            game_name: el.item[0].$.name,
-            comment: el.comments ? el.comments[0] : '' }
-        })
-
-        const data = await fetch(`${baseURL}/plays`, {
-          method: 'POST',
-          body: JSON.stringify(playsForDb),
-          headers: new Headers({
-            'Content-Type': 'application/json'
-          })
-        })
-
-        // if(result.AllPlays.play.length < 100) going = false
-        dispatch(fetchDbPlays())
+    parseString(`<AllPlays>${playData.documentElement.innerHTML}</AllPlays>`, {trim: true}, async function (err, result){
+      const playsForDb = result.AllPlays.play.map((el, i) => {
+        //*** temporary user_id until login added
+        return {
+          user_id: 1,
+          played_on: el.$.date,
+          bgg_game_id: el.item[0].$.objectid,
+          game_name: el.item[0].$.name,
+          comment: el.comments ? el.comments[0] : '' }
       })
+      const data = await fetch(`${baseURL}/plays`, {
+        method: 'POST',
+        body: JSON.stringify(playsForDb),
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      })
+      dispatch(fetchDbPlays())
+    })
 
-    // console.log(page, "page");
-    // page += 1
-    // await fetchPlays()
-
-  // }
   }
 }
 
