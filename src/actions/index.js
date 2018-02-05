@@ -44,6 +44,7 @@ export function downloadPlays(){
     // make an array of all requests
     const requests = pages.map((el, i) => {
       const url = `https://www.boardgamegeek.com/xmlapi2/plays?username=${bggusername}&page=${el}`
+      //requests will return this array of promises, which are set to resolve when 'opened'
       return new Promise((resolve, reject) => {
         //delay to not attack the server
         setTimeout(() => {
@@ -55,7 +56,7 @@ export function downloadPlays(){
       })
     })
 
-    //fire the promises, to turn fetches into xml data
+    //resolve the promises, turning into fetches into xml data
     const remainingRequestData = await Promise.all(requests)
     //combine the data into one big chunk
     const playsContent = remainingRequestData.reduce((acc, el) => {
@@ -86,7 +87,7 @@ export function downloadPlays(){
           'Content-Type': 'application/json'
         })
       }).catch(console.error)
-      console.log('completed POST request');
+
       //show to page
       dispatch(fetchDbPlays())
     })
