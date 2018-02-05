@@ -8,9 +8,9 @@ export const FILTER_GAMES = 'FILTER_GAMES'
 export const POST_PLAY = 'POST_PLAY'
 export const SEARCH_BGG = 'SEARCH_BGG'
 
-// const baseURL = 'https://serene-mesa-27676.herokuapp.com'
+const baseURL = 'https://serene-mesa-27676.herokuapp.com'
 //DEVELOPMENT:
-const baseURL = 'http://localhost:3000'
+// const baseURL = 'http://localhost:3000'
 
 var parseString = require('xml2js').parseString;
 
@@ -57,13 +57,12 @@ export function downloadPlays(){
 
     //fire the promises, to turn fetches into xml data
     const remainingRequestData = await Promise.all(requests)
-    console.log(remainingRequestData, "remainingRequestData");
     //combine the data into one big chunk
     const playsContent = remainingRequestData.reduce((acc, el) => {
       return acc + el.documentElement.innerHTML
     }, '')
 
-    //parse from xml into json 
+    //parse from xml into json
     parseString(`<AllPlays>${playsContent}</AllPlays>`, {trim: true}, async function (err, result){
       //mold data into my format
       const playsForDb = result.AllPlays.play.map((el, i) => {
