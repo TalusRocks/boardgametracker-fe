@@ -49,7 +49,7 @@ class FilterGamesForm extends Component {
                 <span className="caps-title">
                 Number of Players
                 </span>
-                <input className="mt-05 text-input" type="text" name="numPlayers" defaultValue="5"></input>
+                <input className="mt-05 text-input" type="text" name="numPlayers"></input>
               </label>
             </div>
             <div className="two-inputs">
@@ -66,7 +66,7 @@ class FilterGamesForm extends Component {
                   <span className="caps-title">
                   Max Time
                   </span>
-                  <input className="mt-05 text-input" type="text" name="maxTime" defaultValue="30"></input>
+                  <input className="mt-05 text-input" type="text" name="maxTime"></input>
                 </label>
               </div>
             </div>

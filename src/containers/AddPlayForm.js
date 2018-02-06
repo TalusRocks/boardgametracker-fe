@@ -63,7 +63,7 @@ class AddPlayForm extends Component {
                 <span className="caps-title">
                 Date
                 </span>
-                <input className="mt-05 text-input" type="text" name="playDate" defaultValue="2018-02-06"></input>
+                <input className="mt-05 text-input" type="text" name="playDate" placeholder="YYYY-MM-DD"></input>
               </label>
             </div>
             <div className="mt-2 mb-1">
@@ -92,7 +92,7 @@ class AddPlayForm extends Component {
                 <span className="caps-title">
                 Comments
                 </span>
-                <textarea className="mt-05" rows="4" name="playComments" defaultValue="hello capstone audience!"></textarea>
+                <textarea className="mt-05" rows="4" name="playComments"></textarea>
               </label>
             </div>
             <input className="button submit green mt-1" type="submit" value="Save Now"></input>
