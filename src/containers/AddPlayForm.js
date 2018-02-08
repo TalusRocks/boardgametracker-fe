@@ -12,7 +12,19 @@ class AddPlayForm extends Component {
     this.state = {
       fireRedirect: false,
       selectedGame: '',
-      selectedGameId: ''
+      selectedGameId: '',
+      dateError: false
+    }
+  }
+
+  dateError = () => {
+    let playDateValue = document.getElementById('playDate').value
+    console.log(playDateValue);
+
+    if(!playDateValue.match(/^\d{4}-\d{2}-\d{2}$/)){
+      this.setState({ dateError: true })
+    } else {
+      this.setState({ dateError: false })
     }
   }
 
@@ -61,16 +73,23 @@ class AddPlayForm extends Component {
             <div className="mtb-1">
               <label>
                 <span className="caps-title">
-                Date
+                Date*
                 </span>
-                <input className="mt-05 text-input" type="text" name="playDate" placeholder="YYYY-MM-DD"></input>
+                { this.state.dateError === false ? '' :
+                <span className="inline-form-error">
+                  Please enter a valid YYYY-MM-DD date
+                </span>}
+                <input onBlur={this.dateError} className="mt-05 text-input" type="text" name="playDate" id="playDate" placeholder="YYYY-MM-DD"></input>
               </label>
             </div>
             <div className="mt-2 mb-1">
               <label>
                 <span className="caps-title">
-                Game
+                  Game*
                 </span>
+                {/* <span className="inline-form-error">
+                  Please choose a game from BGG
+                </span> */}
 
                 <input onChange={this.removeGameNameState} className={`mt-05 text-input ${this.state.selectedGame ? 'blue-link' : 'noGameInState'}`} type="text" name="playGame" id="playGame" placeholder="Search for a game on BoardGameGeek"></input>
 
@@ -95,6 +114,11 @@ class AddPlayForm extends Component {
                 <textarea className="mt-05" rows="4" name="playComments"></textarea>
               </label>
             </div>
+
+            {/* <div className="form-error">
+              Please complete all *required fields
+            </div> */}
+
             <input className="button submit green mt-1" type="submit" value="Save Now"></input>
           </form>
         </div>

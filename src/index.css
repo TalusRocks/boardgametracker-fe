@@ -37,6 +37,10 @@ a, p, h1, h2, h3, h4, div {
   margin-top: 0.5em;
 }
 
+.p-05 {
+  padding: 0.5em;
+}
+
 .m-1 {
   margin: 1em;
 }
