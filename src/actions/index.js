@@ -8,9 +8,9 @@ export const FILTER_GAMES = 'FILTER_GAMES'
 export const POST_PLAY = 'POST_PLAY'
 export const SEARCH_BGG = 'SEARCH_BGG'
 
-// const baseURL = 'https://serene-mesa-27676.herokuapp.com'
+const baseURL = 'https://serene-mesa-27676.herokuapp.com'
 //DEVELOPMENT:
-const baseURL = 'http://localhost:3000'
+// const baseURL = 'http://localhost:3000'
 
 var parseString = require('xml2js').parseString;
 
