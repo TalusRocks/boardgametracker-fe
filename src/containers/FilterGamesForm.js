@@ -8,7 +8,29 @@ class FilterGamesForm extends Component {
 
   //local state to manage redirect
   state = {
-    fireRedirect: false
+    fireRedirect: false,
+    formError: false
+  }
+
+  isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  }
+
+  formError = () => {
+    let textInputValues = document.querySelectorAll('.text-input')
+
+    textInputValues.forEach((el) => {
+      if (el.value.length >= 1 && this.isNumeric(el.value)) {
+        this.setState({ formError: false })
+      }
+    })
+
+    textInputValues.forEach((el) => {
+      if (el.value.length >= 1 && !this.isNumeric(el.value)) {
+        this.setState({ formError: true })
+      }
+    })
+
   }
 
   submitFilterParams = (e) => {
@@ -41,7 +63,7 @@ class FilterGamesForm extends Component {
                 <span className="caps-title">
                 Minimum BGG Rating
                 </span>
-                <input className="mt-05 text-input" type="text" name="bggRating"></input>
+                <input onBlur={this.formError} className="mt-05 text-input" type="text" name="bggRating" id="bggRating" placeholder="number between 1 and 10"></input>
               </label>
             </div>
             <div className="mtb-2">
@@ -49,7 +71,7 @@ class FilterGamesForm extends Component {
                 <span className="caps-title">
                 Number of Players
                 </span>
-                <input className="mt-05 text-input" type="text" name="numPlayers"></input>
+                <input onBlur={this.formError} className="mt-05 text-input" type="text" name="numPlayers" id="numPlayers"></input>
               </label>
             </div>
             <div className="two-inputs">
@@ -58,7 +80,7 @@ class FilterGamesForm extends Component {
                   <span className="caps-title">
                   Min Time
                   </span>
-                  <input className="mt-05 text-input" type="text" name="minTime"></input>
+                  <input onBlur={this.formError} className="mt-05 text-input" type="text" name="minTime" id="minTime"></input>
                 </label>
               </div>
               <div className="mtb-2 input-right">
@@ -66,10 +88,15 @@ class FilterGamesForm extends Component {
                   <span className="caps-title">
                   Max Time
                   </span>
-                  <input className="mt-05 text-input" type="text" name="maxTime"></input>
+                  <input onBlur={this.formError} className="mt-05 text-input" type="text" name="maxTime" id="maxTime"></input>
                 </label>
               </div>
             </div>
+
+            { this.state.formError === false ? '' :
+            <div className="form-error">
+              Search terms must be numbers
+            </div>}
 
             <input className="button submit mt-1" type="submit" value="Filter"></input>
           </form>

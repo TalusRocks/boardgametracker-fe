@@ -115,10 +115,6 @@ class AddPlayForm extends Component {
               </label>
             </div>
 
-            {/* <div className="form-error">
-              Please complete all *required fields
-            </div> */}
-
             <input className="button submit green mt-1" type="submit" value="Save Now"></input>
           </form>
         </div>
