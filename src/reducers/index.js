@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { GAMES_LOADED, FETCH_DB_PLAYS, SET_BGG_USERNAME, SORT_GAMES, FILTER_GAMES, SEARCH_BGG, POST_PLAY, PLAYS_PER_GAME } from '../actions'
+import { GAMES_LOADED, FETCH_DB_PLAYS, SET_BGG_USERNAME, SORT_GAMES,  _GAMES, SEARCH_BGG, POST_PLAY, PLAYS_PER_GAME } from '../actions'
 import moment from 'moment'
 
 function filterGames(state = { byParams: { minBggRating: '', numPlayers: '', minTime: '', maxTime: '' } }, action){
@@ -34,10 +34,11 @@ function playsPerGame(state = { all: [] }, action){
       const talliedPlaysPerGame = []
       for (let i = 0; i < action.payload.plays.length; i++) {
 
-        //if the play has already been pushed to tallied...
+        //If the play has already been pushed to tallied...
         if (talliedPlaysPerGame.find(el => el.bgg_game_id === action.payload.plays[i].bgg_game_id)){
 
-          //find it (again! **improve this) and increase total plays by 1
+          //TO-DO: Refactor for less loops!!
+          //Find it and increase total plays by 1
           for(let j = 0; j < talliedPlaysPerGame.length; j++){
             if(talliedPlaysPerGame[j].bgg_game_id === action.payload.plays[i].bgg_game_id){
               talliedPlaysPerGame[j].totalplays = talliedPlaysPerGame[j].totalplays + 1
@@ -46,7 +47,7 @@ function playsPerGame(state = { all: [] }, action){
 
         } else {
 
-          //otherwise, add to new array in right format (with total of 1)
+          //Otherwise, add to new array in right format (with total of 1)
           talliedPlaysPerGame.push(
             {
               game_name: action.payload.plays[i].game_name,
@@ -74,7 +75,9 @@ function playsPerGame(state = { all: [] }, action){
 function gameCollection(state = { all: [], byPlays: [] }, action) {
   switch (action.type) {
     case GAMES_LOADED:
-      // 1) get game and total plays
+      //TO-DO: Translate yucky BGG format to my data structure in the backend
+
+      //Get game and total plays
       const playsByGame = []
       for (let i = 0; i < action.payload.length; i++){
 
@@ -86,12 +89,12 @@ function gameCollection(state = { all: [], byPlays: [] }, action) {
         playsByGame.push(gamePlays)
       }
 
-      // 2) SORT into most played order
+      //Sort into most played order
       playsByGame.sort(function(a, b) {
         return b.totalplays - a.totalplays
       })
 
-      //fill in undefined stats
+      //Fill in undefined stats
       for (let j = 0; j < action.payload.length; j++){
         //if no min time, set to 0
         if(!action.payload[j].stats[0].$.minplaytime){
@@ -130,18 +133,18 @@ function bggSearchResults(state = { all: [] }, action) {
 }
 
 function sortPlaysByDate(payload){
-  // 1) turn dates into sortable numbers
+  //Turn dates into sortable numbers
   const formattedDates = payload.map((el, i) => {
     return {...el, played_on: moment(el.played_on).format('YYYYMMDD')}
   })
 
-  // 2) SORT
+  //Sort
   const sortedPlays =
   formattedDates.sort(function(a, b){
     return b.played_on - a.played_on
   })
 
-  // 3) group dates
+  //Group plays on the same date
   const playsByDate = []
   for (let i = 0; i < sortedPlays.length; i++) {
     let prevdate
@@ -159,7 +162,7 @@ function sortPlaysByDate(payload){
     }
   }
 
-  // 4) add nested game name and comments
+  //Add nested game name and comments
   for (let j = 0; j < payload.length; j++) {
 
     let date = payload[j].played_on
@@ -192,10 +195,10 @@ function allPlays(state = { byDate: [] }, action) {
       }
 
     case POST_PLAY:
-      //get into {date: '', plays: []} format
+      //Format to {date: '', plays: []}
       const newPlayByDate = sortPlaysByDate([action.payload])
 
-      //see if the new play needs to be nested in an existing date
+      //Check if new play needs to be nested in an existing date
       function insertNewPlay(plays, newPlay){
         const singlePlay = newPlay[0]
         const match = plays.find(play => play.date === singlePlay.date)

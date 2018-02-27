@@ -13,7 +13,7 @@ const baseURL = process.env.REACT_APP_API_URL
 var parseString = require('xml2js').parseString;
 
 export function sendBGGUsername(bggusername){
-  //*****TO-DO ping API to check username
+  //TO-DO: ping BGG to check username
   localStorage.setItem('bggusername', bggusername)
 
   return {
@@ -22,29 +22,33 @@ export function sendBGGUsername(bggusername){
   }
 }
 
+//TO-DO: Refactor! This is too long. Break apart.
 export function downloadPlays(){
 
   return async (dispatch) => {
-    //** WIPES OUT DB before downloading BGG data !!
+    //Wipe out DB before downloading BGG data
+    //TO-DO: append data if not already downloaded from BGG
     await fetch(`${baseURL}/plays`, { method: 'DELETE' })
 
     let bggusername = localStorage.getItem('bggusername')
     let page = 1
 
-    //get total number of plays
+    //TO-DO: If no response the first time, wait and try again
     const response = await fetch(`https://www.boardgamegeek.com/xmlapi2/plays?username=${bggusername}&page=${page}`)
     const xml = await response.text()
     const playData = new window.DOMParser().parseFromString(xml, "text/xml")
+    //Get all pages of data
     let totalPlays = parseInt(playData.documentElement.getAttribute('total'))
     const remainingPages = Math.ceil(totalPlays / 100)
+    //Creates an array of page numbers
     const pages = Array.from({ length: remainingPages }, (el, i) => i + 1)
 
-    // make an array of all requests
+    //Make an array of all requests
     const requests = pages.map((el, i) => {
       const url = `https://www.boardgamegeek.com/xmlapi2/plays?username=${bggusername}&page=${el}`
-      //requests will return this array of promises, which are set to resolve when 'opened'
+      //Requests will return this array of promises
       return new Promise((resolve, reject) => {
-        //delay to not attack the server
+        //Delay to not attack the server
         setTimeout(() => {
           fetch(url)
             .then(response => response.text())
@@ -54,18 +58,19 @@ export function downloadPlays(){
       })
     })
 
-    //resolve the promises, turning into fetches into xml data
+    //Resolve the promises, turning into fetches into xml data
     const remainingRequestData = await Promise.all(requests)
-    //combine the data into one big chunk
+    //Combine the data into one big chunk
     const playsContent = remainingRequestData.reduce((acc, el) => {
       return acc + el.documentElement.innerHTML
     }, '')
 
-    //parse from xml into json
+    //Parse from xml into json
     parseString(`<AllPlays>${playsContent}</AllPlays>`, {trim: true}, async function (err, result){
-      //mold data into my format
+      //Mold data into my format
+      //TO-DO: can do this on the backend
       const playsForDb = result.AllPlays.play.map((el, i) => {
-        //*** temporary user_id until login added
+        //Temporary user_id for development
         return {
           user_id: 1,
           played_on: el.$.date,
@@ -74,10 +79,8 @@ export function downloadPlays(){
           comment: el.comments ? el.comments[0] : '' }
       })
 
-      //***break up data into smaller chunks, to not post too much
-
-      //post to database
-      console.log(playsForDb, "playsForDb");
+      //Post to database
+      //TO-DO: chunk this out for extra large requests
       await fetch(`${baseURL}/plays`, {
         method: 'POST',
         body: JSON.stringify(playsForDb),
@@ -86,7 +89,7 @@ export function downloadPlays(){
         })
       }).catch(console.error)
 
-      //show to page
+      //Show to page
       dispatch(fetchDbPlays())
     })
 
@@ -109,10 +112,7 @@ export function fetchGameCollection(){
   return async (dispatch, getState) => {
 
     let bggusername = localStorage.getItem('bggusername')
-    // DEVELOPMENT:
-    // let bggusername = 'PlayBosco'
 
-    //****TO-DO check if need to download, and insert (instead of wiping)
     if(bggusername){
         const data = await fetch(`https://www.boardgamegeek.com/xmlapi2/collection?username=${bggusername}&own=1&stats=1`)
         .then(response => response.text())
